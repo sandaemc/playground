@@ -1,0 +1,31 @@
+{
+  "name": "prrr",
+  "version": "1.0.0",
+  "description": "Get PRs from GitHub",
+  "main": ".build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node .build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandaemc/prrr.git"
+  },
+  "author": "Sandae Macalalag <sandaemc@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandaemc/prrr/issues"
+  },
+  "homepage": "https://github.com/sandaemc/prrr#readme",
+  "dependencies": {
+    "@octokit/rest": "^16.15.0",
+    "@slack/client": "^4.8.0",
+    "dotenv": "^6.2.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.120",
+    "@types/node": "^10.12.21",
+    "typescript": "^3.3.1"
+  }
+}
