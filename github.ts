@@ -1,4 +1,5 @@
 import * as Octokit from "@octokit/rest";
+import * as _ from "lodash";
 
 const owner = process.env.GITHUB_OWNER_NAME;
 const repo = process.env.GITHUB_REPO_NAME;
@@ -12,8 +13,12 @@ export type Issue = {
   link: string;
   status: string;
   number: number;
-  owner: string;
+  owner: User;
   branch: string;
+};
+
+export type User = {
+  name: string;
 };
 
 export function getPRs(): Promise<Issue[]> {
@@ -29,7 +34,7 @@ export function getPRs(): Promise<Issue[]> {
         link: issue.html_url,
         status: issue.state,
         number: issue.number,
-        owner: issue.user.login,
+        owner: { name: issue.user.login } as User,
         branch: issue.head.ref
       }))
   );
@@ -53,4 +58,30 @@ export async function getReviews(prNumber: number) {
   );
 
   return reviews;
+}
+
+export async function getApprovedPRsByOwner(dataTeamMembers: User[]) {
+  const prs = await getPRs();
+
+  const dataTeamPRs = prs.filter(pr => dataTeamMembers.includes(pr.owner));
+
+  const reviews = _.flatten(
+    await Promise.all(dataTeamPRs.map(pr => getReviews(pr.number)))
+  );
+
+  const dataTeamPRsWithReviewStatus = dataTeamPRs.map(pr => ({
+    ...pr,
+    reviews: _.filter(reviews, review => review.prNumber === pr.number)
+  }));
+
+  const unapprovedPRs = dataTeamPRsWithReviewStatus.filter(pr => {
+    const recentReview: any = _.last(pr.reviews);
+    if (recentReview) {
+      return recentReview.status !== "APPROVED";
+    }
+
+    return true;
+  });
+
+  return _.sortBy(unapprovedPRs, (pr: Issue) => pr.owner);
 }
