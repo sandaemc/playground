@@ -37,7 +37,7 @@ const dataTeamMembers = ["pcellano", "eoporto", "sandaemc", "arielmanayon"];
       (pr: Issue) => pr.owner
     );
 
-    const messages: string[] = ["Pending PRs: \n\n"];
+    const messages: string[] = ["*Open PRs*\n\n"];
     for (const member of dataTeamMembers) {
       const memberPRs = groupedUnapprovedPRs.filter(pr => pr.owner === member);
 

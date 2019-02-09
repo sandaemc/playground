@@ -36,8 +36,6 @@ export function getPRs(): Promise<Issue[]> {
 }
 
 export async function getReviews(prNumber: number) {
-  console.log(`Pulling ${prNumber}...`);
-
   const reviews = await octokit.paginate(
     "GET /repos/:owner/:repo/pulls/:number/reviews",
     {
@@ -53,8 +51,6 @@ export async function getReviews(prNumber: number) {
         reviewer: review.user.login
       }))
   );
-
-  console.log("Done!");
 
   return reviews;
 }
