@@ -7,7 +7,16 @@ const octokit = new Octokit({
   auth: `token ${process.env.GITHUB_AUTH_TOKEN}`
 });
 
-export function getPRs() {
+export type Issue = {
+  title: string;
+  link: string;
+  status: string;
+  number: number;
+  owner: string;
+  branch: string;
+};
+
+export function getPRs(): Promise<Issue[]> {
   return octokit.paginate(
     "GET /repos/:owner/:repo/pulls",
     {
@@ -27,6 +36,8 @@ export function getPRs() {
 }
 
 export async function getReviews(prNumber: number) {
+  console.log(`Pulling ${prNumber}...`);
+
   const reviews = await octokit.paginate(
     "GET /repos/:owner/:repo/pulls/:number/reviews",
     {
@@ -42,6 +53,8 @@ export async function getReviews(prNumber: number) {
         reviewer: review.user.login
       }))
   );
+
+  console.log("Done!");
 
   return reviews;
 }
