@@ -1,6 +1,6 @@
 import * as Octokit from "@octokit/rest";
 import * as _ from "lodash";
-import { Issue, User, Comment } from "./types";
+import { PullRequest, User, Comment, Issue } from "./types";
 import * as moment from "moment";
 
 const owner = process.env.GITHUB_OWNER_NAME;
@@ -10,7 +10,7 @@ const octokit = new Octokit({
   auth: `token ${process.env.GITHUB_AUTH_TOKEN}`
 });
 
-export function getIssues(): Promise<Issue[]> {
+export function getIssues(): Promise<PullRequest[]> {
   return octokit.paginate(
     "GET /repos/:owner/:repo/issues",
     {
@@ -52,7 +52,7 @@ export function getComments(issueId: number): Promise<Comment[]> {
   );
 }
 
-export function getPRs(): Promise<Issue[]> {
+export function getPRs(): Promise<PullRequest[]> {
   return octokit.paginate(
     "GET /repos/:owner/:repo/pulls",
     {
@@ -60,14 +60,18 @@ export function getPRs(): Promise<Issue[]> {
       repo
     },
     response =>
-      response.data.map(issue => ({
-        title: issue.title,
-        link: issue.html_url,
-        status: issue.state,
-        number: issue.number,
-        owner: { name: issue.user.login } as User,
-        branch: issue.head.ref
-      }))
+      response.data.map(
+        issue =>
+          ({
+            title: issue.title,
+            link: issue.html_url,
+            status: issue.state,
+            number: issue.number,
+            owner: { name: issue.user.login } as User,
+            branch: issue.head.ref,
+            updatedAt: moment(issue.updated_at)
+          } as PullRequest)
+      )
   );
 }
 
@@ -96,7 +100,7 @@ export async function getCommentsToday(issueId: number): Promise<Comment[]> {
   return comments.filter(c => c.createdAt.isSame(moment(), "day"));
 }
 
-export async function getApprovedPRsByOwner(dataTeamMembers: User[]) {
+export async function getUnApprovedPRsByOwner(dataTeamMembers: User[]) {
   const prs = await getPRs();
 
   const dataTeamPRs = prs.filter(pr => dataTeamMembers.includes(pr.owner));
@@ -119,5 +123,5 @@ export async function getApprovedPRsByOwner(dataTeamMembers: User[]) {
     return true;
   });
 
-  return _.sortBy(unapprovedPRs, (pr: Issue) => pr.owner);
+  return _.sortBy(unapprovedPRs, (pr: PullRequest) => pr.owner);
 }

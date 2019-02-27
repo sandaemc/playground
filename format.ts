@@ -1,6 +1,6 @@
-import { Issue } from "./types";
+import { PullRequest } from "./types";
 
-export function openPRsFormattedMessage(prs: Issue[]) {
+export function openPRsFormattedMessage(prs: PullRequest[]) {
   const messages: string[] = ["*Open PRs*\n\n"];
   const members = new Set(prs.map(pr => pr.owner));
 

@@ -7,6 +7,7 @@ import * as moment from "moment";
 (async () => {
   try {
     const issues = await getIssues();
+    console.log(issues);
     for (const issue of issues) {
       const comments = await getCommentsToday(issue.number);
       const statusUpdates = comments.filter(c => c.body.match(/^Status:/g));
@@ -16,13 +17,16 @@ import * as moment from "moment";
       }
 
       const messages: String[] = [
-        `@sandaemc Status update for ${issue.title} (${moment().format(
+        `*Status update for ${issue.title} as of ${moment().format(
           "YYYY-MM-DD"
-        )}):\n`
+        )}*:\n`
       ];
       for (const update of statusUpdates) {
         messages.push(
-          ` - ${update.body} (${update.createdAt.format("h:mm a")})\n`
+          ` * _${update.body.replace(
+            /^Status: /g,
+            ""
+          )}_ (${update.createdAt.format("h:mm a")})\n`
         );
       }
 
