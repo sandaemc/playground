@@ -1,4 +1,4 @@
-import { Issue } from "./github";
+import { Issue } from "./types";
 
 export function openPRsFormattedMessage(prs: Issue[]) {
   const messages: string[] = ["*Open PRs*\n\n"];

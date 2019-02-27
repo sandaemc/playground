@@ -1,8 +1,9 @@
 require("dotenv").config();
 import * as _ from "lodash";
-import { getApprovedPRsByOwner, User } from "./github";
+import { getApprovedPRsByOwner } from "./github";
 import { send } from "./slack";
 import { openPRsFormattedMessage } from "./format";
+import { User } from "./types";
 
 const dataTeamMembers: User[] = [
   { name: "pcellano" },
