@@ -1,6 +1,6 @@
 import * as Octokit from "@octokit/rest";
 import * as _ from "lodash";
-import { PullRequest, User, Comment, Issue } from "./types";
+import { PullRequest, User, Comment, Issue, Commit } from "./types";
 import * as moment from "moment";
 
 const owner = process.env.GITHUB_OWNER_NAME;
@@ -10,7 +10,34 @@ const octokit = new Octokit({
   auth: `token ${process.env.GITHUB_AUTH_TOKEN}`
 });
 
-export function getIssues(): Promise<PullRequest[]> {
+export function getEvents(user: string) {
+  return octokit.paginate("GET /users/:username/events", {
+    username: "sandaemc"
+  });
+}
+
+export function getCommits(branchName: string): Promise<Commit[]> {
+  //`GET /repos/:owner/:repo/compare/master...${branchName}`,
+  return octokit.paginate(
+    `GET /repos/:owner/:repo/compare/master...${branchName}`,
+    {
+      owner,
+      repo
+    },
+    response =>
+      response.data.commits.map(
+        c =>
+          ({
+            sha: c.sha,
+            author: { name: c.commit.author.name } as User,
+            message: c.commit.message,
+            comittedAt: moment(c.commit.author.date)
+          } as Commit)
+      )
+  );
+}
+
+export function getIssues(): Promise<Issue[]> {
   return octokit.paginate(
     "GET /repos/:owner/:repo/issues",
     {
@@ -22,6 +49,7 @@ export function getIssues(): Promise<PullRequest[]> {
         issue =>
           ({
             title: issue.title,
+            body: issue.body,
             link: issue.html_url,
             status: issue.state,
             number: issue.number,

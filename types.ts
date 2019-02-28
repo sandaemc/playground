@@ -1,5 +1,12 @@
 import { Moment } from "moment";
 
+export type Commit = {
+  sha: string;
+  author: User;
+  message: string;
+  comittedAt: Moment;
+};
+
 export type PullRequest = {
   title: string;
   link: string;
@@ -12,6 +19,7 @@ export type PullRequest = {
 
 export type Issue = {
   title: string;
+  body: string;
   link: string;
   status: string;
   number: number;
