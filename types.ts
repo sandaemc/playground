@@ -38,3 +38,11 @@ export type Comment = {
 export type User = {
   name: string;
 };
+
+export type Review = {
+  prNumber: number;
+  body: string;
+  status: string;
+  reviewer: string;
+  submittedAt: Moment;
+};

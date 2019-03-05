@@ -3,6 +3,7 @@ import * as _ from "lodash";
 import { getIssues, getCommentsToday, getCommits } from "./github";
 import { send } from "./slack";
 import * as moment from "moment";
+import { getPRsReviewedToday } from "./reports";
 
 (async () => {
   try {
@@ -31,9 +32,9 @@ import * as moment from "moment";
       }
 
       const comments = await getCommentsToday(issue.number);
-      const statusUpdates = comments.filter(c => c.body.match(/^Status:/g));
+      let statusUpdates = comments.filter(c => c.body.match(/^Status:/g));
 
-      if (!statusUpdates.length) {
+      if (!statusUpdates.length && issue.title !== "Team lead stuff") {
         continue;
       }
 
@@ -46,6 +47,19 @@ import * as moment from "moment";
             ""
           )} _ (${update.createdAt.format("h:mm a")})\n`
         );
+      }
+
+      if (issue.title === "Team lead stuff") {
+        const prs = _.reverse(await getPRsReviewedToday());
+        for (const pr of prs) {
+          const review = _.last(pr.reviews);
+          if (!review) continue;
+          messages.push(
+            `\t• [${review.status}] _ ${pr.title} (${pr.updatedAt.format(
+              "h:mm a"
+            )}) _ \n`
+          );
+        }
       }
 
       if (commitMessages.length) messages.push(commitMessages.join(""));
