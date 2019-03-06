@@ -8,6 +8,7 @@ import { getPRsReviewedToday } from "./reports";
 (async () => {
   try {
     const issues = await getIssues();
+    const posts: string[] = [];
     for (const issue of issues) {
       let commitMessages: string[] = [];
 
@@ -41,12 +42,8 @@ import { getPRsReviewedToday } from "./reports";
       const messages: String[] = [`*${issue.title}*:\n`];
 
       for (const update of statusUpdates) {
-        messages.push(
-          `\t• _${update.body.replace(
-            /^Status: /g,
-            ""
-          )} _ (${update.createdAt.format("h:mm a")})\n`
-        );
+        const updateBody = update.body.replace(/^Status: /g, "");
+        messages.push(`\t• _ ${updateBody} _ \n`);
       }
 
       if (issue.title === "Team lead stuff") {
@@ -54,16 +51,32 @@ import { getPRsReviewedToday } from "./reports";
         for (const pr of prs) {
           const review = _.last(pr.reviews);
           if (!review) continue;
-          messages.push(
-            `\t• [${review.status}] _ ${pr.title} (${pr.updatedAt.format(
-              "h:mm a"
-            )}) _ \n`
-          );
+
+          let reviewStatus = ":nocomment:";
+          switch (review.status) {
+            case "COMMENTED":
+              reviewStatus = ":awesomeface-disapprove:";
+              break;
+            case "APPROVED":
+              reviewStatus = ":approved:";
+              break;
+            case "CHANGES_REQUESTED":
+              reviewStatus = ":notapproved:";
+              break;
+            default:
+              throw new Error("Unhandled status: " + review.status);
+          }
+
+          messages.push(`\t• _ Reviewed ${pr.title} _  ${reviewStatus} \n`);
         }
       }
 
       if (commitMessages.length) messages.push(commitMessages.join(""));
-      send(messages.join(""));
+      posts.push(messages.join(""));
+    }
+
+    if (posts.length) {
+      send(posts.join("\n"));
     }
   } catch (error) {
     console.error(error);
