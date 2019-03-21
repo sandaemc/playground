@@ -1,0 +1,25 @@
+service: voice-po
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    TWILIO_SID: ${file(./config.${self:provider.stage}.json):TWILIO_SID}
+    TWILIO_TOKEN: ${file(./config.${self:provider.stage}.json):TWILIO_TOKEN}
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: "ANY {proxy+}"
+  record:
+    handler: index.handler
+    events:
+      - http: "POST /record"
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript

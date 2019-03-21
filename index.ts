@@ -1,26 +1,43 @@
-import * as twilio from "twilio";
+const serverless = require("serverless-http");
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { inspect } from "util";
+import { record } from "./lib/record";
 
-const client = twilio(
-    "ACc91e430934905bcd3d69cf7ab05d0397",
-    "be4909715c4fb8b99242508fd901db6b"
+const app = express();
+
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
 );
 
-function play() {
-    client.recordings.each((recording, done, err) => recording.)
-    client.recordings.each(recording => console.log(recording.sid));
-}
+app.use((req, res, next) => {
+  console.log({
+    body: inspect(req.body, false, null),
+    params: req.params,
+    query: req.query,
+    originalUrl: req.originalUrl,
+    path: req.path,
+    baseUrl: req.baseUrl,
+    method: req.method
+  });
 
-function record() {
-    const response = new twilio.twiml.VoiceResponse();
+  next();
+});
 
-    response.say(
-        "Please leave a message at the beep.\nPress the star key when finished."
-    );
+app.get("/", function(req, res) {
+  res.send("VoicePO v0.5");
+});
 
-    response.record({
-        timeout: 10,
-        finishOnKey: "#"
-    });
+app.post("/record", function(req, res) {
+  res.send(record().toString());
+});
 
-    response.say("I did not receive a recording");
-}
+/*
+app.get("/play", function(req, res) {
+});
+*/
+
+export const handler = serverless(app);
