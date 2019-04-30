@@ -19,6 +19,10 @@ functions:
     handler: index.handler
     events:
       - http: "POST /record"
+  play:
+    handler: index.handler
+    events:
+      - http: "GET /play"
 
 plugins:
   - serverless-offline

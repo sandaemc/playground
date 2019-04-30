@@ -3,6 +3,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import { inspect } from "util";
 import { record } from "./lib/record";
+import { play } from "./lib/play";
 
 const app = express();
 
@@ -31,13 +32,13 @@ app.get("/", function(req, res) {
   res.send("VoicePO v0.5");
 });
 
-app.post("/record", function(req, res) {
+app.post("/record", async function(req, res) {
   res.send(record().toString());
 });
 
-/*
-app.get("/play", function(req, res) {
+app.get("/play", async function(req, res) {
+  const response = await play();
+  res.send(response.toString());
 });
-*/
 
 export const handler = serverless(app);

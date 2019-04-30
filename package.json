@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "sls deploy --stage prod"
+    "deploy": "sls deploy --stage prod",
+    "start": "sls offline"
   },
   "keywords": [],
   "author": "",
