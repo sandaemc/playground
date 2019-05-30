@@ -1,3 +1,4 @@
+require("dotenv").config();
 import * as Octokit from "@octokit/rest";
 import * as _ from "lodash";
 import { PullRequest, User, Review } from "./types";

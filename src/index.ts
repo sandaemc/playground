@@ -21,23 +21,22 @@ export async function getPRsReviewedToday() {
 
   const prsWithReviews = recentPRs.map(pr => ({
     ...pr,
-    reviews: _.filter(reviews, review => review.prNumber === pr.number)
+    reviews: _.last(_.filter(reviews, review => review.prNumber === pr.number))
   }));
 
   const withoutMoment = prsWithReviews.map(pr => ({ ...pr, updatedAt: null }));
 
   console.log(inspect(withoutMoment, false, null, true));
 
-  const reviewedToday = prsWithReviews.filter(pr => {
-    const review = _.last(pr.reviews);
-    if (review === undefined) {
-      return false;
-    }
+  // const reviewedToday = prsWithReviews.filter(pr => {
+  //   const review = _.last(pr.reviews);
+  //   if (review === undefined) {
+  //     return false;
 
-    return review.submittedAt.isSame(moment(), "day");
-  });
+  //   return review.submittedAt.isSame(moment(), "day");
+  // });
 
-  return reviewedToday;
+  // return reviewedToday;
 }
 
 (async () => {
