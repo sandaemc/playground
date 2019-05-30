@@ -1,49 +1,39 @@
 require("dotenv").config();
 import * as _ from "lodash";
-import { getPRs, getReviews } from "./github";
+import { getPulls, getReviews } from "./github";
 import * as moment from "moment";
-import { inspect } from "util";
+import { PullRequest } from "./types";
 
 // TODO: Find PR that was reviewed today by me
 
-export async function getPRsReviewedToday() {
-  const prs = await getPRs();
+const byDataTeam = (pr: PullRequest) => {
+  return pr.owner.name.match(/^(arielmanayon|pcellano|eoporto)/);
+};
 
-  const teamPRs = prs.filter(c =>
-    c.owner.name.match(/^(sandaemc|arielmanayon|pcellano|eoporto)/)
-  );
+const inTheLastSevenDays = (pr: PullRequest) => {
+  return pr.updatedAt >= moment().subtract(7, "days");
+};
 
-  const recentPRs = teamPRs.filter(
-    c => c.updatedAt >= moment().subtract(7, "days")
-  );
+export async function listPullsReviewedToday() {
+  const prs = (await getPulls()).filter(byDataTeam).filter(inTheLastSevenDays);
 
-  const reviews = _.flatten(
-    await Promise.all(recentPRs.map(pr => getReviews(pr.number)))
-  );
+  for (const pr of prs) {
+    const reviews = await getReviews(pr.number);
 
-  const prsWithReviews = recentPRs.map(pr => ({
-    ...pr,
-    reviews: _.last(_.filter(reviews, review => review.prNumber === pr.number))
-  }));
+    const latest = _.last(reviews);
+    if (latest === undefined) {
+      continue;
+    }
 
-  const withoutMoment = prsWithReviews.map(pr => ({ ...pr, updatedAt: null }));
-
-  console.log(inspect(withoutMoment, false, null, true));
-
-  // const reviewedToday = prsWithReviews.filter(pr => {
-  //   const review = _.last(pr.reviews);
-  //   if (review === undefined) {
-  //     return false;
-
-  //   return review.submittedAt.isSame(moment(), "day");
-  // });
-
-  // return reviewedToday;
+    if (latest.submittedAt.isSame(moment(), "day")) {
+      console.log(latest);
+    }
+  }
 }
 
 (async () => {
   try {
-    await getPRsReviewedToday();
+    await listPullsReviewedToday();
   } catch (error) {
     console.error(error);
   }

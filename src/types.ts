@@ -13,7 +13,6 @@ export type PullRequest = {
   status: string;
   number: number;
   owner: User;
-  // TODO: Only In PR not on Issue. Create PullRequest types
   branch: string;
   updatedAt: Moment;
 };

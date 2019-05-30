@@ -1,4 +1,3 @@
-require("dotenv").config();
 import * as Octokit from "@octokit/rest";
 import * as _ from "lodash";
 import { PullRequest, User, Review } from "./types";
@@ -11,7 +10,7 @@ const octokit = new Octokit({
   auth: `token ${process.env.GITHUB_AUTH_TOKEN}`
 });
 
-export function getPRs(): Promise<PullRequest[]> {
+export function getPulls(): Promise<PullRequest[]> {
   return octokit.paginate(
     "GET /repos/:owner/:repo/pulls",
     {
@@ -48,9 +47,9 @@ export async function getReviews(pull_number: number): Promise<Review[]> {
             prNumber: pull_number,
             body: review.body,
             status: review.state,
-            reviewer: review.user.login
+            reviewer: review.user.login,
             //@ts-ignore
-            //submittedAt: moment(review.submitted_at)
+            submittedAt: moment(review.submitted_at)
           } as Review)
       )
     );
