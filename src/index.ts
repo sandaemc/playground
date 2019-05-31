@@ -10,12 +10,12 @@ const byDataTeam = (pr: PullRequest) => {
   return pr.owner.name.match(/^(arielmanayon|pcellano|eoporto)/);
 };
 
-const inTheLastSevenDays = (pr: PullRequest) => {
-  return pr.updatedAt >= moment().subtract(7, "days");
+const inTheLastThreeDays = (pr: PullRequest) => {
+  return pr.updatedAt >= moment().subtract(3, "days");
 };
 
 export async function listPullsReviewedToday() {
-  const prs = (await getPulls()).filter(byDataTeam).filter(inTheLastSevenDays);
+  const prs = (await getPulls()).filter(byDataTeam).filter(inTheLastThreeDays);
 
   for (const pr of prs) {
     const reviews = await getReviews(pr.number);
@@ -25,11 +25,11 @@ export async function listPullsReviewedToday() {
       continue;
     }
 
-    if (latest.submittedAt.isSame(moment(), "day")) {
-      const info = `${latest.prNumber},${latest.reviewer},${latest.status},${
-        pr.branch
-      }`;
-      console.log(info);
+    if (
+      latest.submittedAt.isSame(moment(), "day") &&
+      (latest.status === "APPROVED" || latest.status === "CHANGES_REQUESTED")
+    ) {
+      console.log("%s,%s,%s", pr.branch, latest.reviewer, latest.status);
     }
   }
 }
