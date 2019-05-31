@@ -26,7 +26,8 @@ export async function listPullsReviewedToday() {
     }
 
     if (latest.submittedAt.isSame(moment(), "day")) {
-      console.log(latest);
+      const info = `${latest.prNumber},${latest.reviewer},${latest.status}`;
+      console.log(info);
     }
   }
 }
@@ -36,5 +37,6 @@ export async function listPullsReviewedToday() {
     await listPullsReviewedToday();
   } catch (error) {
     console.error(error);
+    throw error;
   }
 })();
