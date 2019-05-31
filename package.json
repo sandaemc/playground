@@ -1,22 +1,26 @@
 {
-  "name": "prrr",
+  "name": "pull-review",
   "version": "1.0.0",
   "description": "Get PRs from GitHub",
-  "main": ".build/index.js",
+  "main": ".build/cli.js",
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node --harmony .build/index.js"
+    "build": "tsc && npm run executable",
+    "start": "npm run build && node .build/cli.js",
+    "executable": "chmod +x .build/cli.js"
+  },
+  "bin": {
+      "pull-review": ".build/cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sandaemc/prrr.git"
+    "url": "git+https://github.com/sandaemc/pull-review.git"
   },
   "author": "Sandae Macalalag <sandaemc@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sandaemc/prrr/issues"
+    "url": "https://github.com/sandaemc/pull-review/issues"
   },
-  "homepage": "https://github.com/sandaemc/prrr#readme",
+  "homepage": "https://github.com/sandaemc/pull-review#readme",
   "dependencies": {
     "@octokit/rest": "^16.15.0",
     "dotenv": "^6.2.0",

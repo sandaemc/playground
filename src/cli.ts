@@ -1,10 +1,10 @@
+#!/usr/bin/env node
+
 require("dotenv").config();
 import * as _ from "lodash";
 import { getPulls, getReviews } from "./github";
 import * as moment from "moment";
 import { PullRequest } from "./types";
-
-// TODO: Find PR that was reviewed today by me
 
 const byDataTeam = (pr: PullRequest) => {
   return pr.owner.name.match(/^(arielmanayon|pcellano|eoporto)/);
