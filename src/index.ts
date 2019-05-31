@@ -26,7 +26,9 @@ export async function listPullsReviewedToday() {
     }
 
     if (latest.submittedAt.isSame(moment(), "day")) {
-      const info = `${latest.prNumber},${latest.reviewer},${latest.status}`;
+      const info = `${latest.prNumber},${latest.reviewer},${latest.status},${
+        pr.branch
+      }`;
       console.log(info);
     }
   }
