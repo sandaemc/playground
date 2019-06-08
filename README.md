@@ -1,12 +1,12 @@
 # new-typescript-project-name
 
+Boilerplate when creating a server-side NodeJS typed project.
 
-## Tech Stack
 
+## Tech Stack Options
 
 #### ORM
 
- - [TypeORM](https://github.com/typeorm/typeorm)
  - [LowDB](https://github.com/typicode/lowdb)
 
 #### Server
