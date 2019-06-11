@@ -5,6 +5,9 @@ import { inspect } from "util";
 import { record } from "./lib/record";
 import { play } from "./lib/play";
 
+// TODO: Buy a local number
+// TODO: Test for payload on forwarding; can I get the number his dialing to?
+
 const app = express();
 
 app.use(bodyParser.json());
