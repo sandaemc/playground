@@ -9,7 +9,7 @@ const MAX_SIZE = 950000000000;
 
 const post = msg =>
   axios.post(
-    "https://hooks.slack.com/services/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",
+    "https://hooks.slack.com/services/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",
     {
       text: msg
     }
@@ -22,11 +22,12 @@ const getCurrentDBServerSize = () =>
     "-A",
     "-t",
     "-c",
-    "SELECT SUM(pg_database_size(t1.datname) FROM pg_database t1"
+    "SELECT SUM(pg_database_size(t1.datname)) FROM pg_database t1"
   ]);
 
 (async () => {
-  const cur_size = parseInt(await getCurrentDBServerSize());
+  const { stdout } = await getCurrentDBServerSize();
+  const cur_size = parseInt(stdout);
 
   console.log(cur_size);
 
