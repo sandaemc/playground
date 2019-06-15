@@ -3,8 +3,8 @@
 const axios = require("axios");
 const execa = require("execa");
 
-const CRITICAL_PERCENTAGE = 95;
-const WARNING_PERCENTAGE = 90;
+const CRITICAL_PERCENTAGE = 98;
+const WARNING_PERCENTAGE = 95;
 const MAX_SIZE = 950000000000;
 
 const post = msg =>
@@ -28,8 +28,6 @@ const getCurrentDBServerSize = () =>
 (async () => {
   const { stdout } = await getCurrentDBServerSize();
   const cur_size = parseInt(stdout);
-
-  console.log(cur_size);
 
   const cur_percentage = parseInt((cur_size / MAX_SIZE) * 100);
 
