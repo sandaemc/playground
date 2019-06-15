@@ -32,7 +32,7 @@ const getCurrentDBServerSize = () =>
   const cur_percentage = parseInt((cur_size / MAX_SIZE) * 100);
 
   if (cur_percentage >= CRITICAL_PERCENTAGE) {
-    const crit_msg = `*Critical*: database server is at ${cur_percentage}% capacity!`;
+    const crit_msg = `*Critical*: database server (10.130.52.194) is at ${cur_percentage}% capacity!`;
 
     post(crit_msg);
 
@@ -40,7 +40,7 @@ const getCurrentDBServerSize = () =>
   }
 
   if (cur_percentage >= WARNING_PERCENTAGE) {
-    const warn_msg = `*Warning*: database server is at ${cur_percentage}% capacity.`;
+    const warn_msg = `*Warning*: database server (10.130.52.194) is at ${cur_percentage}% capacity.`;
 
     post(warn_msg);
 
