@@ -3,8 +3,8 @@
 const axios = require("axios");
 const execa = require("execa");
 
-const CRITICAL_PERCENTAGE = 98;
-const WARNING_PERCENTAGE = 95;
+const CRITICAL_PERCENTAGE = 95;
+const WARNING_PERCENTAGE = 92;
 const MAX_SIZE = 950000000000;
 
 const post = msg =>
