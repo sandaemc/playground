@@ -1,5 +1,10 @@
 import { Moment } from "moment";
 
+export enum ReviewStatus {
+  APPROVED = "APPROVED",
+  CHANGES_REQUESTED = "CHANGES_REQUESTED"
+}
+
 export type Commit = {
   sha: string;
   author: User;
@@ -42,7 +47,7 @@ export type User = {
 export type Review = {
   prNumber: number;
   body: string;
-  status: string;
+  status: ReviewStatus;
   reviewer: string;
   submittedAt: Moment;
 };
