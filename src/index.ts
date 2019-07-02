@@ -19,7 +19,7 @@ import { ReviewStatus } from "./types";
 
     const ageMinutes = moment().diff(review.submittedAt, "minutes");
 
-    if (ageMinutes <= 30) {
+    if (ageMinutes <= 15) {
       await jira.transition(
         pull.branch,
         review.status === ReviewStatus.APPROVED
@@ -27,9 +27,12 @@ import { ReviewStatus } from "./types";
           : jira.TRANSITIONS.ReOpenIssue
       );
 
-      await slack.post(`${pull.branch} was ${review.status} by @sandaemc`);
+      const message = `${pull.branch} was ${
+        ReviewStatus.APPROVED === review.status ? "approved!" : "re-openned."
+      }`;
 
-      console.log(`${pull.branch} was ${review.status}`);
+      await slack.post(message);
+      console.log(message);
     }
   }
 })();
