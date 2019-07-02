@@ -7,6 +7,8 @@ import { ReviewStatus } from "./types";
 
 // TODO: a github pull every 30 minutes
 (async () => {
+  console.log("Checking PRs...");
+
   const pulls = await github.getPullsReviewedToday();
 
   // TODO: prevent from keep on updating
