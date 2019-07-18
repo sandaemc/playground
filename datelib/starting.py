@@ -69,7 +69,6 @@ def get_date(query):
 # every 2 weeks starting today at 2PM but monday
 def get_starting_date(query):
     if not has_starting(query):
-        raise ValueError("Starting date not found!")
+        return datetime.now()
 
     return get_date(get_starting(query))
-

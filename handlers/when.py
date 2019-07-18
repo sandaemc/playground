@@ -7,7 +7,10 @@ def when(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps({"date": translate.get_when(query)}),
+        "body": json.dumps({
+            "type": 'date',
+            "items": [translate.get_when(query)]
+        }),
     }
 
     return response

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+      "start": "sls offline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/sandaemc/date-rest-api#readme",
   "devDependencies": {
-    "serverless-domain-manager": "^3.2.2"
+    "serverless-domain-manager": "^3.2.2",
+    "serverless-offline": "^5.8.0"
   }
 }

@@ -7,7 +7,10 @@ def repeat(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(list(translate.get_repeat(query))),
+        "body": json.dumps({
+            "type": 'date',
+            "items": list(translate.get_repeat(query))
+        }),
     }
 
     return response
