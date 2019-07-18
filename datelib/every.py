@@ -15,3 +15,7 @@ def _get_specifications(query):
     if matches:
         return ["FREQ=" + FREQUENCIES[matches.group(2)], "INTERVAL=" + matches.group(1)]
 
+   #TODO: Fix every su,mon 
+    matches = re.match("every (su|mo|tu|we|th|fr|sa)*", query)
+    if matches:
+        return ["FREQ=WEEKLY", "BYWEEKDAY=" + matches.group(1)]

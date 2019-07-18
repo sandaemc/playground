@@ -67,6 +67,9 @@ def get_date(query):
 # every day starting 2019-01-01 but monday
 # every day starting today at 9PM
 # every 2 weeks starting today at 2PM but monday
+# every monday
+# every 3 monday
+# every mon,fri starting tomorrow at 9PM
 def get_starting_date(query):
     if not has_starting(query):
         return datetime.now()
