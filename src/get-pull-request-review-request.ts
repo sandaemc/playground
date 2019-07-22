@@ -8,25 +8,35 @@ import {
 } from "./filters";
 import { issueEventOrderByCreatedAt } from "./sorters";
 
-export async function getReviewRequestsBy(creator: string) {
-  const issues = (await getIssues("pcellano")).filter(issueRecent);
-  const issueIds = issues.map(c => c.number);
+const REQUESTORS = (process.env.GITHUB_REQUESTORS || "").split(",");
+const REVIEWER = process.env.GITHUB_REVIEWER || "";
 
-  for (const id of issueIds) {
-    const issueEvents = (await getIssueEvents(id))
+if (!REVIEWER.length) {
+  throw new Error("GITHUB_REVIEWER is undefined");
+}
+
+if (!REQUESTORS.length) {
+  throw new Error("GITHUB_REQUESTORS is undefined");
+}
+
+export async function getReviewRequestsBy(creator: string) {
+  const issues = (await getIssues(creator)).filter(issueRecent);
+
+  for (const issue of issues) {
+    const issueEvents = (await getIssueEvents(issue.number))
       .filter(issueEventRecent)
       .filter(issueEventIsReviewRequest)
-      .filter(issueEventRequestedReviewerIs("sandaemc"))
+      .filter(issueEventRequestedReviewerIs(REVIEWER))
       .sort(issueEventOrderByCreatedAt)
       .reverse()
       .slice(0, 1);
 
-    console.log(issueEvents);
+    if (issueEvents.length) console.log(issue.html_url);
   }
 }
 
 (async () => {
-  await getReviewRequestsBy("pcellano");
-  await getReviewRequestsBy("eoporto");
-  await getReviewRequestsBy("arielmanayon");
+  for (const requestor of REQUESTORS) {
+    await getReviewRequestsBy(requestor);
+  }
 })();

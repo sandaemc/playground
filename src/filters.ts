@@ -15,7 +15,9 @@ export function issueRecent(issue: IssuesListForRepoResponseItem) {
 }
 
 export function issueEventRecent(event: IssuesListEventsResponseItem) {
-  return moment(event.created_at).isSameOrAfter(moment().subtract(1, "days"));
+  return moment(event.created_at).isSameOrAfter(
+    moment().subtract(15, "minutes")
+  );
 }
 
 export function issueEventIsReviewRequest(
