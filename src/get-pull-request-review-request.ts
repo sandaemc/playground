@@ -1,15 +1,32 @@
 require("dotenv").config();
-import * as Octokit from "@octokit/rest";
+import { getIssues, getIssueEvents } from "./api";
+import {
+  issueRecent,
+  issueEventIsReviewRequest,
+  issueEventRequestedReviewerIs,
+  issueEventRecent
+} from "./filters";
+import { issueEventOrderByCreatedAt } from "./sorters";
 
-const api = new Octokit({
-  auth: `token ${process.env.GITHUB_AUTH_TOKEN}`
-});
+export async function getReviewRequestsBy(creator: string) {
+  const issues = (await getIssues("pcellano")).filter(issueRecent);
+  const issueIds = issues.map(c => c.number);
 
-api.repos
-  .listForOrg({
-    org: "octokit",
-    type: "public"
-  })
-  .then(({ data }) => {
-    console.log(data);
-  });
+  for (const id of issueIds) {
+    const issueEvents = (await getIssueEvents(id))
+      .filter(issueEventRecent)
+      .filter(issueEventIsReviewRequest)
+      .filter(issueEventRequestedReviewerIs("sandaemc"))
+      .sort(issueEventOrderByCreatedAt)
+      .reverse()
+      .slice(0, 1);
+
+    console.log(issueEvents);
+  }
+}
+
+(async () => {
+  await getReviewRequestsBy("pcellano");
+  await getReviewRequestsBy("eoporto");
+  await getReviewRequestsBy("arielmanayon");
+})();
