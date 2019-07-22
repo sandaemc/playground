@@ -8,14 +8,14 @@ import {
 } from "./filters";
 import { issueEventOrderByCreatedAt } from "./sorters";
 
-const REQUESTORS = (process.env.GITHUB_REQUESTORS || "").split(",");
-const REVIEWER = process.env.GITHUB_REVIEWER || "";
+const requestors = (process.env.GITHUB_REQUESTORS || "").split(",");
+const reviewer = process.env.GITHUB_REVIEWER || "";
 
-if (!REVIEWER.length) {
+if (!reviewer.length) {
   throw new Error("GITHUB_REVIEWER is undefined");
 }
 
-if (!REQUESTORS.length) {
+if (!requestors.length) {
   throw new Error("GITHUB_REQUESTORS is undefined");
 }
 
@@ -26,7 +26,7 @@ export async function getReviewRequestsBy(creator: string) {
     const issueEvents = (await getIssueEvents(issue.number))
       .filter(issueEventRecent)
       .filter(issueEventIsReviewRequest)
-      .filter(issueEventRequestedReviewerIs(REVIEWER))
+      .filter(issueEventRequestedReviewerIs(reviewer))
       .sort(issueEventOrderByCreatedAt)
       .reverse()
       .slice(0, 1);
@@ -36,7 +36,7 @@ export async function getReviewRequestsBy(creator: string) {
 }
 
 (async () => {
-  for (const requestor of REQUESTORS) {
+  for (const requestor of requestors) {
     await getReviewRequestsBy(requestor);
   }
 })();
