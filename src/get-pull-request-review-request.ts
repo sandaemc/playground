@@ -7,6 +7,7 @@ import {
   issueEventRecent
 } from "./filters";
 import { issueEventOrderByCreatedAt } from "./sorters";
+import pushEvent from "./push-event";
 
 const requestors = (process.env.GITHUB_REQUESTORS || "").split(",");
 const reviewer = process.env.GITHUB_REVIEWER || "";
@@ -31,7 +32,7 @@ export async function getReviewRequestsBy(creator: string) {
       .reverse()
       .slice(0, 1);
 
-    if (issueEvents.length) console.log(issue.html_url);
+    if (issueEvents.length) pushEvent(issue.html_url);
   }
 }
 
