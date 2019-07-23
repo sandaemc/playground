@@ -13,5 +13,8 @@ const client = new Pusher({
   useTLS: true
 });
 
-export default (message: string) =>
-  client.trigger("github", "review-requested", { message });
+export default (payload: string) =>
+  client.trigger("github", "review-requested", {
+    payload,
+    createdAt: new Date()
+  });
