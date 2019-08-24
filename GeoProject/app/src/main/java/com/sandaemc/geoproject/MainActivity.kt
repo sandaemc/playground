@@ -2,6 +2,7 @@ package com.sandaemc.geoproject
 
 import android.app.IntentService
 import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -14,30 +15,33 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import java.io.IOException
 import java.util.*
 
 object Constants {
     const val SUCCESS_RESULT = 0
     const val FAILURE_RESULT = 1
-    const val PACKAGE_NAME = "com.sandaemc.geoproject"
+    private const val PACKAGE_NAME = "com.sandaemc.geoproject"
     const val RECEIVER = "$PACKAGE_NAME.RECEIVER"
-    const val RESULT_DATA_KEY = "${PACKAGE_NAME}.RESULT_DATA_KEY"
-    const val LOCATION_DATA_EXTRA = "${PACKAGE_NAME}.LOCATION_DATA_EXTRA"
+    const val RESULT_DATA_KEY = "$PACKAGE_NAME.RESULT_DATA_KEY"
+    const val LOCATION_DATA_EXTRA = "$PACKAGE_NAME.LOCATION_DATA_EXTRA"
 }
 
 class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
-    private var receiver: ResultReceiver? = null
+    private lateinit var receiver: ResultReceiver
 
     override fun onHandleIntent(intent: Intent?) {
         intent ?: return
 
         val geocoder = Geocoder(this, Locale.getDefault())
 
-        var location = intent.getParcelableExtra<Location>(Constants.LOCATION_DATA_EXTRA)
-        receiver = intent.getParcelableExtra<ResultReceiver>(Constants.RECEIVER)
+        val location = intent.getParcelableExtra<Location>(Constants.LOCATION_DATA_EXTRA)
+        receiver = intent.getParcelableExtra(Constants.RECEIVER)
 
         var errorMessage = ""
         var addresses: List<Address> = emptyList()
@@ -48,7 +52,6 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
                 location.longitude,
                 3
             )
-
         } catch (ioException: IOException) {
             Log.e("err", "service unavailable", ioException)
             errorMessage = "service unavailable"
@@ -71,10 +74,9 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
         }
     }
 
-
     private fun deliverResultToReceiver(resultCode: Int, message: String) {
         val bundle = Bundle().apply { putString(Constants.RESULT_DATA_KEY, message) }
-        receiver?.send(resultCode, bundle)
+        receiver.send(resultCode, bundle)
     }
 
 }
@@ -82,6 +84,7 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
 class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var resultReceiver: AddressResultReceiver
+    private val requestCheckSettings = 0x1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,13 +93,13 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         resultReceiver = AddressResultReceiver(Handler())
 
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             val txtView = findViewById<TextView>(R.id.txt_hello)
             val locString = { location: Location? -> "Lat: ${location?.latitude}, Long: ${location?.longitude}" }
 
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location == null) {
-                    showToast("No location")
+                    showToast("No last location")
                     return@addOnSuccessListener
                 }
 
@@ -107,10 +110,14 @@ class MainActivity : AppCompatActivity() {
 
                 txtView.text = locString(location)
 
-                startIntentService(location)
+                //startIntentService(location)
             }
+
+            createLoctionRequest()
         }
     }
+
+    fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
     private fun startIntentService(location: Location) {
         val intent = Intent(this, FetchAddressIntentService::class.java).apply {
@@ -121,24 +128,41 @@ class MainActivity : AppCompatActivity() {
         startService(intent)
     }
 
+    private fun createLoctionRequest() {
+        val locationRequest = LocationRequest.create().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
 
-    fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
 
-    internal inner class AddressResultReceiver(handler: Handler): ResultReceiver(handler) {
-        override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
-            Log.i("here", "IN here")
-            super.onReceiveResult(resultCode, resultData)
+        val client = LocationServices.getSettingsClient(this)
+        val task = client.checkLocationSettings(builder.build())
 
-            val address = resultData?.getString(Constants.RESULT_DATA_KEY) ?: ""
-            showToast("Address: $address")
-
-            Log.i("received", address)
-
-            if (resultCode == Constants.SUCCESS_RESULT) {
-//                showToast("Address found")
+        task.addOnSuccessListener { res -> showToast(res.locationSettingsStates.isGpsUsable.toString()) }
+        task.addOnFailureListener { ex ->
+            if (ex is ResolvableApiException) {
+                try {
+                    ex.startResolutionForResult(this@MainActivity, requestCheckSettings)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    // Ignore the error
+                }
             }
         }
     }
 
+    internal inner class AddressResultReceiver(handler: Handler): ResultReceiver(handler) {
+        override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
+            super.onReceiveResult(resultCode, resultData)
+
+            val address = resultData?.getString(Constants.RESULT_DATA_KEY) ?: ""
+
+            if (resultCode == Constants.SUCCESS_RESULT) {
+                showToast("Address: $address")
+            }
+        }
+    }
 
 }
