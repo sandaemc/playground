@@ -1,1 +1,3 @@
-export {};
+import TodayPage from "./today";
+
+export { TodayPage };
