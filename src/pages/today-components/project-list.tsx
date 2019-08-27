@@ -5,15 +5,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Divider from "@material-ui/core/Divider";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: "100%",
-      maxWidth: 360,
       backgroundColor: theme.palette.background.paper
     },
     progress: {
