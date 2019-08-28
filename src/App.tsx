@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Container from "@material-ui/core/Container";
-import { TodayPageComponent } from "./pages/today";
+import { ProjectsPage } from "./pages/projects";
+import { ProjectPage } from "./pages/project";
 import { AppBarComponent } from "./components/app-bar";
 
 const App: React.FC = () => {
@@ -9,7 +9,8 @@ const App: React.FC = () => {
     <>
       <AppBarComponent />
       <Switch>
-        <Route exact path="/" component={TodayPageComponent} />
+        <Route exact path="/" component={ProjectsPage} />
+        <Route path="/projects/:id" component={ProjectPage} />
       </Switch>
     </>
   );
