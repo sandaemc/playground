@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-export default () => {
+export function RadialChart() {
   const state = {
     options: {
       dataLabels: {
@@ -20,8 +20,8 @@ export default () => {
       options={state.options}
       series={state.series}
       type="radialBar"
-      width={500}
-      height={500}
+      width={250}
+      height={250}
     />
   );
 };
