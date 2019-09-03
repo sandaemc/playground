@@ -28,18 +28,12 @@ body {
     transform: rotate(180deg);
 }
 
-.wrapper {
-    margin: 0 auto;
-}
-
 .c100 {
     position: relative;
-    font-size: 160px;
+    font-size: 100px;
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    float: left;
-    margin: 0.4em;
     background-color: #dfe8ed;
     z-index: 500000;
 }
