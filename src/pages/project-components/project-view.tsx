@@ -2,7 +2,8 @@ import React from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { Project } from "../../model-contracts/project";
 import Container from "@material-ui/core/Container";
-import {TimerComponent} from "../../components/timer";
+import {PomodoroComponent} from "../../components/pomodoro";
+import subMinutes from 'date-fns/subMinutes'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,8 +24,7 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
   return (
     <Container maxWidth="xs" className={classes.root}>
       <h1>{project.name}</h1>
-
-        <TimerComponent initialValue={20} maxValue={120} label="Pause"/>
+        <PomodoroComponent initial={24} onDone={() => alert("Allo")}/>
 
     </Container>
   );
