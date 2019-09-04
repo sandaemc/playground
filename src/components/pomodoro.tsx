@@ -3,15 +3,15 @@ import {useInterval} from "react-use";
 
 export type PomodoroComponentProps = {
     onDone: any;
+    onUpdate: any;
     initial: number;
 };
 
 export function PomodoroComponent(props: PomodoroComponentProps) {
     const [minutes, setMinutes] = useState(props.initial);
-    const [seconds, setSeconds] = useState(59);
+    const [seconds, setSeconds] = useState(0);
 
     useInterval(() => {
-        setSeconds(seconds - 1);
         if (seconds <= 0) {
             setSeconds(59);
             setMinutes(minutes - 1);
@@ -19,6 +19,8 @@ export function PomodoroComponent(props: PomodoroComponentProps) {
             if (minutes <= 0) {
                 props.onDone();
             }
+        } else {
+            setSeconds(seconds - 1);
         }
     }, 1000);
 
