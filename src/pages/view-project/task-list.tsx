@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {Link} from "react-router-dom";
 import {Task} from "../../model-contracts/task";
 import {ListItemIcon} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -25,6 +26,10 @@ export function TaskListComponent({tasks}: TaskListComponentProps) {
     const classes = useStyles();
 
     return (
+        <div>
+            <Typography variant="h6" gutterBottom>
+                Tasks
+            </Typography>
         <List component="nav" className={classes.root} aria-label="mailbox folders">
             {tasks.map((v: Task, k) => (
                 <ListItem key={k} button divider component={Link} to="/projects/123">
@@ -35,5 +40,6 @@ export function TaskListComponent({tasks}: TaskListComponentProps) {
                 </ListItem>
             ))}
         </List>
+        </div>
     );
 }

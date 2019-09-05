@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useInterval} from "react-use";
-import {ding, tick} from "../lib/sounds";
+import {ding, tick} from "../../lib/sounds";
 import './pomodoro.css';
 
 export enum PomodoroColor {

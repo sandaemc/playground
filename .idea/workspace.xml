@@ -39,6 +39,12 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
     <property name="ts.external.directory.path" value="D:\code\pomometer\node_modules\typescript\lib" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\pomometer\src\pages\view-project" />
+      <recent name="D:\code\pomometer\src\pages\list-projects" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -67,7 +73,8 @@
       <workItem from="1567402897806" duration="1143000" />
       <workItem from="1567521147218" duration="20458000" />
       <workItem from="1567585050324" duration="3231000" />
-      <workItem from="1567650587300" duration="9986000" />
+      <workItem from="1567650587300" duration="10601000" />
+      <workItem from="1567687947963" duration="3916000" />
     </task>
     <servers />
   </component>

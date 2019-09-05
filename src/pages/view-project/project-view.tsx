@@ -2,10 +2,10 @@ import React, {useState} from "react";
 import {createStyles, Theme, makeStyles} from "@material-ui/core/styles";
 import {Project} from "../../model-contracts/project";
 import Container from "@material-ui/core/Container";
-import {PomodoroComponent} from "../../components/pomodoro";
+import {PomodoroComponent} from "./pomodoro";
 import Button from '@material-ui/core/Button';
-import CenterFocusStrongIcon from '@material-ui/icons/CenterFocusStrong';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
+import LaptopIcon from '@material-ui/icons/Laptop';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -70,7 +70,7 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
                               variant="contained"
                               color="primary">
                         {canFocus()
-                            ? <CenterFocusStrongIcon className={classes.extendedIcon}/>
+                            ? <LaptopIcon className={classes.extendedIcon}/>
                             : <LocalCafeIcon className={classes.extendedIcon}/>}
                         {canFocus() ? 'Focus' : 'Break'}
                     </Button>}
@@ -79,9 +79,3 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
     );
 }
 
-/*
-<Fab style={{ textAlign: 'center'}}>
-    <PlayArrow/>
-</Fab>
-
- */

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import Container from "@material-ui/core/Container";
-import {ProjectViewComponent} from "./project-components/project-view";
-import {TaskListComponent} from "./project-components/task-list";
+import {ProjectViewComponent} from "./project-view";
+import {TaskListComponent} from "./task-list";
 import isEmpty from 'lodash/isEmpty';
-import { Project } from "../model-contracts/project";
+import { Project } from "../../model-contracts/project";
 import './project.css';
 
 const projectSource: Project = {
@@ -15,7 +15,7 @@ const projectSource: Project = {
     ]
 };
 
-export function ProjectPage() {
+export default () => {
     const [project, setProject] = useState<Project>({} as Project);
 
     useEffect(() => {
