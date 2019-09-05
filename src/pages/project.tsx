@@ -26,6 +26,7 @@ export function ProjectPage() {
         <Container maxWidth="sm">
             <div className="progressbar" />
             {!isEmpty(project) ? <ProjectViewComponent project={project}/> : null}
+            <br />
             {!isEmpty(project) && project.tasks ? <TaskListComponent tasks={project.tasks}/> : null}
         </Container>
     );

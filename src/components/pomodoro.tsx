@@ -1,24 +1,28 @@
 import React, {useState} from "react";
 import {useInterval} from "react-use";
-import {ding, flow, tick} from "../lib/sounds";
+import {ding, tick} from "../lib/sounds";
+import './pomodoro.css';
+
+export enum PomodoroColor {
+    blue = 'blue',
+    orange = 'orange',
+    green = 'green'
+};
 
 export type PomodoroComponentProps = {
-    onStop: any;
     onDone: any;
     onUpdate: any;
     initial: number;
 };
 
-ding.on('end', () => flow.play());
-
 export function PomodoroComponent(props: PomodoroComponentProps) {
-
     const [timeSpent, setTimeSpent] = useState(-1);
     const [minutes, setMinutes] = useState(props.initial);
     const [seconds, setSeconds] = useState(0);
 
     useInterval(() => {
         tick.play();
+
         if (seconds <= 0) {
             setSeconds(59);
             setMinutes(minutes - 1);
@@ -48,8 +52,12 @@ export function PomodoroComponent(props: PomodoroComponentProps) {
         return `${pad(minutes)}:${pad(seconds)}`;
     }
 
+    function getColor() {
+        return props.initial === 25 ? PomodoroColor.blue : PomodoroColor.green;
+    }
+
     return (
-        <div className={`c100 p${getPercentage(minutes, seconds)} blue`}>
+        <div className={`c100 p${getPercentage(minutes, seconds)} ${getColor()}`}>
             <span>{formatTime(minutes, seconds)}</span>
             <div className="slice">
                 <div className="bar"/>
