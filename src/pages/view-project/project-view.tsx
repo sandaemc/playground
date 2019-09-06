@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {createStyles, Theme, makeStyles} from "@material-ui/core/styles";
-import {Project} from "../../model-contracts/project";
 import Container from "@material-ui/core/Container";
 import {PomodoroComponent} from "./pomodoro";
 import Button from '@material-ui/core/Button';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import LaptopIcon from '@material-ui/icons/Laptop';
+import {Project} from "../../models/project";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -51,7 +51,7 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
         setNextAction(
             nextAction === PomodoroAction.focus
                 ? PomodoroAction.break
-                : PomodoroAction.break);
+                : PomodoroAction.focus);
     }
 
     function canFocus() {

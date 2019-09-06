@@ -1,0 +1,59 @@
+import db from './db';
+
+enum Color {
+    blue = 'blue',
+    orange = 'orange'
+};
+
+enum Day {
+    SU = 'SU',
+    MO = 'MO',
+    TU = 'TU',
+    WE = 'WE',
+    TH = 'TH',
+    FR = 'FR',
+    SA = 'SA'
+}
+
+class Schedule {
+    constructor(private day: Day, private goal: number) {
+    }
+}
+
+export class Task {
+    constructor(public name: string) {
+    }
+}
+
+export class Project {
+    constructor(public id: number, public name: string, private color: Color, public tasks: Task[], private schedules: Schedule[]) {
+    }
+}
+
+const projectTable = db.get('projects');
+
+export function findProjects(): Project[] {
+    const data = projectTable.value();
+    return data.map((record: any) =>
+        new Project(
+            record.id,
+            record.name,
+            record.color,
+            record.tasks.map((c: any) => new Task(c.name)),
+            record.schedules.map((c: any) => new Schedule(c.day, c.goal))
+        )
+    );
+}
+
+export function findProject(id: number): Project {
+    const record = projectTable.find({id}).value();
+
+    return new Project(
+        record.id,
+        record.name,
+        record.color,
+        record.tasks.map((c: any) => new Task(c.name)),
+        record.schedules.map((c: any) => new Schedule(c.day, c.goal))
+    );
+}
+

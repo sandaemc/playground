@@ -1,9 +1,9 @@
 import db from './db';
 
-const TABLE_NAME = 'configs';
+const configTable = db.get('configs');
 
 export function get(name: string): number {
-    const {value, type} = db.get(TABLE_NAME).find({name}).value();
+    const {value, type} = configTable.find({name}).value();
 
     switch (type) {
         case 'float':
@@ -14,5 +14,5 @@ export function get(name: string): number {
 }
 
 export function set(name: string, value: any) {
-    db.get(TABLE_NAME).find({ name }).assign({ value }).write();
+    configTable.find({ name }).assign({ value }).value();
 }

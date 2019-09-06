@@ -3,24 +3,20 @@ import Container from "@material-ui/core/Container";
 import {ProjectViewComponent} from "./project-view";
 import {TaskListComponent} from "./task-list";
 import isEmpty from 'lodash/isEmpty';
-import { Project } from "../../model-contracts/project";
 import './index.css';
+import { RouteComponentProps } from "react-router";
+import {findProject, Project} from "../../models/project";
 
-const projectSource: Project = {
-    name: "Work - Pomometer",
-    minutesLeft: 25,
-    tasks: [
-        {name: 'Simple 1', done: false},
-        {name: 'Simple 2', done: false}
-    ]
+type IRouteParams = {
+    projectId: string;
 };
 
-export default () => {
+export default ({ match }: RouteComponentProps<IRouteParams>) => {
     const [project, setProject] = useState<Project>({} as Project);
 
     useEffect(() => {
-        setProject(projectSource);
-    });
+        setProject(findProject(Number.parseInt(match.params.projectId)));
+    }, []);
 
     return (
         <Container maxWidth="sm">

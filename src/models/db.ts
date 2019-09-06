@@ -24,14 +24,23 @@ db.defaults({
     ],
     projects: [
         {
-            name: 'Work - Pomometer',
+            id: 1,
+            name: 'Pomometer',
             color: 'blue',
-            tasks: [
-                { name: 'Sample'}
-            ],
+            tasks: [],
             schedules: [
                 { day: "mon", goal: 3},
-                { day: "wed", goal: 3}
+                { day: "fri", goal: 3}
+            ]
+        },
+        {
+            id: 2,
+            name: 'IE Data',
+            color: 'red',
+            tasks: [],
+            schedules: [
+                { day: "mon", goal: 3},
+                { day: "tue", goal: 3}
             ]
         }
     ]

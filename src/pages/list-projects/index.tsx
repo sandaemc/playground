@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import Container from "@material-ui/core/Container";
 import {ProjectListComponent} from "./project-list";
-import {Project} from "../../model-contracts/project";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {findProjects, Project} from "../../models/project";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -16,19 +16,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const projectsSource: Project[] = [
-    {name: "Work - Pomometer", minutesLeft: 25, tasks: []},
-    {name: "Work - IE", minutesLeft: 25, tasks: []},
-    {name: "Work - Example", minutesLeft: 100, tasks: []}
-];
-
 export default () => {
     const [projects, setProjects] = useState<Project[]>([]);
     const classes = useStyles();
 
     useEffect(() => {
-        setProjects(projectsSource);
-    }, [projects]);
+        setProjects(findProjects());
+    }, []);
 
     return (
         <Container maxWidth="sm">

@@ -11,7 +11,7 @@ const App: React.FC = () => {
       <AppBarComponent />
       <Switch>
         <Route exact path="/" component={ListProjects} />
-        <Route path="/projects/:id" component={ViewProject} />
+        <Route path="/projects/:projectId" component={ViewProject} />
       </Switch>
     </>
   );

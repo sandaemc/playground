@@ -1,5 +1,5 @@
 import { Action } from "./action";
-import {Project} from "./model-contracts/project";
+import {Project} from "./models/project";
 
 export type RootState = {
   projects: Project[],
@@ -7,9 +7,6 @@ export type RootState = {
 
 const initialState: RootState = {
   projects: [
-    { name: "Work - Pomometer", minutesLeft: 25, tasks: [] },
-    { name: "Work - IE", minutesLeft: 25, tasks: [] },
-    { name: "Work - Example", minutesLeft: 100, tasks: [] }
   ]
 };
 

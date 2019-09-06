@@ -5,9 +5,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from '@material-ui/core/Checkbox';
 import {Link} from "react-router-dom";
-import {Task} from "../../model-contracts/task";
 import {ListItemIcon} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import {Task} from "../../models/project";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
