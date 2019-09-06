@@ -27,8 +27,8 @@ export type ProjectViewComponentProps = {
 };
 
 enum PomodoroAction {
-    focus,
-    break
+    focus = 25,
+    break = 5
 }
 
 export function ProjectViewComponent({project}: ProjectViewComponentProps) {
@@ -48,7 +48,10 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
         if (PomodoroAction.focus)
             setFocusCount(focusCount + 1);
 
-        setNextAction(PomodoroAction.break);
+        setNextAction(
+            nextAction === PomodoroAction.focus
+                ? PomodoroAction.break
+                : PomodoroAction.break);
     }
 
     function canFocus() {
@@ -63,7 +66,7 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
                     ? <PomodoroComponent
                         onDone={() => done()}
                         onUpdate={({timeSpent}: any) => console.log("Time spent: " + timeSpent)}
-                        initial={canFocus() ? 1 : 2}/>
+                        initial={canFocus() ? PomodoroAction.focus : PomodoroAction.break}/>
                     : <Button className={classes.button}
                               size="large"
                               onClick={() => start()}

@@ -4,7 +4,7 @@ import {ProjectViewComponent} from "./project-view";
 import {TaskListComponent} from "./task-list";
 import isEmpty from 'lodash/isEmpty';
 import { Project } from "../../model-contracts/project";
-import './project.css';
+import './index.css';
 
 const projectSource: Project = {
     name: "Work - Pomometer",

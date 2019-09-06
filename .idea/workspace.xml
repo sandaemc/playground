@@ -8,12 +8,15 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="pomometer" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="CSS File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -41,6 +44,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\pomometer\src\components" />
       <recent name="D:\code\pomometer\src\pages\view-project" />
       <recent name="D:\code\pomometer\src\pages\list-projects" />
     </key>
@@ -74,7 +78,8 @@
       <workItem from="1567521147218" duration="20458000" />
       <workItem from="1567585050324" duration="3231000" />
       <workItem from="1567650587300" duration="10601000" />
-      <workItem from="1567687947963" duration="3916000" />
+      <workItem from="1567687947963" duration="6666000" />
+      <workItem from="1567732433498" duration="3749000" />
     </task>
     <servers />
   </component>
