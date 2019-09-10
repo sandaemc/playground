@@ -5,6 +5,7 @@ import {ProjectListComponent} from "./project-list";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {findProjects, Project} from "../../models/project";
+import {ListProjectBarComponent} from "./list-project-bar";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -26,6 +27,8 @@ export default () => {
 
     return (
         <Container maxWidth="sm">
+            <ListProjectBarComponent />
+
             <Fab aria-label="Add" className={classes.fab} color="primary">
                 <AddIcon/>
             </Fab>

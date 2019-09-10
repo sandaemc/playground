@@ -25,7 +25,7 @@ export function ProjectListComponent({ projects }: ProjectListComponentProps) {
   return (
     <List component="nav" className={classes.root} aria-label="mailbox folders">
       {projects.map((v: Project) => (
-        <ListItem key={v.id} button divider component={Link} to={`/projects/${v.id}`}>
+        <ListItem key={v.id} button divider component={Link} to={`/projects/view/${v.id}`}>
           <ListItemText
             primary={v.name}
             secondary={

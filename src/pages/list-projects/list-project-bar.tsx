@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export function AppBarComponent() {
+export function ListProjectBarComponent() {
   const classes = useStyles();
 
   return (

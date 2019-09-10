@@ -6,12 +6,13 @@ import isEmpty from 'lodash/isEmpty';
 import './index.css';
 import { RouteComponentProps } from "react-router";
 import {findProject, Project} from "../../models/project";
+import {ViewProjectBarComponent} from "./view-project-bar";
 
 type IRouteParams = {
     projectId: string;
 };
 
-export default ({ match }: RouteComponentProps<IRouteParams>) => {
+export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
     const [project, setProject] = useState<Project>({} as Project);
 
     useEffect(() => {
@@ -20,6 +21,10 @@ export default ({ match }: RouteComponentProps<IRouteParams>) => {
 
     return (
         <Container maxWidth="sm">
+            <ViewProjectBarComponent
+                onBackClick={() => history.push("/")}
+                onEditClick={() => history.push(`/projects/edit/${project.id}`)} />
+                
             <div className="progressbar" />
             {!isEmpty(project) ? <ProjectViewComponent project={project}/> : null}
             <br />
