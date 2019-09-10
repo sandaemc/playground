@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 const lowdb = require('lowdb');
 const LocalStorage = require('lowdb/adapters/LocalStorage');
 
@@ -24,7 +25,7 @@ db.defaults({
     ],
     projects: [
         {
-            id: 1,
+            id: v4(),
             name: 'Pomometer',
             color: 'blue',
             tasks: [],
@@ -34,7 +35,7 @@ db.defaults({
             ]
         },
         {
-            id: 2,
+            id: v4(),
             name: 'IE Data',
             color: 'red',
             tasks: [],

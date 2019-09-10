@@ -16,7 +16,7 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
     const [project, setProject] = useState<Project>({} as Project);
 
     useEffect(() => {
-        setProject(findProject(Number.parseInt(match.params.projectId)));
+        setProject(findProject(match.params.projectId));
     }, []);
 
     return (
@@ -24,8 +24,7 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
             <ViewProjectBarComponent
                 onBackClick={() => history.push("/")}
                 onEditClick={() => history.push(`/projects/edit/${project.id}`)} />
-                
-            <div className="progressbar" />
+
             {!isEmpty(project) ? <ProjectViewComponent project={project}/> : null}
             <br />
             {!isEmpty(project) && project.tasks ? <TaskListComponent tasks={project.tasks}/> : null}

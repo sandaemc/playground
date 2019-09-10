@@ -25,8 +25,7 @@ export function ListProjectBarComponent() {
           edge="start"
           className={classes.menuButton}
           color="inherit"
-          aria-label="menu"
-        >
+          aria-label="menu">
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>

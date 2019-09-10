@@ -16,13 +16,19 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export function AddProjectBarComponent() {
+interface Props {
+    onBackClick: any;
+    onDoneClick: any;
+}
+
+export function AddProjectBarComponent(props: Props) {
     const classes = useStyles();
 
     return (
         <AppBar position="relative">
             <Toolbar>
                 <IconButton
+                    onClick={() => props.onBackClick()}
                     edge="start"
                     className={classes.menuButton}
                     color="inherit"
@@ -33,6 +39,7 @@ export function AddProjectBarComponent() {
                     Add Project
                 </Typography>
                 <IconButton
+                    onClick={() => props.onDoneClick()}
                     edge="end"
                     className={classes.menuButton}
                     color="inherit"

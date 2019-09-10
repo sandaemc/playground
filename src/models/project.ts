@@ -1,4 +1,5 @@
 import db from './db';
+import { v4 } from 'uuid';
 
 enum Color {
     blue = 'blue',
@@ -26,11 +27,21 @@ export class Task {
 }
 
 export class Project {
-    constructor(public id: number, public name: string, private color: Color, public tasks: Task[], private schedules: Schedule[]) {
+    constructor(public id: string, public name: string, private color: Color, public tasks: Task[], private schedules: Schedule[]) {
     }
 }
 
 const projectTable = db.get('projects');
+
+export function addProject(values: Omit<Project, 'id' | 'tasks' | 'schedules' | 'color'>) {
+    projectTable.push({
+        id: v4(),
+        tasks: [],
+        schedules: [],
+        color: 'blue',
+        ...values
+    }).write();
+}
 
 export function findProjects(): Project[] {
     const data = projectTable.value();
@@ -45,7 +56,7 @@ export function findProjects(): Project[] {
     );
 }
 
-export function findProject(id: number): Project {
+export function findProject(id: string): Project {
     const record = projectTable.find({id}).value();
 
     return new Project(

@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
+import {makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -19,30 +15,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    onSubmit: any;
-}
-
-interface State {
-    name: string;
+    onChange: any;
+    initial: {
+        name: string;
+    }
 }
 
 export function AddFormComponent(props: Props)  {
     const classes = useStyles();
 
-    const [values, setValues] = useState<State>({
-        name: ''
-    });
-
-    const handleChange = (name: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValues({...values, [name]: event.target.value });
+    const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        props.onChange({...props.initial, [name]: event.target.value });
     };
 
     return (
         <form className={classes.container} noValidate autoComplete="off">
             <FormControl fullWidth>
-                <TextField fullWidth label="Name"
+                <TextField label="Name"
                            className={classes.textField}
-                           value={values.name}
+                           value={props.initial.name}
                            margin="normal"
                            onChange={handleChange('name')}/>
             </FormControl>
