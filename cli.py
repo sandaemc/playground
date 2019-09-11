@@ -17,3 +17,4 @@ if __name__ == '__main__':
     sys.exit(main())
 
 """I distrust the system when I am overwhelmed. I need to prevent that."""
+# /home/ubuntu/code/recurrist/env/bin/python FromCli -p Inbox -l ThisWeek -l ThisMonth
