@@ -17,7 +17,7 @@ enum Day {
 }
 
 class Schedule {
-    constructor(private day: Day, private goal: number) {
+    constructor(public day: Day, public goal: number) {
     }
 }
 
@@ -27,7 +27,7 @@ export class Task {
 }
 
 export class Project {
-    constructor(public id: string, public name: string, private color: Color, public tasks: Task[], private schedules: Schedule[]) {
+    constructor(public id: string, public name: string, private color: Color, public tasks: Task[], public schedules: Schedule[]) {
     }
 }
 

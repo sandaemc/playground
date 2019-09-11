@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import {Project} from "../../models/project";
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,11 +33,15 @@ enum PomodoroAction {
 }
 
 export function ProjectViewComponent({project}: ProjectViewComponentProps) {
+    const classes = useStyles();
+
     const [nextAction, setNextAction] = useState(PomodoroAction.focus);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
-    const [focusCount, setFocusCount] = useState(0);
+    const [value, setValue] = useState(0);
 
-    const classes = useStyles();
+    function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
+        setValue(newValue);
+    }
 
     function start() {
         setIsTimerRunning(true);
@@ -44,9 +49,6 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
 
     function done() {
         setIsTimerRunning(false);
-
-        if (PomodoroAction.focus)
-            setFocusCount(focusCount + 1);
 
         setNextAction(
             nextAction === PomodoroAction.focus
@@ -59,9 +61,11 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
     }
 
     return (
-        <Container maxWidth="xs" className={classes.root}>
-            <h1 style={{textAlign: 'center'}}>{project.name}</h1>
+        <Container maxWidth="sm" className={classes.root}>
+            <br />
+
             <div style={{textAlign: 'center'}}>
+
                 {isTimerRunning
                     ? <PomodoroComponent
                         onDone={() => done()}
@@ -77,7 +81,12 @@ export function ProjectViewComponent({project}: ProjectViewComponentProps) {
                             : <LocalCafeIcon className={classes.extendedIcon}/>}
                         {canFocus() ? 'Focus' : 'Break'}
                     </Button>}
+
+                <Typography variant="overline" display="block" gutterBottom>
+                    Today's goal: 0 / {project.schedules[0].goal}
+                </Typography>
             </div>
+
         </Container>
     );
 }

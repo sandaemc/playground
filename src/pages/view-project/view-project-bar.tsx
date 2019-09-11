@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 interface Props {
     onBackClick: any;
     onEditClick: any;
+    title: string;
 }
 
 export function ViewProjectBarComponent(props: Props) {
@@ -37,7 +38,7 @@ export function ViewProjectBarComponent(props: Props) {
           <ArrowBack />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-          Project Detail
+            {props.title}
         </Typography>
         <IconButton
             onClick={() => props.onEditClick()}

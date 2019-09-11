@@ -1,5 +1,5 @@
 {
-  "name": "new-react-app-js",
+  "name": "pomometer",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -14,6 +14,7 @@
     "@types/react-dom": "16.8.5",
     "@types/react-redux": "^7.1.2",
     "@types/react-router-dom": "^4.3.5",
+    "@types/recharts": "^1.1.21",
     "@types/uuid": "^3.4.5",
     "prettier": "^1.18.2",
     "typescript": "3.5.3"
@@ -21,22 +22,18 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.2.1",
-    "apexcharts": "^3.8.5",
     "axios": "^0.19.0",
-    "bootstrap": "^4.3.1",
     "date-fns": "^2.0.1",
     "howler": "^2.1.2",
     "lodash": "^4.17.15",
     "lowdb": "^1.0.0",
     "react": "^16.9.0",
-    "react-apexcharts": "^1.3.3",
     "react-dom": "^16.9.0",
-    "react-progressbar": "^15.4.1",
-    "react-progressbar.js": "^0.2.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.0",
     "react-use": "^12.1.0",
+    "recharts": "^1.7.1",
     "redux": "^4.0.4",
     "redux-saga": "^1.0.5",
     "typeface-roboto": "0.0.75",
@@ -44,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false  react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "invalidate": "aws cloudfront create-invalidation --distribution-id E1IJXCK3WB5N6J --invalidation-batch file://invalidation.json",
