@@ -26,8 +26,10 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
                 onEditClick={() => history.push(`/projects/edit/${project.id}`)} />
 
             {!isEmpty(project) ? <ProjectViewComponent project={project}/> : null}
-            <br />
-            {!isEmpty(project) && project.tasks ? <TaskListComponent tasks={project.tasks}/> : null}
         </Container>
     );
 }
+/*
+<br />
+{!isEmpty(project) && project.tasks ? <TaskListComponent tasks={project.tasks}/> : null}
+ */
