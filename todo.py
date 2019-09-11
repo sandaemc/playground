@@ -30,6 +30,6 @@ def add_task(name, project, labels, due):
     project = _get_project(project)['id']
     labels = list(map(lambda x: _get_label(x)['id'], labels))
 
-    api.items.add(name, project_id=project, labels=labels)
+    api.items.add(name, project_id=project, labels=labels, due={"string": due})
     api.commit()
 
