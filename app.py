@@ -14,7 +14,7 @@ def create_task():
     request = app.current_request
     body = request.json_body
 
-    add_task(body['name'], body['project'], body['labels'], None)
+    add_task(body['name'], body['project'], body['labels'], body.get('due', None))
 
     return {'done': 'ok'}
 

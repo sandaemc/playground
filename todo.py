@@ -25,11 +25,12 @@ def _get_label(key):
     return get_resource(key, 'labels')
 
 
-def add_task(name, project, labels, due):
+def add_task(name, project, labels, due=None):
     """Main entry point for the script."""
     project = _get_project(project)['id']
     labels = list(map(lambda x: _get_label(x)['id'], labels))
 
-    api.items.add(name, project_id=project, labels=labels, due={"string": due})
-    api.commit()
+    api.items.add(name, project_id=project, labels=labels, date_string=due)
+
+    api.commit(raise_on_error=False)
 
