@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import ListProjects from "./pages/list-projects";
 import ViewProject from "./pages/view-project";
 import AddProject from "./pages/add-project";
-import 'typeface-roboto';
+import "typeface-roboto";
 
 const App: React.FC = () => {
   return (

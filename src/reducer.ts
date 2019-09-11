@@ -1,13 +1,12 @@
 import { Action } from "./action";
-import {Project} from "./models/project";
+import { Project } from "./models/project";
 
 export type RootState = {
-  projects: Project[],
+  projects: Project[];
 };
 
 const initialState: RootState = {
-  projects: [
-  ]
+  projects: []
 };
 
 export default (state = initialState, action: Action): RootState => {

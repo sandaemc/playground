@@ -4,7 +4,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
-import { Project } from '../../models/project';
+import { Project } from "../../models/project";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,14 +25,14 @@ export function ProjectListComponent({ projects }: ProjectListComponentProps) {
   return (
     <List component="nav" className={classes.root} aria-label="mailbox folders">
       {projects.map((v: Project) => (
-        <ListItem key={v.id} button divider component={Link} to={`/projects/view/${v.id}`}>
-          <ListItemText
-            primary={v.name}
-            secondary={
-              <span>
-              </span>
-            }
-          />
+        <ListItem
+          key={v.id}
+          button
+          divider
+          component={Link}
+          to={`/projects/view/${v.id}`}
+        >
+          <ListItemText primary={v.name} secondary={<span></span>} />
         </ListItem>
       ))}
     </List>

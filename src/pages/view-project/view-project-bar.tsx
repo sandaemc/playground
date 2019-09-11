@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import Edit from "@material-ui/icons/Edit";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -18,9 +17,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface Props {
-    onBackClick: any;
-    onEditClick: any;
-    title: string;
+  onBackClick: any;
+  onEditClick: any;
+  title: string;
 }
 
 export function ViewProjectBarComponent(props: Props) {
@@ -30,21 +29,23 @@ export function ViewProjectBarComponent(props: Props) {
     <AppBar position="relative">
       <Toolbar>
         <IconButton
-            onClick={() => props.onBackClick()}
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="back">
+          onClick={() => props.onBackClick()}
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="back"
+        >
           <ArrowBack />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-            {props.title}
+          {props.title}
         </Typography>
         <IconButton
-            onClick={() => props.onEditClick()}
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="edit">
+          onClick={() => props.onEditClick()}
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="edit"
+        >
           <Edit />
         </IconButton>
       </Toolbar>
