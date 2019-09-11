@@ -14,15 +14,15 @@ function addTask(name, project, labels, due) {
 }
 
 // m h DoM M DoW
-//cron.schedule('0 0 20 * *', () => { // every 20th of the month
-cron.schedule('* * * * *', () => { // every 20th of the month
-    addTask('Pay Globe - 09176294439', 'Inbox', ['ThisWeek'], "25th");
-    addTask('Pay Globe At Home Wifi', 'Inbox', ['ThisWeek']);
-    addTask('Pay Credit Card', 'Inbox', ['ThisWeek']);
-    addTask('Transfer 13K to EastWest', 'Inbox', ['ThisWeek']);
+cron.schedule('0 0 20 * *', () => { // every 20th of the month
+//cron.schedule('* * * * *', () => { // every 20th of the month
+    addTask('Pay Globe - 09176294439', 'Inbox', ['ThisWeek'], "26th");
+    addTask('Pay Globe At Home Wifi', 'Inbox', ['ThisWeek'], "26th");
+    addTask('Pay Credit Card', 'Inbox', ['ThisWeek'], "26th");
+    addTask('Transfer 13K to EastWest', 'Inbox', ['ThisWeek'], "26th");
 });
 
-cron.schedule('0 0 11 * *', () => { // every 11th of the month
-    addTask('Text St. Peter Agent', 'Inbox', ['ThisWeek', 'To_Tacloban']);
-    addTask('Pay St. Peter', 'Inbox', ['ThisMonth', 'At_Peerless']);
+cron.schedule('0 0 10 * *', () => { // every 10th of the month
+    addTask('Text St. Peter Agent', 'Inbox', ['ThisWeek', 'To_Tacloban'], "15th");
+    addTask('Pay St. Peter', 'Inbox', ['ThisMonth', 'At_Peerless'], "16th");
 });
