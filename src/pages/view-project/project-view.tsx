@@ -92,7 +92,7 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
         )}
 
         <Typography variant="overline" display="block" gutterBottom>
-          Today's goal: 0 / {project.schedules[0].goal}
+          Goal: 0 / {project.schedules[0].goal}
         </Typography>
       </div>
     </Container>

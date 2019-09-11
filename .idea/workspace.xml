@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7dc5d3f-1aec-43aa-938e-4d81db58f62a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/sounds.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/sounds.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/project.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/add-project/add-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add-project/add-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/add-project/add-project-bar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add-project/add-project-bar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/add-project/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add-project/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list-projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list-projects/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list-projects/list-project-bar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list-projects/list-project-bar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list-projects/project-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list-projects/project-list.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/view-project/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/view-project/pomodoro.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/pomodoro.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/view-project/project-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/project-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/view-project/task-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/task-list.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/view-project/view-project-bar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/view-project-bar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +98,7 @@
       <workItem from="1568104232587" duration="3932000" />
       <workItem from="1568148396890" duration="4415000" />
       <workItem from="1568186836613" duration="6883000" />
-      <workItem from="1568204937034" duration="272000" />
+      <workItem from="1568204937034" duration="687000" />
     </task>
     <servers />
   </component>
