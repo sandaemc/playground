@@ -42,7 +42,6 @@ export function ViewProjectBarComponent(props: Props) {
         </Typography>
         <IconButton
             onClick={() => props.onEditClick()}
-            edge="end"
             className={classes.menuButton}
             color="inherit"
             aria-label="edit">

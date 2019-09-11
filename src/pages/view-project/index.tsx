@@ -1,29 +1,28 @@
 import React, {useEffect, useState} from "react";
-import Container from "@material-ui/core/Container";
 import {ProjectViewComponent} from "./project-view";
-import {TaskListComponent} from "./task-list";
 import isEmpty from 'lodash/isEmpty';
 import './index.css';
 import { RouteComponentProps } from "react-router";
 import {findProject, Project} from "../../models/project";
 import {ViewProjectBarComponent} from "./view-project-bar";
-import { LineChart, Line } from 'recharts';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
-const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page B', uv: 200, pv: 1400, amt: 1400}];
-
-const renderLineChart = (
-    <LineChart width={200} height={200} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-    </LineChart>
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+    }),
 );
-
-
 
 type IRouteParams = {
     projectId: string;
 };
 
 export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
+    const classes = useStyles();
+
     const [project, setProject] = useState<Project>({} as Project);
 
     useEffect(() => {
@@ -31,14 +30,18 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
     }, []);
 
     return (
-        <Container maxWidth="sm">
-            <ViewProjectBarComponent
-                title={project.name}
-                onBackClick={() => history.push("/")}
-                onEditClick={() => history.push(`/projects/edit/${project.id}`)} />
+        <div className={classes.root}>
+            <Grid container>
+                <Grid item xs={12}>
+                    <ViewProjectBarComponent
+                        title={project.name}
+                        onBackClick={() => history.push("/")}
+                        onEditClick={() => history.push(`/projects/edit/${project.id}`)} />
 
-            {!isEmpty(project) ? <ProjectViewComponent project={project}/> : null}
-        </Container>
+                    {!isEmpty(project) ? <ProjectViewComponent project={project}/> : null}
+                </Grid>
+            </Grid>
+        </div>
     );
 }
 /*

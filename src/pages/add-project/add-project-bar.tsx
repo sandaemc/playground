@@ -40,7 +40,6 @@ export function AddProjectBarComponent(props: Props) {
                 </Typography>
                 <IconButton
                     onClick={() => props.onDoneClick()}
-                    edge="end"
                     className={classes.menuButton}
                     color="inherit"
                     aria-label="done">
