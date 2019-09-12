@@ -1,5 +1,5 @@
 from chalice import Chalice
-from todo import add_task
+from chalicelib.todo import *
 
 app = Chalice(app_name="recurrist")
 

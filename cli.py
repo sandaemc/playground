@@ -1,7 +1,7 @@
 """Script to create recurring TODOS"""
 import sys
 import click
-from todo import add_task
+from chalicelib.todo import add_task
 
 
 @click.command()

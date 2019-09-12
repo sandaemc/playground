@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 api = TodoistAPI(os.getenv('TODOIST_TOKEN'))
-api.sync()
+#api.sync()
 
 
 def get_resource(key, source):
