@@ -1,71 +1,69 @@
 import db from "./db";
 import { v4 } from "uuid";
 
-type COLOR = "BLUE" | "ORANGE";
-type DAY = "SU" | "MO" | "TU" | "WE" | "TH" | "FR" | "SA";
+export type Color = "BLUE" | "ORANGE";
+export type Day = "MO" | "TU" | "WE" | "TH" | "FR" ;
 
-class Schedule {
-  constructor(public day: DAY, public goal: number) {}
+export type Schedule = {
+    day: Day,
+    goal: number
+};
+
+export type Task = {
+    name: string;
 }
 
-export class Task {
-  constructor(public name: string) {}
+export type Project = {
+    id: string,
+    name: string,
+    color: Color,
+    schedules: Schedule[],
+    tasks: Task[]
+};
+
+function mapRecordToSchedule(record: any): Schedule {
+    return {
+        day: record.day,
+        goal: record.goal
+    };
 }
 
-export class Project {
-  constructor(
-    public id: string,
-    public name: string,
-    public color: COLOR,
-    public tasks: Task[],
-    public schedules: Schedule[]
-  ) {}
+function mapRecordToTask(record: any): Task {
+    return {
+        name: record.name
+    };
 }
+
+function mapRecordToProject(record: any): Project {
+    return {
+        id: record.id,
+        name: record.name,
+        color: record.color,
+        schedules: record.schedules.map((c: any) => mapRecordToSchedule(c)),
+        tasks: record.tasks.map((c: any) => mapRecordToTask(c))
+    };
+}
+
 
 const projectTable = db.get("projects");
 
 export function addProject(
-  values: Omit<Project, "id" | "tasks" | "schedules" | "color">
+  values: Omit<Project, "tasks">
 ) {
   projectTable
     .push({
-      id: v4(),
       tasks: [],
-      schedules: [
-          { day: 'MO', goal: 0},
-          { day: 'TU', goal: 0},
-          { day: 'WE', goal: 0},
-          { day: 'TH', goal: 0},
-          { day: 'FR', goal: 0}
-      ],
-      color: "BLUE",
       ...values
     })
     .write();
 }
 
 export function findProjects(): Project[] {
-  const data = projectTable.value();
-  return data.map(
-    (record: any) =>
-      new Project(
-        record.id,
-        record.name,
-        record.color,
-        record.tasks.map((c: any) => new Task(c.name)),
-        record.schedules.map((c: any) => new Schedule(c.day, c.goal))
-      )
-  );
+  return projectTable
+      .value()
+      .map((record: any) => mapRecordToProject(record));
 }
 
 export function findProject(id: string): Project {
-  const record = projectTable.find({ id }).value();
-
-  return new Project(
-    record.id,
-    record.name,
-    record.color,
-    record.tasks.map((c: any) => new Task(c.name)),
-    record.schedules.map((c: any) => new Schedule(c.day, c.goal))
-  );
+  return mapRecordToProject(projectTable.find({ id }).value());
 }

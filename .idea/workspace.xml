@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b7dc5d3f-1aec-43aa-938e-4d81db58f62a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/db.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/project.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/view-project/pomodoro.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/pomodoro.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/add-project/add-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add-project/add-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/add-project/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add-project/index.tsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +105,7 @@
       <workItem from="1568240409923" duration="36000" />
       <workItem from="1568273125609" duration="1634000" />
       <workItem from="1568324031474" duration="26000" />
-      <workItem from="1568326983109" duration="3793000" />
+      <workItem from="1568326983109" duration="19022000" />
     </task>
     <servers />
   </component>

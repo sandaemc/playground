@@ -1,46 +1,115 @@
-import React from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import React, {ChangeEvent, useEffect} from "react";
+import {makeStyles, Theme} from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import Typography from '@material-ui/core/Typography';
+import Grid from "@material-ui/core/Grid";
+import {Project} from "../../models/project";
+import Slider from '@material-ui/core/Slider';
+
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  }
+    container: {
+        display: "flex",
+        flexWrap: "wrap"
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+    scheduleContainer: {
+    }
 }));
 
-interface Props {
-  onChange: any;
-  initial: {
-    name: string;
-  };
-}
+type Props = {
+    onChange: any,
+    initial: Project
+};
+
+const labels = {
+    "MO": "Monday",
+    "TU": "Tuesday",
+    "WE": "Wednesday",
+    "TH": "Thursday",
+    "FR": "Friday"
+};
 
 export function AddFormComponent(props: Props) {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  const handleChange = (name: string) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    props.onChange({ ...props.initial, [name]: event.target.value });
-  };
+    function handleChange(event: React.ChangeEvent<{ name?: string; value: unknown }>) {
+        props.onChange({...props.initial, [event.target.name as string]: event.target.value});
+    }
 
-  return (
-    <form className={classes.container} noValidate autoComplete="off">
-      <FormControl fullWidth>
-        <TextField
-          label="Name"
-          className={classes.textField}
-          value={props.initial.name}
-          margin="normal"
-          onChange={handleChange("name")}
-        />
-      </FormControl>
-    </form>
-  );
+    const handleSliderChange = (name: string) => (event: any, value: number | number[]) => {
+        const schedules = props.initial.schedules;
+        const index = schedules.findIndex(c => c.day === name);
+        const schedule = schedules[index];
+
+        if (schedule.goal === (value as number))
+            return;
+
+        schedules.splice(index, 1, {...schedule, goal: value as number});
+
+        props.onChange({
+            ...props.initial,
+            schedules
+        });
+    };
+
+    return (
+        <Grid container>
+            <Grid item xs={12}>
+                {(new Date()).toISOString()}
+                <FormControl fullWidth>
+                    <TextField
+                        inputProps={{
+                            name: 'name'
+                        }}
+                        label="Name"
+                        value={props.initial.name}
+                        margin="normal"
+                        onChange={handleChange}
+                    />
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel htmlFor="color">Color</InputLabel>
+                    <Select
+                        value={props.initial.color}
+                        className={classes.selectEmpty}
+                        onChange={handleChange}
+                        inputProps={{
+                            name: 'color',
+                            id: 'color',
+                        }}>
+                        <MenuItem value="BLUE">Blue</MenuItem>
+                        <MenuItem value="ORANGE">Orange</MenuItem>
+                    </Select>
+                </FormControl>
+            </Grid>
+
+
+            <Grid item xs={12} sm={6}>
+                    {props.initial.schedules.map((sched, i) =>
+                        <div key={i}>
+                            <Typography gutterBottom>
+                                {labels[sched.day]}
+                            </Typography>
+                            <Slider
+                                defaultValue={0}
+                                step={1}
+                                marks
+                                min={0}
+                                max={10}
+                                onChangeCommitted={handleSliderChange(sched.day)}
+                                valueLabelDisplay="auto"/></div>)}
+            </Grid>
+        </Grid>
+    );
 }
