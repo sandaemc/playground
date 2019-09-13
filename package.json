@@ -45,7 +45,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "invalidate": "aws cloudfront create-invalidation --distribution-id E1IJXCK3WB5N6J --invalidation-batch file://invalidation.json",
-    "deploy": "aws s3 sync build/ s3://pomometer"
+    "deploy": "npm run build && aws s3 sync build/ s3://pomometer"
   },
   "eslintConfig": {
     "extends": "react-app"

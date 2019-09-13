@@ -1,5 +1,11 @@
 import db from "./db";
 
+export type Config = {
+  name: string,
+  value: any;
+  type: string;
+};
+
 const configTable = db.get("configs");
 
 export function get(name: string): number {

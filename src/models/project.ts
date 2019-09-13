@@ -1,23 +1,11 @@
 import db from "./db";
 import { v4 } from "uuid";
 
-enum Color {
-  blue = "blue",
-  orange = "orange"
-}
-
-enum Day {
-  SU = "SU",
-  MO = "MO",
-  TU = "TU",
-  WE = "WE",
-  TH = "TH",
-  FR = "FR",
-  SA = "SA"
-}
+type COLOR = "BLUE" | "ORANGE";
+type DAY = "SU" | "MO" | "TU" | "WE" | "TH" | "FR" | "SA";
 
 class Schedule {
-  constructor(public day: Day, public goal: number) {}
+  constructor(public day: DAY, public goal: number) {}
 }
 
 export class Task {
@@ -28,7 +16,7 @@ export class Project {
   constructor(
     public id: string,
     public name: string,
-    private color: Color,
+    public color: COLOR,
     public tasks: Task[],
     public schedules: Schedule[]
   ) {}
@@ -43,8 +31,14 @@ export function addProject(
     .push({
       id: v4(),
       tasks: [],
-      schedules: [],
-      color: "blue",
+      schedules: [
+          { day: 'MO', goal: 0},
+          { day: 'TU', goal: 0},
+          { day: 'WE', goal: 0},
+          { day: 'TH', goal: 0},
+          { day: 'FR', goal: 0}
+      ],
+      color: "BLUE",
       ...values
     })
     .write();

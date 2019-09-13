@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7dc5d3f-1aec-43aa-938e-4d81db58f62a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/pages/view-project/project-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/project-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serviceWorker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/project.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/view-project/pomodoro.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/view-project/pomodoro.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +41,7 @@
   <component name="PropertiesComponent">
     <property name="NewWatcherDialog.advanced.open" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/view-project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../todoist-tasks" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -99,6 +103,11 @@
       <workItem from="1568148396890" duration="4415000" />
       <workItem from="1568186836613" duration="6883000" />
       <workItem from="1568204937034" duration="687000" />
+      <workItem from="1568233980712" duration="217000" />
+      <workItem from="1568240409923" duration="36000" />
+      <workItem from="1568273125609" duration="1634000" />
+      <workItem from="1568324031474" duration="26000" />
+      <workItem from="1568326983109" duration="3793000" />
     </task>
     <servers />
   </component>
