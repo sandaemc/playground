@@ -18,3 +18,11 @@ export const flow = new Howl({
 });
 
 flow.volume(config.get("flow.sound.volume"));
+
+export function exclaimDone(withFlow: boolean = false) {
+  ding.on("end", () => {
+    if (withFlow) flow.play();
+  });
+
+  ding.play();
+}

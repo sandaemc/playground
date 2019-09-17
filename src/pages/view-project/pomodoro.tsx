@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useInterval } from "react-use";
-import { ding, tick } from "../../lib/sounds";
+import * as fx from "../../lib/fx";
 import "./pomodoro.css";
 
 export enum PomodoroColor {
@@ -21,7 +21,7 @@ export function PomodoroComponent(props: PomodoroComponentProps) {
   const [seconds, setSeconds] = useState(0);
 
   useInterval(() => {
-    tick.play();
+    fx.tick.play();
 
     if (seconds <= 0) {
       setSeconds(59);
@@ -30,8 +30,7 @@ export function PomodoroComponent(props: PomodoroComponentProps) {
       props.onUpdate({ timeSpent: timeSpent + 1 });
 
       if (minutes <= 0) {
-        tick.stop();
-        ding.play();
+        fx.tick.stop();
         props.onDone();
       }
     } else {

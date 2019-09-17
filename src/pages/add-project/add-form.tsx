@@ -77,7 +77,6 @@ export function AddFormComponent(props: Props) {
   return (
     <Grid container>
       <Grid item xs={12}>
-        {new Date().toISOString()}
         <FormControl fullWidth>
           <TextField
             inputProps={{

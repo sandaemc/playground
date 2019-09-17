@@ -7,6 +7,9 @@ import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import LaptopIcon from "@material-ui/icons/Laptop";
 import { Project } from "../../models/project";
 import Typography from "@material-ui/core/Typography";
+import * as fx from "../../lib/fx";
+import { incrementFlowPoint } from "../../models/log";
+import { format } from "date-fns";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,11 +53,19 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
   function done() {
     setIsTimerRunning(false);
 
+    fx.exclaimDone(nextAction === PomodoroAction.focus);
+
+    if (nextAction === PomodoroAction.focus) incrementFlowPoint(project.id);
+
     setNextAction(
       nextAction === PomodoroAction.focus
         ? PomodoroAction.break
         : PomodoroAction.focus
     );
+  }
+
+  function onTimerUpdate({ timeSpent }: any) {
+    console.log(timeSpent);
   }
 
   function canFocus() {
@@ -69,9 +80,7 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
         {isTimerRunning ? (
           <PomodoroComponent
             onDone={() => done()}
-            onUpdate={({ timeSpent }: any) =>
-              console.log("Time spent: " + timeSpent)
-            }
+            onUpdate={onTimerUpdate}
             initial={canFocus() ? PomodoroAction.focus : PomodoroAction.break}
           />
         ) : (
