@@ -11,36 +11,33 @@ export enum PomodoroColor {
 
 export type PomodoroComponentProps = {
   onDone: any;
-  onUpdate: any;
+  onMinuteCycle: any;
   initial: number;
+  color: string;
 };
 
 export function PomodoroComponent(props: PomodoroComponentProps) {
-  const [timeSpent, setTimeSpent] = useState(-1);
   const [minutes, setMinutes] = useState(props.initial);
   const [seconds, setSeconds] = useState(0);
 
   useInterval(() => {
     fx.tick.play();
+    setSeconds(seconds - 1);
 
     if (seconds <= 0) {
       setSeconds(59);
       setMinutes(minutes - 1);
-      setTimeSpent(timeSpent + 1);
-      props.onUpdate({ timeSpent: timeSpent + 1 });
 
       if (minutes <= 0) {
         fx.tick.stop();
         props.onDone();
       }
-    } else {
-      setSeconds(seconds - 1);
     }
   }, 1000);
 
-  function getPercentage(current: number, seconds: number) {
+  function getPercentage(minutes: number, seconds: number) {
     const secondsPercentage = seconds / 60;
-    return Math.ceil(((current + secondsPercentage) / props.initial) * 100);
+    return Math.ceil(((minutes + secondsPercentage) / props.initial) * 100);
   }
 
   function pad(value: number) {
@@ -51,12 +48,8 @@ export function PomodoroComponent(props: PomodoroComponentProps) {
     return `${pad(minutes)}:${pad(seconds)}`;
   }
 
-  function getColor() {
-    return props.initial === 25 ? PomodoroColor.blue : PomodoroColor.green;
-  }
-
   return (
-    <div className={`c100 p${getPercentage(minutes, seconds)} ${getColor()}`}>
+    <div className={`c100 p${getPercentage(minutes, seconds)} ${props.color}`}>
       <span>{formatTime(minutes, seconds)}</span>
       <div className="slice">
         <div className="bar" />

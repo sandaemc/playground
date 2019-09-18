@@ -8,8 +8,7 @@ import LaptopIcon from "@material-ui/icons/Laptop";
 import { Project } from "../../models/project";
 import Typography from "@material-ui/core/Typography";
 import * as fx from "../../lib/fx";
-import { incrementFlowPoint } from "../../models/log";
-import { format } from "date-fns";
+import { incrementFlowPoint, incrementTimeSpent } from "../../models/log";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,11 +39,6 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
 
   const [nextAction, setNextAction] = useState(PomodoroAction.focus);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [value, setValue] = useState(0);
-
-  function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
-    setValue(newValue);
-  }
 
   function start() {
     setIsTimerRunning(true);
@@ -64,8 +58,10 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
     );
   }
 
-  function onTimerUpdate({ timeSpent }: any) {
-    console.log(timeSpent);
+  function onMinuteCycle() {
+    if (nextAction === PomodoroAction.focus) {
+      incrementTimeSpent(project.id);
+    }
   }
 
   function canFocus() {
@@ -79,8 +75,9 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
       <div style={{ textAlign: "center" }}>
         {isTimerRunning ? (
           <PomodoroComponent
+            color="blue"
             onDone={() => done()}
-            onUpdate={onTimerUpdate}
+            onMinuteCycle={onMinuteCycle}
             initial={canFocus() ? PomodoroAction.focus : PomodoroAction.break}
           />
         ) : (
