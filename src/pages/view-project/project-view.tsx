@@ -60,6 +60,7 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
 
   function onMinuteCycle() {
     if (nextAction === PomodoroAction.focus) {
+      console.log("minute cycle");
       incrementTimeSpent(project.id);
     }
   }

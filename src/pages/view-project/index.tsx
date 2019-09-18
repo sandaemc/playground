@@ -7,7 +7,6 @@ import { findProject, Project } from "../../models/project";
 import { ViewProjectBarComponent } from "./view-project-bar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Log, findLog } from "../../models/log";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +27,7 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
 
   useEffect(() => {
     setProject(findProject(match.params.projectId));
-  }, []);
+  }, [match.params.projectId]);
 
   return (
     <div className={classes.root}>
@@ -48,7 +47,3 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
     </div>
   );
 };
-/*
-<br />
-{!isEmpty(project) && project.tasks ? <TaskListComponent tasks={project.tasks}/> : null}
- */

@@ -28,6 +28,10 @@ export function PomodoroComponent(props: PomodoroComponentProps) {
       setSeconds(59);
       setMinutes(minutes - 1);
 
+      if (props.initial !== minutes) {
+        props.onMinuteCycle();
+      }
+
       if (minutes <= 0) {
         fx.tick.stop();
         props.onDone();
