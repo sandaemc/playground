@@ -8,6 +8,8 @@ import { ViewProjectBarComponent } from "./view-project-bar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Log, findLog } from "../../models/log";
+import { WeeklyReportComponent } from "./weekly-report";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,7 +36,6 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
 
   return (
     <div className={classes.root}>
-      {console.log(log)}
       <Grid container>
         <Grid item xs={12}>
           <ViewProjectBarComponent
@@ -46,6 +47,8 @@ export default ({ match, history }: RouteComponentProps<IRouteParams>) => {
           {!isEmpty(project) ? (
             <ProjectViewComponent project={project} log={log} />
           ) : null}
+
+          <WeeklyReportComponent />
         </Grid>
       </Grid>
     </div>
