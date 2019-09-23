@@ -5,10 +5,10 @@ import { PomodoroComponent } from "./pomodoro";
 import Button from "@material-ui/core/Button";
 import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import LaptopIcon from "@material-ui/icons/Laptop";
-import { Project } from "../../models/project";
+import { Project, selectCurrentDaySchedule } from "../../models/project";
 import Typography from "@material-ui/core/Typography";
 import * as fx from "../../lib/fx";
-import { incrementFlowPoint, incrementTimeSpent } from "../../models/log";
+import { incrementFlowPoint, incrementTimeSpent, Log } from "../../models/log";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type ProjectViewComponentProps = {
   project: Project;
+  log: Log;
 };
 
 enum PomodoroAction {
@@ -34,11 +35,15 @@ enum PomodoroAction {
   break = 5
 }
 
-export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
+export function ProjectViewComponent({
+  project,
+  log
+}: ProjectViewComponentProps) {
   const classes = useStyles();
 
   const [nextAction, setNextAction] = useState(PomodoroAction.focus);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [flowPoint, setFlowPoint] = useState(log.flowPoint);
 
   function start() {
     setIsTimerRunning(true);
@@ -49,7 +54,10 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
 
     fx.exclaimDone(nextAction === PomodoroAction.focus);
 
-    if (nextAction === PomodoroAction.focus) incrementFlowPoint(project.id);
+    if (nextAction === PomodoroAction.focus) {
+      incrementFlowPoint(project.id);
+      setFlowPoint(flowPoint + 1);
+    }
 
     setNextAction(
       nextAction === PomodoroAction.focus
@@ -59,10 +67,7 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
   }
 
   function onMinuteCycle() {
-    if (nextAction === PomodoroAction.focus) {
-      console.log("minute cycle");
-      incrementTimeSpent(project.id);
-    }
+    if (nextAction === PomodoroAction.focus) incrementTimeSpent(project.id);
   }
 
   function canFocus() {
@@ -99,7 +104,7 @@ export function ProjectViewComponent({ project }: ProjectViewComponentProps) {
         )}
 
         <Typography variant="overline" display="block" gutterBottom>
-          Goal: 0 / {project.schedules[0].goal}
+          Goal: {flowPoint} / {selectCurrentDaySchedule(project).goal}
         </Typography>
       </div>
     </Container>

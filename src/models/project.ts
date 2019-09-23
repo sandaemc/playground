@@ -1,4 +1,5 @@
 import db from "./db";
+import { format } from "date-fns";
 
 export type Color = "BLUE" | "ORANGE";
 export type Day = "MO" | "TU" | "WE" | "TH" | "FR";
@@ -44,6 +45,14 @@ function mapRecordToProject(record: any): Project {
 }
 
 const projectTable = db.get("projects");
+
+export function selectCurrentDaySchedule(p: Project): Schedule {
+  const day = format(new Date(), "eeeeee").toUpperCase();
+  const result = p.schedules.find(c => c.day === day);
+  if (!result) throw new Error("Data problem in schedule.");
+
+  return result;
+}
 
 export function addProject(values: Omit<Project, "tasks">) {
   projectTable

@@ -12,11 +12,17 @@ export type Log = {
 
 const logTable = db.get("logs");
 
-export function findLog(projectId: string) {
+export function findLog(projectId: string): Log {
   const date = format(new Date(), "yyyy-MM-dd");
   const day = format(new Date(), "eeeeee").toUpperCase();
+  const data = { day: day, date: date, projectId };
 
-  return logTable.find({ day: day, date: date, projectId }).value();
+  const result = logTable.find(data).value();
+  if (result) return result as Log;
+
+  logTable.push({ ...data, timeSpent: 0, flowPoint: 0 }).write();
+
+  return findLog(projectId);
 }
 
 function increment(key: "flowPoint" | "timeSpent", projectId: string) {
