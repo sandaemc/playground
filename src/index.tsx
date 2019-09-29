@@ -15,3 +15,12 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+// TODO: Create a centered text field for entering distraction
+// TODO: Ask for current energy level
+// TODO: Ask for what were you doing before acccessing the website?
+// TODO: Setup log model for persisting redirectedFrom (required), timeOfDay (required), energyLevel (optional), note (optional)
+// TODO: Display logs in a table
+// TODO: Auto-save
+// TODO: Write blocking / redirect plugin
+// TODO: Syncing (premium users only)
