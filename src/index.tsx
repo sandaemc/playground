@@ -20,6 +20,8 @@ serviceWorker.unregister();
 // TODO: Ask for current energy level
 // TODO: Ask for what were you doing before acccessing the website?
 // TODO: Setup log model for persisting redirectedFrom (required), timeOfDay (required), energyLevel (optional), note (optional)
+// TODO: Create energyLog table; can be use by other service like enlog
+// TODO: triggered by - challenged, bored, reward, aimlessness, waiting; 
 // TODO: Display logs in a table
 // TODO: Auto-save
 // TODO: Write blocking / redirect plugin
