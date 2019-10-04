@@ -32,15 +32,7 @@ export default ({ history }: RouteComponentProps) => {
   const [project, setProject] = useState<Project>({
     id: v4(),
     name: "",
-    color: "BLUE",
-    tasks: [],
-    schedules: [
-      { day: "MO", goal: 0 },
-      { day: "TU", goal: 0 },
-      { day: "WE", goal: 0 },
-      { day: "TH", goal: 0 },
-      { day: "FR", goal: 0 }
-    ]
+    color: "BLUE"
   });
 
   const onChange = (data: any) => setProject(data);

@@ -5,7 +5,7 @@ import { PomodoroComponent } from "./pomodoro";
 import Button from "@material-ui/core/Button";
 import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import LaptopIcon from "@material-ui/icons/Laptop";
-import { Project, selectCurrentDaySchedule } from "../../models/project";
+import { Project } from "../../models/project";
 import Typography from "@material-ui/core/Typography";
 import * as fx from "../../lib/fx";
 import { incrementFlowPoint, incrementTimeSpent, Log } from "../../models/log";
@@ -104,7 +104,7 @@ export function ProjectViewComponent({
         )}
 
         <Typography variant="overline" display="block" gutterBottom>
-          Goal: {flowPoint} / {selectCurrentDaySchedule(project).goal}
+          Goal: {flowPoint} / 0
         </Typography>
       </div>
     </Container>

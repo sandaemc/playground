@@ -17,8 +17,6 @@ export type Project = {
   id: string;
   name: string;
   color: Color;
-  schedules: Schedule[];
-  tasks: Task[];
 };
 
 function mapRecordToSchedule(record: any): Schedule {
@@ -38,21 +36,11 @@ function mapRecordToProject(record: any): Project {
   return {
     id: record.id,
     name: record.name,
-    color: record.color,
-    schedules: record.schedules.map((c: any) => mapRecordToSchedule(c)),
-    tasks: record.tasks.map((c: any) => mapRecordToTask(c))
+    color: record.color
   };
 }
 
 const projectTable = db.get("projects");
-
-export function selectCurrentDaySchedule(p: Project): Schedule {
-  const day = format(new Date(), "eeeeee").toUpperCase();
-  const result = p.schedules.find(c => c.day === day);
-  if (!result) throw new Error("Data problem in schedule.");
-
-  return result;
-}
 
 export function addProject(values: Omit<Project, "tasks">) {
   projectTable
