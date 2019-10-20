@@ -11,25 +11,13 @@ export function AddComponent({ onSubmit }: AddComponentProps) {
   return (
     <form className="form-signin" onSubmit={handleSubmit(onSubmit)}>
       <div className="text-center mb-4">
-        <h1 className="h3 mb-3 font-weight-normal">Distracted</h1>
+        <h5 className="h3 mb-3 font-weight-normal">
+          You tried to visit reddit.com, why?
+        </h5>
       </div>
 
       <div className="form-label-group">
-        <input
-          type="text"
-          name="distraction"
-          id="inputDistraction"
-          className="form-control"
-          placeholder="Distraction"
-          ref={register({ required: true })}
-        />
-        <label htmlFor="inputDistraction">
-          What made you try to visit that site?
-        </label>
-      </div>
-
-      <div className="form-label-group">
-        <p>What's your current energy level?</p>
+        <span className="text-muted">What's your current energy level?</span>
         <div className="btn-group btn-group-toggle" data-toggle="buttons">
           <label className="btn btn-light">
             Lazy
@@ -60,7 +48,7 @@ export function AddComponent({ onSubmit }: AddComponentProps) {
       <br />
 
       <button className="btn btn-lg btn-dark btn-block" type="submit">
-        Save Log
+        <small>SAVE</small>
       </button>
     </form>
   );
