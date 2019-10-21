@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import firebase from "../firebase-app";
 
-const authContext = createContext(undefined);
+const defaultContext = {
+  user: undefined,
+  signOut: () => Promise.resolve()
+};
+
+const authContext = createContext(defaultContext);
 
 export function ProvideAuth({ children }: any) {
   const auth = useProvideAuth();
@@ -25,6 +30,7 @@ function useProvideAuth() {
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        console.log(user);
         setUser(user);
       } else {
         setUser(null);
@@ -36,5 +42,8 @@ function useProvideAuth() {
   }, []);
 
   // Return the user object and auth methods
-  return user;
+  return {
+    user,
+    signOut
+  };
 }

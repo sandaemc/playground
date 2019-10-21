@@ -1,7 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth";
 
-export function HeaderComponent() {
+interface HeaderComponentProps extends RouteComponentProps {}
+
+export function HeaderComponent({ location }: HeaderComponentProps) {
+  const auth = useAuth();
+
+  function getLogoutLink() {
+    return (
+      <a
+        className="btn btn-sm btn-outline-secondary"
+        onClick={() => auth.signOut()}
+      >
+        Log out
+      </a>
+    );
+  }
+
+  function getLoginLink() {
+    const link = (
+      <Link to="/login" className="btn btn-sm btn-outline-secondary">
+        Log in
+      </Link>
+    );
+
+    return location.pathname === "/login" ? null : link;
+  }
+
   return (
     <div className="container">
       <header className="blog-header py-3">
@@ -12,7 +38,9 @@ export function HeaderComponent() {
               <small>DISTRACTED</small>
             </Link>
           </div>
-          <div className="col-4 d-flex justify-content-end align-items-center"></div>
+          <div className="col-4 d-flex justify-content-end align-items-center">
+            {auth.user ? getLogoutLink() : getLoginLink()}
+          </div>
         </div>
       </header>
     </div>
