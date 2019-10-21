@@ -19,10 +19,7 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-// TODO: Create a centered text field for entering distraction
-// TODO: Ask for current energy level
-// TODO: Ask for what were you doing before acccessing the website?
-// TODO: Create energyLog table; can be use by other service like enlog
+// TODO: Create a tags of what users can select. i.e. What's your current state? Lazy, Bored, Aimless, Waiting
 // TODO: triggered by - challenged, bored, reward, aimlessness, waiting;
 // TODO: Display logs in a table
 // TODO: Write blocking / redirect plugin

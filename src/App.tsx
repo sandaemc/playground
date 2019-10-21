@@ -9,7 +9,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "typeface-roboto";
-import { useAuth } from "./hooks/use-auth";
 
 const App: React.FC = () => {
   return (
