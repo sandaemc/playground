@@ -5,6 +5,16 @@ interface AddComponentProps {
   onSubmit: any;
 }
 
+const states = [
+  { name: "tired", value: "Tired" },
+  { name: "bored", value: "Bored" },
+  { name: "energized", value: "Energized" },
+  { name: "sleepy", value: "Sleepy" },
+  { name: "waiting", value: "Waiting" },
+  { name: "challenged", value: "Challenged" },
+  { name: "irritated", value: "Irritated" }
+];
+
 export function AddComponent({ onSubmit }: AddComponentProps) {
   const { register, handleSubmit } = useForm();
 
@@ -17,30 +27,15 @@ export function AddComponent({ onSubmit }: AddComponentProps) {
       </div>
 
       <div className="form-label-group">
-        <span className="text-muted">What's your current energy level?</span>
-        <div className="btn-group btn-group-toggle" data-toggle="buttons">
-          <label className="btn btn-light">
-            Lazy
-            <input type="radio" name="energyLevel" value="Low" ref={register} />
-          </label>
-          <label className="btn btn-light">
-            Stable
-            <input
-              type="radio"
-              name="energyLevel"
-              value="Medium"
-              ref={register}
-            />
-          </label>
-          <label className="btn btn-light">
-            Focused
-            <input
-              type="radio"
-              name="energyLevel"
-              value="High"
-              ref={register}
-            />
-          </label>
+        <p className="text-muted">What's your current state?</p>
+
+        <div className="btn-group-toggle" data-toggle="buttons">
+          {states.map(state => (
+            <label className="btn btn-secondary" style={{ margin: 2 }}>
+              {state.value}
+              <input type="checkbox" name={state.name} />
+            </label>
+          ))}
         </div>
       </div>
 
