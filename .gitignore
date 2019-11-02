@@ -61,3 +61,6 @@ typings/
 .next
 
 .build
+
+creds
+api.credentials.json

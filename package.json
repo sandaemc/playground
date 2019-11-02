@@ -1,5 +1,5 @@
 {
-  "name": "new-typescript-console-project",
+  "name": "get-calendar-events",
   "version": "1.0.0",
   "description": "Template for creating a new TypeScript console project",
   "main": "index.js",
@@ -21,11 +21,12 @@
   "devDependencies": {
     "@types/node": "^12.6.8",
     "@types/yargs": "^13.0.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.3"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "date-fns": "^2.6.0",
     "execa": "^2.0.3",
+    "googleapis": "^44.0.0",
     "yargs": "^13.3.0"
   }
 }
