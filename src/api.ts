@@ -1,12 +1,11 @@
 import { google, calendar_v3 } from "googleapis"
 import { OAuth2Client } from "googleapis-common"
 import { Credentials } from "google-auth-library"
-import { endOfDay } from "date-fns"
 
 type EventListFilterOptions = {
+  timeMin?: string
   timeMax?: string
   maxResults?: number
-  orderBy?: string
 }
 
 type OAuthClientInfo = {
@@ -42,56 +41,26 @@ export class GoogleCalendarApi {
     return []
   }
 
-  async getEvents(calendarId: string, filterMods: EventListFilterOptions) {
-    const defaultFilters: EventListFilterOptions = {
-      maxResults: 10,
-      orderBy: "startTime"
-    }
-
-    const filters: EventListFilterOptions = {
-      ...defaultFilters,
-      ...filterMods
-    }
-
+  private async getEvents(calendarId: string, filters: EventListFilterOptions) {
     const resp = await this.calendar.events.list({
       calendarId,
-      timeMin: new Date().toISOString(),
       singleEvents: true,
+      orderBy: "startTime",
       ...filters
     })
 
-    if (resp.data.items) {
-      return resp.data.items
-    }
-
-    return []
+    return resp.data.items ? resp.data.items : []
   }
 
-  async getTodaysEvents() {
-    const calendars = await this.getCalendars()
-
+  async getAll(filters: EventListFilterOptions) {
     let allEvents: calendar_v3.Schema$Event[] = []
-    for (const calendar of calendars) {
-      const events = await this.getEvents(calendar.id || "", {
-        maxResults: 1,
-        timeMax: endOfDay(new Date()).toISOString()
-      })
-
+    for (const calendar of await this.getCalendars()) {
+      const events = await this.getEvents(calendar.id || "", filters)
       if (events) {
         allEvents = [...allEvents, ...events]
       }
     }
 
     return allEvents
-  }
-
-  isAllDay(event: calendar_v3.Schema$Event) {
-    if ("start" in event) {
-      if (event.start && "date" in event.start) {
-        return true
-      }
-    }
-
-    return false
   }
 }
