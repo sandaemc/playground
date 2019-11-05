@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import firebase from "../firebase-app";
+import { useHistory } from "react-router-dom";
 
 const defaultContext = {
   user: undefined,
@@ -17,6 +18,7 @@ export const useAuth = () => useContext(authContext);
 
 function useProvideAuth() {
   const [user, setUser] = useState();
+  const history = useHistory();
 
   const signOut = () => {
     return firebase
@@ -24,13 +26,13 @@ function useProvideAuth() {
       .signOut()
       .then(() => {
         setUser(null);
+        history.replace("/");
       });
   };
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         setUser(user);
       } else {
         setUser(null);

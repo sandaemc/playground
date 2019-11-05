@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { AddComponent } from "../components/add";
 import firebase from "../firebase-app";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps, Redirect } from "react-router";
+import { useAuth } from "../hooks/use-auth";
 
 const distractionsCol = firebase.firestore().collection("distractions");
 
 export function NewPage({ location }: RouteComponentProps) {
+  const auth = useAuth();
+
   /*
   const params = new URLSearchParams(location.search);
   const from = new URL(params.get("from") || "");
@@ -30,5 +33,7 @@ export function NewPage({ location }: RouteComponentProps) {
     }
   }
 
-  return <AddComponent onSubmit={(data: any) => console.log(data)} />;
+  return auth.user ? (
+    <AddComponent onSubmit={(data: any) => console.log(data)} />
+  ) : null;
 }
