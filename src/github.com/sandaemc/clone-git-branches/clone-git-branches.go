@@ -5,7 +5,6 @@ import "encoding/json"
 import "io/ioutil"
 import "os"
 import "os/exec"
-import "strings"
 
 func check(e error) {
     if e != nil {
@@ -18,6 +17,7 @@ type Repos struct {
 }
 
 type Repo struct {
+    Name string `json:"name"`
     Url string `json:"url"`
 }
 
@@ -35,21 +35,11 @@ func main() {
     byteValue, _ := ioutil.ReadAll(jsonFile)
     json.Unmarshal(byteValue, &repos)
 
-    dir, err := os.Getwd()
-    if err != nil {
-        fmt.Println(err)
-    }
-
     for _, repo := range repos.Repos {
-        slices := strings.Split(repo.Url, "/")
-        repoName := slices[1]
+        if _, err := os.Stat(repo.Name); os.IsNotExist(err) {
+            fmt.Println(fmt.Sprintf("Cloning %s...", repo.Name))
 
-        if _, err := os.Stat(repoName); os.IsNotExist(err) {
-            fmt.Println(fmt.Sprintf("Cloning %s...", repoName))
-
-            uri := fmt.Sprintf("git@github.com:%s.git", repo.Url)
-
-            cmd := exec.Command("git", "clone", uri)
+            cmd := exec.Command("git", "clone", repo.Url, repo.Name)
             err := cmd.Run()
             if err != nil {
                 fmt.Println(err)
