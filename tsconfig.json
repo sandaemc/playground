@@ -10,6 +10,7 @@
     "sourceMap": true,
     "outDir": ".build",
     "moduleResolution": "node",
-    "lib": ["es2017", "dom", "esnext.array"]
+    "lib": ["es2017", "dom", "esnext.array"],
+    "rootDir": "./src"
   }
 }
