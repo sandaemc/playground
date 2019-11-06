@@ -1,0 +1,25 @@
+tenant: sandaemc
+app: slack-messenger
+service: slack-messenger
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:state, 'dev'}
+  region: us-east-1
+
+functions:
+  index:
+    handler: handlers/index.index
+    events:
+      - http: GET /
+
+  send:
+    handler: handlers/index.send
+    events:
+      - http: POST /
+        cors: true
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript

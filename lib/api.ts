@@ -1,5 +1,5 @@
 import axios from "axios"
-import * as assert from "assert"
+import assert from "assert"
 
 const instance = axios.create({
   baseURL: "https://slack.com/api"
@@ -12,13 +12,13 @@ interface Payload {
 }
 
 export function post(botToken: string) {
-  assert(botToken.length, "Bot Token is required")
+  assert(botToken && botToken.length, "Bot Token is required")
 
   return async function(payload: Payload) {
-    assert(payload.channel.length, "Channel is required")
-    assert(payload.text.length, "Text is required")
+    assert(payload.channel && payload.channel.length, "Channel is required")
+    assert(payload.text && payload.text.length, "Text is required")
 
-    if (payload.threadId) {
+    if (payload.threadId && payload.threadId.length) {
       payload["thread_ts"] = payload.threadId
       delete payload["threadId"]
     }
@@ -33,6 +33,8 @@ export function post(botToken: string) {
         }
       }
     )
+
+    if (!data.ok) throw new Error(data.error)
 
     return data
   }
