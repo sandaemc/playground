@@ -1,11 +1,12 @@
-import React from "react";
-import useForm from "react-hook-form";
+import React from "react"
+import useForm from "react-hook-form"
 
 interface AddComponentProps {
-  onSubmit: any;
+  onSubmit: any
+  distraction: string
 }
 
-const states = [
+const tags = [
   { name: "tired", value: "Tired" },
   { name: "bored", value: "Bored" },
   { name: "energized", value: "Energized" },
@@ -13,16 +14,16 @@ const states = [
   { name: "waiting", value: "Waiting" },
   { name: "challenged", value: "Challenged" },
   { name: "irritated", value: "Irritated" }
-];
+]
 
-export function AddComponent({ onSubmit }: AddComponentProps) {
-  const { register, handleSubmit } = useForm();
+export function AddComponent({ distraction, onSubmit }: AddComponentProps) {
+  const { register, handleSubmit } = useForm()
 
   return (
     <form className="form-signin" onSubmit={handleSubmit(onSubmit)}>
       <div className="text-center mb-4">
         <h5 className="h3 mb-3 font-weight-normal">
-          You tried to visit reddit.com, why?
+          You tried to visit {distraction}, why?
         </h5>
       </div>
 
@@ -30,10 +31,19 @@ export function AddComponent({ onSubmit }: AddComponentProps) {
         <p className="text-muted">What's your current state?</p>
 
         <div className="btn-group-toggle" data-toggle="buttons">
-          {states.map(state => (
-            <label className="btn btn-secondary" style={{ margin: 2 }}>
-              {state.value}
-              <input type="checkbox" name={state.name} />
+          {tags.map((tag, idx) => (
+            <label
+              key={idx}
+              className="btn btn-secondary"
+              style={{ margin: 2 }}
+            >
+              {tag.value}
+              <input
+                type="checkbox"
+                name={`tag-${idx}`}
+                value={tag.name}
+                ref={register}
+              />
             </label>
           ))}
         </div>
@@ -46,5 +56,5 @@ export function AddComponent({ onSubmit }: AddComponentProps) {
         <small>SAVE</small>
       </button>
     </form>
-  );
+  )
 }
