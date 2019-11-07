@@ -20,13 +20,11 @@ export const send = middy(async (event: any) => {
   const { botToken, channel, text, threadId } = event.body
 
   try {
-    const response = await post(botToken)({
+    await post(botToken)({
       channel,
       text,
       threadId
     })
-
-    console.log(response)
 
     return { statusCode: 200 }
   } catch (e) {
