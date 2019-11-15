@@ -1,11 +1,17 @@
 (ns wallet-api.persistence
   (:require [environ.core :refer [env]]
+            [honeysql.core :as sql]
+            [honeysql.helpers :refer [insert-into values]]
             [clojure.java.jdbc :as jdbc]))
 
-(def db-spec {:dbtype "postgresql"
-              :dbname "sampledb"
-              :host "172.17.0.2"
-              :user "postgres"})
+(def db-spec (env :database-uri))
 
-(defn test-query []
-  (jdbc/query db-spec ["SELECT 3*5 AS result"]))
+(defn- exec [query]
+  (println (sql/build query))
+  (jdbc/insert! db-spec (sql/build query)))
+
+(defn insert-transaction [txn]
+  (jdbc/insert! db-spec :transactions txn))
+
+(defn insert-entry [entry]
+  (jdbc/insert! db-spec :entries entry))
