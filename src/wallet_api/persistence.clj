@@ -6,12 +6,8 @@
 
 (def db-spec (env :database-uri))
 
-(defn- exec [query]
-  (println (sql/build query))
-  (jdbc/insert! db-spec (sql/build query)))
+(defn insert-transaction [txn ks]
+  (jdbc/insert! db-spec :transactions (select-keys txn ks)))
 
-(defn insert-transaction [txn]
-  (jdbc/insert! db-spec :transactions txn))
-
-(defn insert-entry [entry]
-  (jdbc/insert! db-spec :entries entry))
+(defn insert-entry [entry ks]
+  (jdbc/insert! db-spec :entries (select-keys entry ks)))

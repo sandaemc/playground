@@ -21,13 +21,13 @@
   {:value (as-num m :value)
    :index (:n m)
    :address (get-in m [:scriptPubKey :addresses 0])
-   :isIn? false})
+   :is_in false})
 
 (defn- to-in [m]
   {:value (as-num m :value)
    :index (:n m)
    :address (get-in m [:addresses 0])
-   :isIn? true})
+   :is_in true})
 
 (defn- get-entries [transaction]
   (let [outs (sort-by :index (map to-out (:vout transaction)))

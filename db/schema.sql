@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS walletdb;
+
+CREATE DATABASE walletdb;
+
 CREATE TABLE transactions (
     id VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL,
