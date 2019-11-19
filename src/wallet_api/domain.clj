@@ -16,8 +16,8 @@
 
 (defn get-transaction-ids [key]
   (let [address (get-address key)
-        ;pages (range 1 (+ (get-total-pages address) 1))]
-        pages (range 1 3)]
+        pages (range 1 (+ (get-total-pages address) 1))]
+        ;pages (range 1 3)]
     (apply concat (->> (pmap #(get-address key %) pages)
                        (map #(:transactions %))))))
 
