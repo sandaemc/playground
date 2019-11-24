@@ -16,7 +16,7 @@ class AuthenticationController < ApplicationController
             username: @user.username 
         })
       else
-        json_response({ error: 'unauthorized' }, status: :unauthorized)
+        json_response({ error: 'unauthorized' }, :unauthorized)
       end
     end
   
