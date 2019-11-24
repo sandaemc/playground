@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
   include Response
   include ExceptionHandler
 
+  before_action :authorize_request
   before_action :set_article, only: [:show, :update, :destroy]
 
   def index

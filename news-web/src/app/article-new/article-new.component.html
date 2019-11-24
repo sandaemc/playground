@@ -1,4 +1,4 @@
-<form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm.value)">
+<form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
   <div>
     <label for="title">
       Title
@@ -13,7 +13,7 @@
     <input id="description" type="text" formControlName="description" />
   </div>
 
-  <button class="button" type="submit" [disabled]="editForm.invalid">
-    Update
+  <button class="button" type="submit" [disabled]="addForm.invalid">
+    Save
   </button>
 </form>

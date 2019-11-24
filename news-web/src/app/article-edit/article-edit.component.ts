@@ -1,7 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ArticleService, Article } from "../article.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from "@angular/forms";
 
 @Component({
   selector: "app-article-edit",
@@ -20,7 +25,7 @@ export class ArticleEditComponent implements OnInit {
   ) {
     this.editForm = this.formBuilder.group({
       id: 0,
-      title: ["", Validators.required],
+      title: ["", [Validators.required]],
       description: "",
       created_at: "",
       updated_at: ""
