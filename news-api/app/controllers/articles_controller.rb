@@ -2,6 +2,8 @@ class ArticlesController < ApplicationController
   include Response
   include ExceptionHandler
 
+  before_action :set_article, only: [:show, :update, :destroy]
+
   def index
     @articles = Article.all
     json_response(@articles)
@@ -33,6 +35,6 @@ class ArticlesController < ApplicationController
   end
 
   def set_article
-    @article = Todo.find(params[:id])
+    @article = Article.find(params[:id])
   end
 end

@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let article of articles">
+    {{ article.title }}
+
+    <a href="javascript:void(0)" (click)="onSelect(article.id)">View</a>
+    <a href="javascript:void(0)" (click)="onDelete(article.id)">Delete</a>
+  </li>
+</ul>
