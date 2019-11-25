@@ -1,11 +1,15 @@
-<ul>
-  <li *ngFor="let article of articles">
-    <a routerLink="/edit/{{ article.id }}">{{ article.title }}</a>
+<div *ngIf="isLoggedIn">
+  <ul>
+    <li *ngFor="let article of articles">
+      <a routerLink="/edit/{{ article.id }}">{{ article.title }}</a>
 
-    &nbsp; -> &nbsp;
+      &nbsp; -> &nbsp;
 
-    <a href="javascript:void(0)" (click)="onDelete(article.id)">Delete</a>
-  </li>
-</ul>
+      <a href="javascript:void(0)" (click)="onDelete(article.id)">Delete</a>
+    </li>
+  </ul>
 
-<a routerLink="/new" routerLinkActive="active">Add an article</a>
+  <a routerLink="/new" routerLinkActive="active">Add an article</a>
+</div>
+
+<div *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></div>

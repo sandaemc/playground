@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { ArticleService, Article } from "../article.service";
+import { ArticleService } from "../_services/article.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormControl
 } from "@angular/forms";
+import { Article } from '../_models/article';
 
 @Component({
   selector: "app-article-edit",

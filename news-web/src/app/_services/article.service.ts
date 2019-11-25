@@ -1,12 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../environments/environment";
+import { environment } from "../../environments/environment";
+import { Article } from '../_models/article'
 
-export interface Article {
-  id: number;
-  title: string;
-  description: string;
-}
 
 @Injectable({
   providedIn: "root"

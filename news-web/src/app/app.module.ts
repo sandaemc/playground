@@ -11,11 +11,13 @@ import { ArticleListComponent } from "./article-list/article-list.component";
 import { ArticleEditComponent } from "./article-edit/article-edit.component";
 import { ArticleDetailComponent } from "./article-detail/article-detail.component";
 import { ArticleNewComponent } from "./article-new/article-new.component";
+import { LoginComponent } from "./login/login.component";
 
 const appRoutes: Routes = [
   { path: "list", component: ArticleListComponent },
   { path: "view/:id", component: ArticleDetailComponent },
   { path: "edit/:id", component: ArticleEditComponent },
+  { path: "login", component: LoginComponent },
   { path: "new", component: ArticleNewComponent },
   { path: "", redirectTo: "list", pathMatch: "full" }
 ];
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     ArticleListComponent,
     ArticleEditComponent,
     ArticleDetailComponent,
-    ArticleNewComponent
+    ArticleNewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { ArticleService, Article } from "../article.service";
+import { ArticleService } from "../_services/article.service";
 import { Router } from "@angular/router";
+import { Article } from "../_models/article";
+import { AuthenticationService } from "../_services/authentication.service";
 
 @Component({
   selector: "app-article-list",
@@ -9,11 +11,17 @@ import { Router } from "@angular/router";
 })
 export class ArticleListComponent implements OnInit {
   articles: Article[];
+  isLoggedIn: boolean;
 
-  constructor(private articleService: ArticleService, private router: Router) {}
+  constructor(
+    private articleService: ArticleService,
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.articleService.getArticles().subscribe(data => (this.articles = data));
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   onSelect(articleId: number) {
