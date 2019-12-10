@@ -3,18 +3,20 @@ import * as fs from "fs"
 import { GoogleCalendarApi } from "./api"
 import * as yargs from "yargs"
 import * as _ from "lodash"
-import { startOfDay, endOfDay, set, addMinutes } from "date-fns"
+import { startOfDay, endOfDay, addDays, endOfWeek } from "date-fns"
 
 interface CLIArguments {
   [x: string]: unknown
   credential: string
   token: string
+  json?: boolean
   _: ArrayLike<string>
 }
 
 const arg: CLIArguments = yargs.options({
   credential: { type: "string", demandOption: true },
-  token: { type: "string", demandOption: true }
+  token: { type: "string", demandOption: true },
+  json: { type: "boolean" }
 }).argv
 
 const apiCredential = JSON.parse(fs.readFileSync(arg.credential).toString())
@@ -27,59 +29,26 @@ const oAuthClientInfo = {
 }
 
 async function getEvents(context: string) {
+  const currentDate = new Date()
+
   switch (context) {
     case "today":
       return api.getAll({
-        timeMin: startOfDay(new Date()).toISOString(),
-        timeMax: endOfDay(new Date()).toISOString()
+        timeMin: startOfDay(currentDate).toISOString(),
+        timeMax: endOfDay(currentDate).toISOString()
       })
 
-    case "morning":
+    case "tomorrow":
+      const tom = addDays(currentDate, 1)
       return api.getAll({
-        timeMin: set(new Date(), {
-          hours: 8,
-          minutes: 0,
-          seconds: 0
-        }).toISOString(),
-        timeMax: set(new Date(), {
-          hours: 12,
-          minutes: 0,
-          seconds: 0
-        }).toISOString()
+        timeMin: startOfDay(tom).toISOString(),
+        timeMax: endOfDay(tom).toISOString()
       })
 
-    case "afternoon":
+    case "week":
       return api.getAll({
-        timeMin: set(new Date(), {
-          hours: 13,
-          minutes: 0,
-          seconds: 0
-        }).toISOString(),
-        timeMax: set(new Date(), {
-          hours: 19,
-          minutes: 0,
-          seconds: 0
-        }).toISOString()
-      })
-
-    case "evening":
-      return api.getAll({
-        timeMin: set(new Date(), {
-          hours: 20,
-          minutes: 0,
-          seconds: 0
-        }).toISOString(),
-        timeMax: set(new Date(), {
-          hours: 23,
-          minutes: 0,
-          seconds: 0
-        }).toISOString()
-      })
-
-    case "soon":
-      return api.getAll({
-        timeMin: new Date().toISOString(),
-        timeMax: addMinutes(new Date(), 30).toISOString()
+        timeMin: startOfDay(currentDate).toISOString(),
+        timeMax: endOfWeek(currentDate).toISOString()
       })
 
     default:
@@ -93,5 +62,7 @@ const api = new GoogleCalendarApi(oAuthClientInfo, token)
   if (!context) throw new Error("Please provide context")
 
   const events = await getEvents(context)
-  console.log(events)
+  for (const event of events) {
+    console.log(arg.json ? event : JSON.stringify(event))
+  }
 })()

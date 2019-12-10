@@ -1,0 +1,8 @@
+{ 
+    title: .summary, 
+    start: (if .start.dateTime then .start.dateTime else .start.date end), 
+    end: (if .end.dateTime then .end.dateTime else .end.date end), 
+    organizer: .organizer.displayName, 
+    hangoutLink: .hangoutLink,
+    isAllDay: (if .start.date then true else false end)
+}
