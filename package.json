@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "sls offline",
     "deploy": "sls deploy",
-    "release": "sls deploy --stage prod"
+    "release": "sls deploy --stage prod",
+    "login": "sls login"
   },
   "repository": {
     "type": "git",

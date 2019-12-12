@@ -1,4 +1,3 @@
-tenant: sandaemc
 app: slack-messenger
 service: slack-messenger
 

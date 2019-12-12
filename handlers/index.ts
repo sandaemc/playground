@@ -1,13 +1,13 @@
-import middy from "middy"
-import { jsonBodyParser } from "middy/middlewares"
-import { post } from "../lib/api"
+import middy from 'middy'
+import { jsonBodyParser } from 'middy/middlewares'
+import { post } from '../lib/api'
 
 export async function index(event: any) {
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: "Slack Messenger v1",
+        message: 'Slack Messenger v1',
         input: event
       },
       null,
