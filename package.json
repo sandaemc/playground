@@ -7,7 +7,7 @@
     "build": "tsc",
     "release": "npm link",
     "generate-token": "rm -rf token.json && node .build/scripts/generate-token.js",
-    "test": "npm run build && node .build/cli.js --credential=$HOME/.secret/google-calendar/api.credentials.json --token=$HOME/.secret/google-calendar/token.personal.json --json=true"
+    "test": "npm run build && node .build/cli.js today --credential=$HOME/.secret/google-calendar/api.credentials.json --token=$HOME/.secret/google-calendar/token.hireplicity.json --json=true"
   },
   "bin": {
     "get-calendar-events": "./.build/cli.js"

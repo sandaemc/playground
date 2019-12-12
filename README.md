@@ -18,4 +18,7 @@ npm run build
 npm run release
 
 get-calendar-events --credential=api.credentials.json --token=token.js
+
+ - jq -f clean-filter | jq '{message: (.title + " - " + .hangoutLink)}' | jq  -r .message | slack-illuminate
+ - jq -c -f clean-filter  | slack-illuminate
 ```
