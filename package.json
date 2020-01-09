@@ -1,15 +1,25 @@
 {
   "name": "new-aws-lambda-service-template",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.600.0",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.8.6",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-dynamodb-local": "^0.2.38",
+    "uuid": "^3.3.3"
+  },
   "devDependencies": {
+    "@types/mongoose": "^5.5.40",
     "@types/node": "^12.6.8",
+    "@types/uuid": "^3.4.6",
     "serverless-offline": "^5.8.0",
     "serverless-plugin-typescript": "^1.1.9",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "author": "Sandae Macalalag <sandaemc@gmail.com>",
   "license": "ISC"
