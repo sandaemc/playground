@@ -24,15 +24,26 @@ export async function create(event: any) {
   }
 }
 
-export async function update(event: any) {
+export async function view(event: any) {
   const { sellerId } = event.pathParameters
-  const data = JSON.parse(event.body)
-  const seller = new Seller(sellerId, data.name)
-  const result = await repo.update(seller)
+  const seller = await repo.findOne(sellerId)
 
   return {
     statusCode: 200,
-    body: JSON.stringify(result)
+    body: JSON.stringify(seller)
+  }
+}
+
+export async function update(event: any) {
+  const { sellerId } = event.pathParameters
+  const data = JSON.parse(event.body)
+  const seller = await repo.findOne(sellerId)
+  seller.name = data.name
+  await repo.update(seller)
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(seller)
   }
 }
 

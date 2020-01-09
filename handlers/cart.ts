@@ -1,27 +1,20 @@
-import AWS from 'aws-sdk'
-import uuid from 'uuid'
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
-const TableName = process.env.DYNAMODB_TABLE || ''
-if (!TableName) {
-  throw new Error('Please provide table name')
-}
-
 export async function create(event: any) {
-  const params = {
-    TableName,
-    Item: {
-      pk: `cart_${uuid.v4()}`,
-      sk: `cart`,
-      data: {
-        hello: 'world'
-      }
-    }
-  }
-
-  await dynamoDb.put(params).promise()
   return {
     statusCode: 200,
-    body: JSON.stringify(params.Item)
+    body: JSON.stringify({})
+  }
+}
+
+export async function view(event: any) {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({})
+  }
+}
+
+export async function addProduct(event: any) {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({})
   }
 }

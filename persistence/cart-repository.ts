@@ -9,13 +9,13 @@ if (!TableName) {
 }
 
 export class SellerRepository {
-  async findOne(sellerId: string) {
+  async findOne(cartId: string) {
     const result = await dynamoDb
       .get({
         TableName,
         Key: {
-          pk: `seller_${sellerId}`,
-          sk: 'seller'
+          pk: `cart_${cartId}`,
+          sk: 'cart'
         }
       })
       .promise()

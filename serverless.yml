@@ -34,6 +34,10 @@ functions:
     handler: handlers/seller.create
     events:
       - http: 'POST /sellers'
+  viewSeller:
+    handler: handlers/seller.view
+    events:
+      - http: 'GET /sellers/{sellerId}'
   updateSeller:
     handler: handlers/seller.update
     events:
@@ -51,6 +55,31 @@ functions:
     handler: handlers/product.create
     events:
       - http: 'POST /sellers/{sellerId}/products'
+  updateProduct:
+    handler: handlers/product.update
+    events:
+      - http: 'PATCH /sellers/{sellerId}/products/{productId}'
+  viewProduct:
+    handler: handlers/product.view
+    events:
+      - http: 'GET /sellers/{sellerId}/products/{productId}'
+  deleteProduct:
+    handler: handlers/product.remove
+    events:
+      - http: 'DELETE /sellers/{sellerId}/products/{productId}'
+
+  createCart:
+    handler: handlers/cart.create
+    events:
+      - http: 'POST /carts'
+  viewCart:
+    handler: handlers/cart.view
+    events:
+      - http: 'GET /carts/{cartId}'
+  addToCart:
+    handler: handlers/cart.addProduct
+    events:
+      - http: 'POST /carts/{cartId}/items
 
 resources:
   Resources:

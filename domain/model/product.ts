@@ -1,11 +1,8 @@
 export class Product {
   constructor(
-    protected id: string,
-    protected name: string,
-    protected description: string
+    public id: string,
+    public sellerId: string,
+    public name: string,
+    public description: string
   ) {}
-
-  getId() {
-    return this.id
-  }
 }
