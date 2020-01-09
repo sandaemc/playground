@@ -8,7 +8,15 @@ if (!TableName) {
 }
 
 export async function index(event: any) {
-  const result = await dynamoDb.scan({ TableName }).promise()
+  const result = await dynamoDb
+    .scan({
+      TableName,
+      FilterExpression: 'sk = :sk',
+      ExpressionAttributeValues: {
+        ':sk': 'seller'
+      }
+    })
+    .promise()
 
   return {
     statusCode: 200,
@@ -21,7 +29,7 @@ export async function create(event: any) {
     TableName,
     Item: {
       pk: `seller_${uuid.v4()}`,
-      sk: 'data',
+      sk: 'seller',
       data: {
         hello: 'world'
       }
