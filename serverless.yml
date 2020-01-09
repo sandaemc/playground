@@ -1,0 +1,19 @@
+service: new-aws-lambda-service-template
+app: your-app-name
+#tenant: your-tenant-name
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:state, 'dev'}
+  region: us-east-1
+
+functions:
+  hello:
+    handler: handlers/hello.index
+    events:
+      - http: "GET /hello"
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
