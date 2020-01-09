@@ -8,7 +8,7 @@ if (!TableName) {
 }
 
 export async function index(event: any) {
-  const { sellerId } = event.pathParameters.id
+  const { sellerId } = event.pathParameters
 
   const result = await dynamoDb
     .scan({
@@ -27,7 +27,7 @@ export async function index(event: any) {
 }
 
 export async function create(event: any) {
-  const { sellerId } = event.pathParameters.id
+  const { sellerId } = event.pathParameters
 
   const params = {
     TableName,
