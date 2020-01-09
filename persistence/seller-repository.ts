@@ -13,9 +13,12 @@ export class SellerRepository {
       .scan({
         TableName,
         FilterExpression: 'sk = :sk',
-        ProjectionExpression: 'data',
+        ProjectionExpression: '#dt',
         ExpressionAttributeValues: {
           ':sk': 'seller'
+        },
+        ExpressionAttributeNames: {
+          '#dt': 'data'
         }
       })
       .promise()
