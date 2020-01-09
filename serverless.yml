@@ -10,7 +10,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: ${opt:state, 'dev'}
+  stage: ${opt:stage, 'dev'}
   region: us-east-1
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
@@ -34,6 +34,15 @@ functions:
     handler: handlers/seller.create
     events:
       - http: 'POST /sellers'
+
+  listProducts:
+    handler: handlers/product.index
+    events:
+      - http: 'GET /sellers/{sellerId}/products'
+  createProduct:
+    handler: handlers/product.create
+    events:
+      - http: 'POST /sellers/{sellerId}/products'
 
 resources:
   Resources:
