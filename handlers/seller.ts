@@ -23,3 +23,25 @@ export async function create(event: any) {
     body: JSON.stringify(seller)
   }
 }
+
+export async function update(event: any) {
+  const { sellerId } = event.pathParameters
+  const data = JSON.parse(event.body)
+  const seller = new Seller(sellerId, data.name)
+  const result = await repo.update(seller)
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(result)
+  }
+}
+
+export async function remove(event: any) {
+  const { sellerId } = event.pathParameters
+  await repo.delete(sellerId)
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({})
+  }
+}

@@ -37,9 +37,7 @@ export class SellerRepository {
       })
       .promise()
 
-    console.log(result.Items)
-
-    return result.Items?.map(c => new Seller(c.data.id, c.data.name))
+    return result.Items?.map(({ data }) => new Seller(data.id, data.name))
   }
 
   async add(seller: Seller) {
@@ -56,13 +54,51 @@ export class SellerRepository {
     return seller
   }
 
-  async findAllProductsBy(sellerId: string) {
+  async update(seller: Seller) {
+    const params = {
+      TableName,
+      Key: {
+        pk: `seller_${seller.getId()}`,
+        sk: 'seller'
+      },
+      UpdateExpression: 'SET #dt.#name = :name',
+      ExpressionAttributeNames: {
+        '#dt': 'data',
+        '#name': 'name'
+      },
+      ExpressionAttributeValues: {
+        ':name': seller.name
+      },
+      ReturnValues: 'UPDATED_NEW'
+    }
+
+    console.log(params)
+    const result = await dynamoDb.update(params).promise()
+
+    return result.Attributes
+  }
+
+  async delete(sellerId: string) {
+    await dynamoDb
+      .delete({
+        TableName,
+        Key: {
+          pk: `seller_${sellerId}`,
+          sk: 'seller'
+        }
+      })
+      .promise()
+
+    return null
+  }
+
+  async findAllProductsBy(seller: Seller) {
     const result = await dynamoDb
       .scan({
         TableName,
         FilterExpression: 'sk = :sk',
         ExpressionAttributeValues: {
-          ':sk': `product_by_${sellerId}`
+          ':sk': `product_by_${seller.getId()}`
         }
       })
       .promise()
@@ -72,12 +108,12 @@ export class SellerRepository {
     )
   }
 
-  async addProductTo(product: Product, sellerId: string) {
+  async addProductTo(product: Product, seller: Seller) {
     const params = {
       TableName,
       Item: {
         pk: `product_${product.getId()}`,
-        sk: `product_by_${sellerId}`,
+        sk: `product_by_${seller.getId()}`,
         data: product
       }
     }
