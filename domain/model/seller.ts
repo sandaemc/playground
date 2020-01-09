@@ -1,5 +1,5 @@
 export class Seller {
-  constructor(protected id: string, protected name: string) {}
+  constructor(public id: string, public name: string) {}
 
   getId() {
     return this.id
