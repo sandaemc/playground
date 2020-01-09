@@ -37,6 +37,8 @@ export class SellerRepository {
       })
       .promise()
 
+    console.log(result.Items)
+
     return result.Items?.map(c => new Seller(c.data.id, c.data.name))
   }
 
