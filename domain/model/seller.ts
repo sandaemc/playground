@@ -1,11 +1,5 @@
-import uuid from 'uuid'
-
 export class Seller {
-  protected id: string
-
-  constructor(protected name: string) {
-    this.id = uuid.v4()
-  }
+  constructor(protected id: string, protected name: string) {}
 
   getId() {
     return this.id

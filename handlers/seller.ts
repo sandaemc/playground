@@ -1,5 +1,6 @@
 import { SellerRepository } from '../persistence/seller-repository'
 import { Seller } from '../domain/model/seller'
+import uuid from 'uuid'
 
 const repo = new SellerRepository()
 
@@ -14,7 +15,7 @@ export async function index(event: any) {
 
 export async function create(event: any) {
   const data = JSON.parse(event.body)
-  const seller = new Seller(data.name)
+  const seller = new Seller(uuid.v4(), data.name)
 
   await repo.add(seller)
   return {

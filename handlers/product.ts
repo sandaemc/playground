@@ -1,48 +1,28 @@
-import AWS from 'aws-sdk'
+import { SellerRepository } from '../persistence/seller-repository'
+import { Product } from '../domain/model/product'
 import uuid from 'uuid'
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
-const TableName = process.env.DYNAMODB_TABLE || ''
-if (!TableName) {
-  throw new Error('Please provide table name')
-}
+const repo = new SellerRepository()
 
 export async function index(event: any) {
   const { sellerId } = event.pathParameters
-
-  const result = await dynamoDb
-    .scan({
-      TableName,
-      FilterExpression: 'sk = :sk',
-      ExpressionAttributeValues: {
-        ':sk': `product_by_${sellerId}`
-      }
-    })
-    .promise()
+  const products = await repo.findAllProductsBy(sellerId)
 
   return {
     statusCode: 200,
-    body: JSON.stringify(result.Items)
+    body: JSON.stringify(products)
   }
 }
 
 export async function create(event: any) {
   const { sellerId } = event.pathParameters
+  const data = JSON.parse(event.body)
+  const product = new Product(uuid.v4(), data.name, data.description)
 
-  const params = {
-    TableName,
-    Item: {
-      pk: `product_${uuid.v4()}`,
-      sk: `product_by_${sellerId}`,
-      data: {
-        hello: 'world'
-      }
-    }
-  }
+  await repo.addProductTo(product, sellerId)
 
-  await dynamoDb.put(params).promise()
   return {
     statusCode: 200,
-    body: JSON.stringify(params.Item)
+    body: JSON.stringify(product)
   }
 }
