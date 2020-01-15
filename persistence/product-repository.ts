@@ -1,50 +1,31 @@
-import AWS from 'aws-sdk'
 import { Product } from '../domain/model/product'
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
-const TableName = process.env.DYNAMODB_TABLE || ''
-if (!TableName) {
-  throw new Error('Please provide table name')
-}
+import { ProductId } from '../domain/model/product-id'
+import { SellerId } from '../domain/model/seller-id'
+import { dynamoDb, TableName } from './db'
 
 export class ProductRepository {
-  async findOne(sellerId: string, productId: string) {
+  async findOne(sellerId: SellerId, productId: ProductId) {
     const result = await dynamoDb
       .get({
         TableName,
         Key: {
-          pk: `product_${productId}`,
-          sk: `product_by_${sellerId}`
+          pk: productId.toString(),
+          sk: sellerId.toString()
         }
       })
       .promise()
 
     if (result.Item) {
-      const data = result.Item.data
-      return new Product(data.id, data.sellerId, data.name, data.description)
+      return Product.create(result.Item)
     }
-  }
-
-  async add(product: Product) {
-    const params = {
-      TableName,
-      Item: {
-        pk: `product_${product.id}`,
-        sk: `product_by_${product.sellerId}`,
-        data: product
-      }
-    }
-
-    await dynamoDb.put(params).promise()
-    return product
   }
 
   async update(product: Product) {
     const params = {
       TableName,
       Key: {
-        pk: `product_${product.id}`,
-        sk: `product_by_${product.sellerId}`
+        pk: product.id.toString(),
+        sk: product.sellerId.toString()
       },
       UpdateExpression:
         'SET #dt.#name = :name, #dt.#description = :description',
@@ -60,9 +41,9 @@ export class ProductRepository {
       ReturnValues: 'UPDATED_NEW'
     }
 
-    const result = await dynamoDb.update(params).promise()
+    await dynamoDb.update(params).promise()
 
-    return result.Attributes
+    return product
   }
 
   async delete(sellerId: string, productId: string) {
@@ -70,12 +51,10 @@ export class ProductRepository {
       .delete({
         TableName,
         Key: {
-          pk: `product_${productId}`,
-          sk: `product_by_${sellerId}`
+          pk: productId.toString(),
+          sk: sellerId.toString()
         }
       })
       .promise()
-
-    return null
   }
 }

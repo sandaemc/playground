@@ -1,26 +1,21 @@
-import AWS from 'aws-sdk'
 import { Seller } from '../domain/model/seller'
 import { Product } from '../domain/model/product'
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
-const TableName = process.env.DYNAMODB_TABLE || ''
-if (!TableName) {
-  throw new Error('Please provide table name')
-}
+import { SellerId } from '../domain/model/seller-id'
+import { dynamoDb, TableName } from './db'
 
 export class SellerRepository {
-  async findOne(sellerId: string) {
+  async findOne(sellerId: SellerId) {
     const result = await dynamoDb
       .get({
         TableName,
         Key: {
-          pk: `seller_${sellerId}`,
+          pk: sellerId.toString(),
           sk: 'seller'
         }
       })
       .promise()
 
-    return new Seller(result.Item?.data.id, result.Item?.data.name)
+    return Seller.create(result.Item)
   }
 
   async findAll() {
@@ -28,26 +23,24 @@ export class SellerRepository {
       .scan({
         TableName,
         FilterExpression: 'sk = :sk',
-        ProjectionExpression: '#dt',
         ExpressionAttributeValues: {
           ':sk': 'seller'
-        },
-        ExpressionAttributeNames: {
-          '#dt': 'data'
         }
       })
       .promise()
 
-    return result.Items?.map(({ data }) => new Seller(data.id, data.name))
+    return result.Items?.map(c => Seller.create(c))
   }
 
   async add(seller: Seller) {
     const params = {
       TableName,
       Item: {
-        pk: `seller_${seller.id}`,
+        pk: seller.id.toString(),
         sk: 'seller',
-        data: seller
+        data: {
+          name: seller.name
+        }
       }
     }
 
@@ -59,7 +52,7 @@ export class SellerRepository {
     const params = {
       TableName,
       Key: {
-        pk: `seller_${seller.id}`,
+        pk: seller.id.toString(),
         sk: 'seller'
       },
       UpdateExpression: 'SET #dt.#name = :name',
@@ -78,12 +71,12 @@ export class SellerRepository {
     return result.Attributes
   }
 
-  async delete(sellerId: string) {
+  async delete(sellerId: SellerId) {
     await dynamoDb
       .delete({
         TableName,
         Key: {
-          pk: `seller_${sellerId}`,
+          pk: sellerId.toString(),
           sk: 'seller'
         }
       })
@@ -92,19 +85,33 @@ export class SellerRepository {
     return null
   }
 
-  async findAllProductsBy(sellerId: string) {
+  async addProduct(product: Product) {
+    await dynamoDb
+      .put({
+        TableName,
+        Item: {
+          pk: product.id.toString(),
+          sk: product.sellerId.toString(),
+          data: {
+            name: product.name,
+            description: product.description
+          }
+        }
+      })
+      .promise()
+  }
+
+  async findAllProductsBy(sellerId: SellerId) {
     const result = await dynamoDb
       .scan({
         TableName,
         FilterExpression: 'sk = :sk',
         ExpressionAttributeValues: {
-          ':sk': `product_by_${sellerId}`
+          ':sk': sellerId.toString()
         }
       })
       .promise()
 
-    return result.Items?.map(
-      ({ data }) => new Product(data.id, sellerId, data.name, data.description)
-    )
+    return result.Items?.map(c => Product.create(c)) || []
   }
 }

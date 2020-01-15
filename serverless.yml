@@ -76,10 +76,10 @@ functions:
     handler: handlers/cart.view
     events:
       - http: 'GET /carts/{cartId}'
-  addToCart:
-    handler: handlers/cart.addProduct
+  addItemToCart:
+    handler: handlers/cart.addItem
     events:
-      - http: 'POST /carts/{cartId}/items
+      - http: 'POST /carts/{cartId}/add-item'
 
 resources:
   Resources:

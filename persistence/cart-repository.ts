@@ -1,74 +1,58 @@
-import AWS from 'aws-sdk'
-import { Seller } from '../domain/model/seller'
-import { Product } from '../domain/model/product'
+import { Cart } from '../domain/model/cart'
+import { dynamoDb, TableName } from './db'
+import { CartId } from '../domain/model/cart-id'
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
-const TableName = process.env.DYNAMODB_TABLE || ''
-if (!TableName) {
-  throw new Error('Please provide table name')
-}
-
-export class SellerRepository {
-  async findOne(cartId: string) {
+export class CartRepository {
+  async findOne(cartId: CartId) {
     const result = await dynamoDb
       .get({
         TableName,
         Key: {
-          pk: `cart_${cartId}`,
+          pk: cartId.toString(),
           sk: 'cart'
         }
       })
       .promise()
 
-    return new Seller(result.Item?.data.id, result.Item?.data.name)
+    if (result.Item) return Cart.create(result.Item)
   }
 
-  async findAll() {
-    const result = await dynamoDb
-      .scan({
-        TableName,
-        FilterExpression: 'sk = :sk',
-        ProjectionExpression: '#dt',
-        ExpressionAttributeValues: {
-          ':sk': 'seller'
-        },
-        ExpressionAttributeNames: {
-          '#dt': 'data'
-        }
-      })
-      .promise()
-
-    return result.Items?.map(({ data }) => new Seller(data.id, data.name))
-  }
-
-  async add(seller: Seller) {
+  async add(cart: Cart) {
     const params = {
       TableName,
       Item: {
-        pk: `seller_${seller.id}`,
-        sk: 'seller',
-        data: seller
+        pk: cart.id.toString(),
+        sk: 'cart',
+        data: {
+          items: cart.items,
+          date: cart.date.toString()
+        }
       }
     }
 
     await dynamoDb.put(params).promise()
-    return seller
+    return cart
   }
 
-  async update(seller: Seller) {
+  async update(cart: Cart) {
     const params = {
       TableName,
       Key: {
-        pk: `seller_${seller.id}`,
-        sk: 'seller'
+        pk: cart.id.toString(),
+        sk: 'cart'
       },
-      UpdateExpression: 'SET #dt.#name = :name',
+      UpdateExpression: 'SET #dt.#items = :items',
       ExpressionAttributeNames: {
         '#dt': 'data',
-        '#name': 'name'
+        '#items': 'items'
       },
       ExpressionAttributeValues: {
-        ':name': seller.name
+        ':items': cart.items.map(c => ({
+          productId: c.productId.toString(),
+          sellerId: c.sellerId.toString(),
+          date: c.date.toString(),
+          quantity: c.quantity
+        }))
       },
       ReturnValues: 'UPDATED_NEW'
     }
@@ -76,35 +60,5 @@ export class SellerRepository {
     const result = await dynamoDb.update(params).promise()
 
     return result.Attributes
-  }
-
-  async delete(sellerId: string) {
-    await dynamoDb
-      .delete({
-        TableName,
-        Key: {
-          pk: `seller_${sellerId}`,
-          sk: 'seller'
-        }
-      })
-      .promise()
-
-    return null
-  }
-
-  async findAllProductsBy(sellerId: string) {
-    const result = await dynamoDb
-      .scan({
-        TableName,
-        FilterExpression: 'sk = :sk',
-        ExpressionAttributeValues: {
-          ':sk': `product_by_${sellerId}`
-        }
-      })
-      .promise()
-
-    return result.Items?.map(
-      ({ data }) => new Product(data.id, sellerId, data.name, data.description)
-    )
   }
 }

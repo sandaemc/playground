@@ -1,6 +1,8 @@
 import { SellerRepository } from '../persistence/seller-repository'
 import { Seller } from '../domain/model/seller'
-import uuid from 'uuid'
+import { SellerId } from '../domain/model/seller-id'
+import { renderJSON } from './concerns/render-json'
+import { SellerView } from './views/seller-view'
 
 const repo = new SellerRepository()
 
@@ -15,7 +17,7 @@ export async function index(event: any) {
 
 export async function create(event: any) {
   const data = JSON.parse(event.body)
-  const seller = new Seller(uuid.v4(), data.name)
+  const seller = new Seller(SellerId.create(), data.name)
 
   await repo.add(seller)
   return {
@@ -26,30 +28,24 @@ export async function create(event: any) {
 
 export async function view(event: any) {
   const { sellerId } = event.pathParameters
-  const seller = await repo.findOne(sellerId)
+  const seller = await repo.findOne(new SellerId(sellerId))
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(seller)
-  }
+  return renderJSON(new SellerView(seller))
 }
 
 export async function update(event: any) {
   const { sellerId } = event.pathParameters
   const data = JSON.parse(event.body)
-  const seller = await repo.findOne(sellerId)
+  const seller = await repo.findOne(new SellerId(sellerId))
   seller.name = data.name
   await repo.update(seller)
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(seller)
-  }
+  return renderJSON(new SellerView(seller))
 }
 
 export async function remove(event: any) {
   const { sellerId } = event.pathParameters
-  await repo.delete(sellerId)
+  await repo.delete(new SellerId(sellerId))
 
   return {
     statusCode: 200,
