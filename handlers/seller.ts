@@ -3,16 +3,14 @@ import { Seller } from '../domain/model/seller'
 import { SellerId } from '../domain/model/seller-id'
 import { renderJSON } from './concerns/render-json'
 import { SellerView } from './views/seller-view'
+import { SellersView } from './views/sellers-view'
 
 const repo = new SellerRepository()
 
 export async function index(event: any) {
   const sellers = await repo.findAll()
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(sellers)
-  }
+  return renderJSON(new SellersView(sellers))
 }
 
 export async function create(event: any) {

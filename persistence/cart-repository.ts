@@ -3,6 +3,20 @@ import { dynamoDb, TableName } from './db'
 import { CartId } from '../domain/model/cart-id'
 
 export class CartRepository {
+  async findAll() {
+    const result = await dynamoDb
+      .scan({
+        TableName,
+        FilterExpression: 'sk = :sk',
+        ExpressionAttributeValues: {
+          ':sk': 'cart'
+        }
+      })
+      .promise()
+
+    return result.Items?.map(c => Cart.create(c)) || []
+  }
+
   async findOne(cartId: CartId) {
     const result = await dynamoDb
       .get({

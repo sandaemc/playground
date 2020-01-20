@@ -29,7 +29,7 @@ export class SellerRepository {
       })
       .promise()
 
-    return result.Items?.map(c => Seller.create(c))
+    return result.Items?.map(c => Seller.create(c)) || []
   }
 
   async add(seller: Seller) {

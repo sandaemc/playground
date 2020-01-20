@@ -1,11 +1,10 @@
 import { CartRepository } from '../persistence/cart-repository'
 import { Cart } from '../domain/model/cart'
 import { CartId } from '../domain/model/cart-id'
-import { ProductRepository } from '../persistence/product-repository'
-import { CreateCartDTO } from './dtos/create-cart-dto'
+import { AddProductToCartDTO } from './dtos/add-product-to-cart-dto'
+import { AddProdutToCartCommand } from '../commands/add-product-to-cart-command'
 
 const cartRepo = new CartRepository()
-const productRepo = new ProductRepository()
 
 export async function create(event: any) {
   const cart = new Cart(CartId.create(), [], new Date())
@@ -30,29 +29,19 @@ export async function view(event: any) {
 export async function addItem(event: any) {
   const { cartId } = event.pathParameters
 
-  const cart = await cartRepo.findOne(new CartId(cartId))
-  if (!cart) {
+  try {
+    const dto = AddProductToCartDTO.create(JSON.parse(event.body), cartId)
+    const cmd = new AddProdutToCartCommand(dto)
+    const cart = await cmd.execute()
+    return {
+      statusCode: 200,
+      body: JSON.stringify(cart)
+    }
+  } catch (err) {
+    // TODO: Assuming everything is 404 for now
     return {
       statusCode: 404,
-      body: JSON.stringify({ error: 'Cart not found' })
+      body: { message: err.message }
     }
-  }
-
-  const dto = CreateCartDTO.create(JSON.parse(event.body))
-
-  const product = await productRepo.findOne(dto.sellerId, dto.productId)
-  if (!product) {
-    return {
-      statusCode: 404,
-      body: JSON.stringify({ error: 'Product not found' })
-    }
-  }
-
-  cart.addItem(product, dto.quantity)
-  await cartRepo.update(cart)
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(cart)
   }
 }
