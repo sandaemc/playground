@@ -2,7 +2,6 @@
 
 API for shopping products
 
-Hosted at:
 
 ```
 http :3000/sellers
