@@ -2,10 +2,12 @@
 
 API for shopping products
 
+An example code that uses Domain-Driven Design / Hexagonal Architecture in AWS Lambda and DynamoDB single-table design.
+
 ## Requirements & Installation
 
 - NodeJS v13
-- Java 1.6+ // for local deployment
+- Java 1.6+ // for local development
 - `npm i -g serverless`
 
 ## Running
