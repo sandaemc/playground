@@ -1,0 +1,13 @@
+{
+  "name": "github-notifications",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Sandae Macalalag <sandaemc@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.75.0"
+  }
+}

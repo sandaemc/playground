@@ -1,0 +1,32 @@
+{
+  "name": "typescript-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".build/index.js",
+  "scripts": {
+    "start": "nodemon --watch .build .build/index.js",
+    "dev": "concurrently \"npm run build:watch\" \"npm start\"",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sandae Macalalag",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^12.6.8",
+    "@types/restify": "^8.4.0",
+    "@types/uuid": "^3.4.5",
+    "concurrently": "^4.1.1",
+    "nodemon": "^1.19.1",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "lowdb": "^1.0.0",
+    "moment": "^2.24.0",
+    "restify": "^8.4.0",
+    "uuid": "^3.3.3"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "API Gateway",
+  "main": "index.js",
+  "scripts": {
+    "start": "sls offline start",
+    "deploy": "sls deploy --stage prod",
+    "build": "tsc",
+    "test": "npm run build && node .build/test.js"
+  },
+  "author": "Sandae Macalalag <sandaemc@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.388.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "serverless": "^1.36.1",
+    "serverless-domain-manager": "^3.2.1",
+    "serverless-dynamodb-local": "^0.2.30",
+    "serverless-http": "^1.8.0",
+    "serverless-offline": "^4.0.0",
+    "serverless-plugin-typescript": "^1.1.7",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/lodash": "^4.14.123",
+    "@types/node": "^10.12.18",
+    "@types/uuid": "^3.4.4",
+    "typescript": "^3.4.5"
+  }
+}

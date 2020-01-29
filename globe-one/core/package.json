@@ -1,0 +1,29 @@
+{
+  "name": "globeone-core",
+  "version": "1.0.0",
+  "description": "Fetches Globe Data",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .build/index.js",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandaemc/globe-data.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandaemc/globe-data/issues"
+  },
+  "homepage": "https://github.com/sandaemc/globe-data#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.8",
+    "typescript": "^3.4.5"
+  }
+}
