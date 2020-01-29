@@ -1,0 +1,33 @@
+{
+  "name": "new-typescript-console-project",
+  "version": "1.0.0",
+  "description": "Template for creating a new TypeScript console project",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandaemc/new-typescript-console-project.git"
+  },
+  "keywords": [],
+  "author": "Sandae Macalalag <sandaemc@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandaemc/new-typescript-console-project/issues"
+  },
+  "homepage": "https://github.com/sandaemc/new-typescript-console-project#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.14.141",
+    "@types/node": "^12.6.8",
+    "@types/node-fetch": "^2.5.2",
+    "@types/yargs": "^13.0.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0"
+  }
+}
