@@ -1,0 +1,19 @@
+<form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
+  <div>
+    <label for="title">
+      Title
+    </label>
+    <input id="title" type="text" formControlName="title" required />
+  </div>
+
+  <div>
+    <label for="description">
+      Description
+    </label>
+    <input id="description" type="text" formControlName="description" />
+  </div>
+
+  <button class="button" type="submit" [disabled]="addForm.invalid">
+    Save
+  </button>
+</form>

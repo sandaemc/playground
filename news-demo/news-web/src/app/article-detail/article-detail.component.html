@@ -1,0 +1,6 @@
+<div *ngIf="article">
+  <h2>{{ article.title }}</h2>
+  <p>{{ article.description }}</p>
+  <button (click)="onEdit(article.id)">Edit</button>
+  <button (click)="onDelete(article.id)">Delete</button>
+</div>
