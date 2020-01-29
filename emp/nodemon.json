@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "ignore": [
+        "src/**/*.ts"
+    ],
+    "watch": [
+        ".build"
+    ]
+}

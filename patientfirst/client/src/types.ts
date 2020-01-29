@@ -1,0 +1,20 @@
+
+export const PATIENTS_FETCH_REQUESTED = '@patients/FETCH_REQEUSTED';
+export const PATIENTS_FETCH_SUCCEEDED = '@patients/FETCH_SUCCEEDED';
+
+export const PATIENT_POST_REQUESTED = '@patient/POST_REQUESTED';
+export const PATIENT_POST_SUCCEEDED = '@patient/POST_SUCCEEDED';
+export const PATIENT_POST_FAILED = '@patient/POST_FAILED';
+
+export const PATIENT_FETCH_REQUESTED = '@patient/FETCH_REQUESTED';
+export const PATIENT_FETCH_SUCCEEDED = '@patient/FETCH_SUCCEEDED';
+export const PATIENT_FETCH_FAILED = '@patient/FETCH_FAILED';
+
+export const PATIENT_PUT_REQUESTED = '@patient/PUT_REQUESTED';
+export const PATIENT_PUT_SUCCEEDED = '@patient/PUT_SUCCEEDED';
+export const PATIENT_PUT_FAILED = '@patient/PUT_SUCCEEDED';
+
+export const PATIENTS_DELETE_REQUESTED = '@patients/DELETE_REQUESTED';
+export const PATIENTS_DELETE_SUCCEEDED = '@patients/DELETE_SUCCEEDED';
+
+export const PATIENT_LOADED_CLEARED = '@patient/LOADED_CLEARED';

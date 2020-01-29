@@ -1,0 +1,13 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "ERTyui234",
+    "database": "payrolldb",
+    "logging": true,
+    "synchronize": true,
+    "entities": [
+        ".build/src/domain/model/**/*.js"
+    ]
+ }

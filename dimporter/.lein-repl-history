@@ -1,0 +1,164 @@
+exit
+(def f (fields [:id (validate/int?)] :username :password :last_name :first_name))
+f
+(keys f)
+(defn fields [& definitions]
+  (->>
+    (map #(if (vector? %)
+            (hash-map (first %) (rest %))
+            (hash-map % [])) definitions)))
+(defn fields [& definitions]
+  (map #(if (vector? %)
+          (hash-map (first %) (rest %))
+          (hash-map % [])) definitions))
+(def f (fields [:id (validate/int?)] :username :password :last_name :first_name))
+f
+(map key f)
+(map #(key %) f)
+(map #(%) f)
+(map #(println %) f)
+(map #(key %) f)
+(map #(key %) (first f))
+(map (fn [k v] (println k)) f)
+exit
+(def f (fields [:id (validate/int?)] :username :password :last_name :first_name))
+f
+(def c (csv "doc/test.data"))
+c
+(def ds (datasource c f))
+ds
+(def v (validate/int?))
+v
+(meta v)
+(meta (v))
+(meta validate/int?)
+(defn ^:transform truncate [v] (println v))
+(meta truncate)
+(meta #'truncate)
+(meta #'validate/truncate)
+(var validate/truncate)
+(var (validate/truncate))
+var
+(var)
+(var meta)
+(var truncate)
+(meta (var truncate))
+(var transform/truncate)
+(meta (var transform/truncate))
+(meta (var (transform/truncate)))
+(def x (transform/truncate :len 20))
+(var x)
+(meta (var x))
+(meta (var (x "sample"))
+)
+exit
+(var (transform/truncate))
+(var '(transform/truncate))
+(var (transform/truncate))
+(def x (transform/truncate))
+(meta x)
+(meta (meta x))
+(var x)
+(meta (var x))
+(in-ns 'dimporter.transformations)
+(meta (var truncate))
+(meta (var (var (truncate)))
+)
+(var truncate)
+(meta (eval (truncate)))
+(meta (var (eval (truncate))))
+(meta (eval (truncate))))
+(eval (truncate))
+(var (eval (truncate)))
+(meta (eval (truncate)))
+(var truncate)
+(ns-resolve (eval (truncate)))
+(ns-resolve *ns*(eval (truncate)))
+(ns-resolve *ns* (eval (truncate)))
+(ns-resolve *ns* (symbol (eval (truncate))))
+(eval (truncate))
+(resolve (eval (truncate)))
+(truncate)
+(var (truncate))
+(symbol (truncate))
+(resolve (truncate))
+exit
+(in-ns 'dimporter.transformations)
+(meta truncate)
+(meta (var truncate))
+exit
+(var dimporter.transformations/truncate)
+(meta (var dimporter.transformations/truncate))
+(symbol transform/truncate)
+(var transform/truncate)
+(def x {:val (transform/truncate)})
+x
+(:val x)
+(symbol (:val x))
+(var (:val x))
+(:val x)
+(resolve (:val x))
+(resolve '(:val x))
+(ns-resolve  'dimporter.transformation (:val x))
+(ns-resolve  'dimporter.transformations (:val x))
+(ns-resolve  'dimporter.transformations (symbol "truncate"))
+(:val x)
+(str (:val x))
+(def x {:val (transform/truncate)})
+x
+(:val x)
+(eval (:val x))
+(var (:val x))
+(meta (:val x))
+(print-doc (:val x))
+(str (:val x))
+(clojure.string/split "$" (str (:val x)))
+(clojure.string/split (str (:val x)) #"$")
+(clojure.string/split (str (:val x)) #"\$")
+(defn func-meta [func]
+  (let [[name-space func-name _] (clojure.string/split (str func) #"\$")]
+    (ns-resolve (symbol name-space) (symbol func-name))))
+(func-meta (:val x))
+(defn func-meta [func]
+  (let [[name-space func-name _] (clojure.string/split (str func) #"\$")]
+    (meta (ns-resolve (symbol name-space) (symbol func-name)))))
+(func-meta (:val x))
+exit
+(def x {:val (transform/truncate)})
+(func-meta (:val x))
+(def x {:val (transform/truncate)})
+(def x (transform/truncate :len 5))
+x
+(func-meta x)
+(defn- func-meta2 [f]
+  (meta
+    (apply ns-resolve
+           (map symbol 
+                (butlast (clojure.string/split (str f) #"\$"))))))
+(func-meta2 x)
+(defn- func-meta [f]
+  (->>
+    (clojure.string/split (str f) #"\$")
+    butlast
+    (map symbol)
+    (apply ns-resolve)
+    meta))
+(func-meta x)
+(defn- func-meta [f]
+  (->>
+    (butlast (clojure.string/split (str f) #"\$"))
+    #(apply ns-resolve (map symbol %)) 
+    meta))
+(func-meta x)
+(defn- func-meta [f]
+  (->>
+    (butlast (clojure.string/split (str f) #"\$"))
+    (map symbol)
+    (apply ns-resolve)
+    meta))
+(func-meta x)
+(:transform (func-meta x))
+(fields :username
+)
+(fields :username :roster)
+exit
