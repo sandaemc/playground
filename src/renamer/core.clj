@@ -7,7 +7,7 @@
 (defn- is-hidden?
   [file]
   (some #(re-find #"^\.\w*" %) 
-        (clojure.string/split (.getPath file) #"/")))
+        (string/split (.getPath file) #"/")))
 
 (defn- is-file?
   [file] 
@@ -25,5 +25,6 @@
 
 (defn -main [& args] 
   (let [[dir match replacement] args]
-    (doall (map #(replace-text %(java.util.regex.Pattern/compile match) replacement) 
-                (files dir)))))
+    (doall 
+      (map #(replace-text %(java.util.regex.Pattern/compile match) replacement) 
+           (files dir)))))
