@@ -10,7 +10,7 @@ Rename files recursively based on the provided key and replacement.
 
 ## Usage
 
-lein run <target-directory> <search-key> <replacement>
+lein run target-directory search-key replacement
 
 ## License
 
