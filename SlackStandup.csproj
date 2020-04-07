@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>dotnet-SlackTest-9A482931-271D-4D28-9D06-9194D7C79AF3</UserSecretsId>
     <LangVersion>8</LangVersion>
-    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
