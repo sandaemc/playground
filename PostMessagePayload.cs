@@ -12,5 +12,8 @@ namespace SlackApi
 
         [JsonPropertyName("text")]
         public string Text { get; set; }
+
+        [JsonPropertyName("as_user")]
+        public bool AsUser { get; set; } = false;
     }
 }

@@ -16,12 +16,13 @@ namespace SlackApi
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {authToken}");
         }
 
-        public async Task<PostMessageResponse> PostAsync(string channel, string message)
+        public async Task<PostMessageResponse> PostAsync(string channel, string message, bool asUser = false)
         {
             var payload = new PostMessagePayload()
             {
                 Channel = channel,
-                Text = message
+                Text = message,
+                AsUser = asUser
             };
 
             var response = await _client.PostAsync(
