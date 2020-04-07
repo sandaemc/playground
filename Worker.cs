@@ -67,7 +67,7 @@ namespace SlackStandup
 
                 if (current.Hour == _scheduleOptions.Hour && current.Minute == _scheduleOptions.Minute && current.Second == _scheduleOptions.Second)
                 {
-                    var json = await _slack.PostAsync(_slackOptions.Channel, _slackOptions.Message);
+                    var json = await _slack.PostAsync(_slackOptions.Channel, _slackOptions.Message, asUser: true);
                     if (!json.Ok)
                     {
                         _logger.LogError(json.Error);
