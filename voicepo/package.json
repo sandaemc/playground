@@ -1,0 +1,28 @@
+{
+  "name": "voicepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "sls deploy --stage prod",
+    "start": "sls offline"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "serverless": "^1.39.1",
+    "serverless-http": "^1.9.1",
+    "twilio": "^3.29.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "@types/serverless": "^1.18.2",
+    "@types/twilio": "0.0.10",
+    "serverless-offline": "^4.9.2",
+    "serverless-plugin-typescript": "^1.1.5"
+  }
+}
