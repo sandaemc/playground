@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -10,30 +11,19 @@ namespace SlackApi
     {
         private readonly HttpClient _client;
 
-        public Slack(string authToken)
+        public Slack(string authToken, HttpClient client)
         {
-            _client = new HttpClient();
+            _client = client;
+            _client.DefaultRequestHeaders.Clear();
+            _client.BaseAddress = new Uri("https://slack.com");
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {authToken}");
+            _client.Timeout = TimeSpan.FromSeconds(30);
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<PostMessageResponse> PostAsync(string channel, string message, bool asUser = false)
+        public Channel GetChannel(string channelId)
         {
-            var payload = new PostMessagePayload()
-            {
-                Channel = channel,
-                Text = message,
-                AsUser = asUser
-            };
-
-            var response = await _client.PostAsync(
-                "https://slack.com/api/chat.postMessage",
-                new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
-            );
-
-            response.EnsureSuccessStatusCode();
-
-            var body = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<PostMessageResponse>(body);
+            return new Channel(channelId, _client);
         }
     }
 }

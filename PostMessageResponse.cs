@@ -5,14 +5,12 @@ using System.Text.Json.Serialization;
 
 namespace SlackApi
 {
-    public class PostMessageResponse
+    public sealed class PostMessageResponse
     {
         [JsonPropertyName("ok")]
         public bool Ok { get; set; }
 
-#nullable enable
         [JsonPropertyName("error")]
-        public string? Error { get; set; }
-#nullable disable
+        public string Error { get; set; }
     }
 }
