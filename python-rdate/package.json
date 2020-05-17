@@ -1,0 +1,25 @@
+{
+  "name": "date-rest-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+      "start": "sls offline",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandaemc/date-rest-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandaemc/date-rest-api/issues"
+  },
+  "homepage": "https://github.com/sandaemc/date-rest-api#readme",
+  "devDependencies": {
+    "serverless-domain-manager": "^3.2.2",
+    "serverless-offline": "^5.8.0"
+  }
+}
