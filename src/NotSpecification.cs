@@ -1,6 +1,6 @@
 using System;
 
-namespace SandaeMc.DomainLibrary
+namespace SharpDomain
 {
     public class NotSpecification<T> : ISpecification<T>
     {

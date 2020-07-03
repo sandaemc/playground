@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 
-namespace SandaeMc.DomainLibrary
+namespace SharpDomain
 {
     public interface IRepository<T>
     {

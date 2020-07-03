@@ -1,6 +1,6 @@
 using System;
 
-namespace SandaeMc.DomainLibrary
+namespace SharpDomain
 {
     public class AndSpecification<T> : ISpecification<T>
     {

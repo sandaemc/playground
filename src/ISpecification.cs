@@ -1,4 +1,4 @@
-namespace SandaeMc.DomainLibrary
+namespace SharpDomain
 {
     public interface ISpecification<in T>
     {

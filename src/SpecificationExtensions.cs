@@ -1,4 +1,4 @@
-namespace SandaeMc.DomainLibrary
+namespace SharpDomain
 {
     public static class SpecificationExtensions
     {

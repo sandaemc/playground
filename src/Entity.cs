@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SandaeMc.DomainLibrary
+namespace SharpDomain
 {
     public abstract class Entity
     {

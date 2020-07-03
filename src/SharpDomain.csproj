@@ -8,6 +8,9 @@
         <Authors>Sandae Macalalag</Authors>
         <PackageProjectUrl>https://github.com/sandaemc/SharpDomain</PackageProjectUrl>
         <RepositoryUrl>https://github.com/sandaemc/SharpDomain</RepositoryUrl>
+        <Title>SharpDomain</Title>
+        <PackageVersion>1.0.1</PackageVersion>
+        <Description>A collection of reusable classes for Domain-Driven Design.</Description>
     </PropertyGroup>
 
     <ItemGroup>

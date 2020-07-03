@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using DateTimeExtensions;
 
-namespace SandaeMc.DomainLibrary
+namespace SharpDomain
 {
     public static class DateExtensions
     {
