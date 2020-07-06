@@ -10,7 +10,7 @@ Add this package source url on your nuget.config: https://nuget.pkg.github.com/s
 
 ### Usage
 
-```
+```csharp
 var client = new Auth0Client(new Auth0ClientOptions() {
     Domain = "project.auth0.com",
     ClientId = "12345",
