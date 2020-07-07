@@ -1,3 +1,4 @@
-# new-react-app-js
+# Pomometer (WIP)
 
-A template for creating a new React app
+Pomodoro Technique + Weekly Planning
+
