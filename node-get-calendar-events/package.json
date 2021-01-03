@@ -1,0 +1,39 @@
+{
+  "name": "get-calendar-events",
+  "version": "1.0.0",
+  "description": "Template for creating a new TypeScript console project",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "release": "npm link",
+    "generate-token": "rm -rf token.json && node .build/scripts/generate-token.js",
+    "test": "npm run build && node .build/cli.js today --credential=$HOME/.secret/google-calendar/api.credentials.json --token=$HOME/.secret/google-calendar/token.hireplicity.json --json=true"
+  },
+  "bin": {
+    "get-calendar-events": "./.build/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandaemc/new-typescript-console-project.git"
+  },
+  "keywords": [],
+  "author": "Sandae Macalalag <sandaemc@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandaemc/new-typescript-console-project/issues"
+  },
+  "homepage": "https://github.com/sandaemc/new-typescript-console-project#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.14.144",
+    "@types/node": "^12.6.8",
+    "@types/yargs": "^13.0.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "date-fns": "^2.6.0",
+    "execa": "^2.0.3",
+    "googleapis": "^44.0.0",
+    "lodash": "^4.17.15",
+    "yargs": "^13.3.0"
+  }
+}
