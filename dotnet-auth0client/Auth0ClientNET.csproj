@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <AssemblyName>Auth0ClientNET</AssemblyName>
+        <RootNamespace>Auth0ClientNET</RootNamespace>
+        <Authors>Sandae Macalalag</Authors>
+        <RepositoryUrl>https://github.com/sandaemc/Auth0ClientNET</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    </ItemGroup>
+
+</Project>
