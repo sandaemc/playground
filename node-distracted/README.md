@@ -1,3 +1,2 @@
-# new-react-app-js
-
-A template for creating a new React app
+# playground
+Repository for all of my plays on different technology and solutions.
