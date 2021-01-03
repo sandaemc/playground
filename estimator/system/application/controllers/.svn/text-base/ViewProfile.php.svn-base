@@ -1,0 +1,17 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewProfile
+ *
+ * @author Sandae
+ */
+class ViewProfile extends MY_Controller {
+    function  __construct() {
+        parent::MY_Controller();        
+    }    
+}
+?>

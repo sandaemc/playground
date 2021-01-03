@@ -1,0 +1,32 @@
+<?php
+    $user = new User();
+    if ($this->uri->segment(3))
+        $user->get_by_id($this->uri->segment(3));
+
+    echo
+        form_open(site_url('ViewAdminTeacher/save'), array('id' => 'data_form')),
+        new Table(array(
+            array(
+                NULL,
+                form_hidden('id', $user->id)
+            ),
+            array(
+                form_label("Last Name:"),
+                txt('last_name', $user->last_name, 'required')),
+            array(
+                form_label("First Name:"),
+                txt('first_name', $user->first_name, 'required')),
+            array(
+                form_label("Username:"),
+                txt('username', $user->username, 'required')),
+            array(
+                form_label("Password:"),
+                pass('password', 'required')),
+            array(
+                form_label("Confirm Password:"),
+                pass('confirm_password', 'required')),
+            array(
+                '',
+                btn('save', 'SAVE', 'submit')))),
+        form_close();
+?>

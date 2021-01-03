@@ -1,0 +1,32 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of Quiz
+ *
+ * @author Sandae
+ */
+class Quiz extends DataMapper {
+    var $table = 'quizzes';
+    
+    var $has_many = array('question');
+    var $has_one = array('note');
+    
+    function __construct() {
+        parent::DataMapper();
+    }
+
+    function getSubject() {
+        $subject = new Subject();
+        return $subject->get_by_id($this->{'subject_id'});
+    }
+
+    function getUser() {
+        $user = new User();
+        return $user->get_by_id($this->{'user_id'});
+    }
+}
+?>

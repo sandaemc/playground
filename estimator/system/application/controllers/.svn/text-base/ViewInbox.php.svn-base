@@ -1,0 +1,47 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewMessage
+ *
+ * @author Sandae
+ */
+class ViewInbox extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+    }    
+
+    function create() {
+        $this->setData(array('people' => $this->session->userdata('send_to_people')));
+        $this->display('create.php')->render();
+    }
+
+    function read() {
+        $this->display('read.php')->render();
+    }
+
+    function save() {
+        if ($this->param('send')) {                        
+            $msg = new Message();
+            $msg->sender  = $this->getLoggedUser()->getName();
+            $msg->subject = $this->param('subject');
+            $msg->content = $this->param('content');            
+
+            $usernames = array();
+            foreach (preg_split("/\s*,\s*/", $this->param('to')) as $username) {
+                $usernames[] = trim($username);                
+            }
+
+            $user = new User();            
+            $user->where_in('username', $usernames);                                    
+            $msg->save($user->get()->all);
+
+            $this->setStatus("Message was successfully sent");
+            return $this->index();
+        }
+    }
+}
+?>

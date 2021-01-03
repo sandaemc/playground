@@ -1,0 +1,299 @@
+<html>
+    <head>
+        <title>
+            Quiz Builder
+        </title>        
+        <script type="text/javascript" src="<?=x_resource('js/jquery-1.4.2.js');?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/jquery.validate.min.js');?>"></script>
+
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery-ui-1.8.1.custom.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.widget.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.accordion.js');?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.autocomplete.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.button.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.core.js');?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.datepicker.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.position.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.dialog.js');?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.draggable.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.droppable.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.mouse.js');?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.position.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.progressbar.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.resizable.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.selectable.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.slider.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.sortable.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.ui.tabs.js')?>"></script>
+
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.blind.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.bounce.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.clip.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.core.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.drop.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.explode.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.fold.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.shake.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.pulsate.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.scale.js')?>"></script>
+        <script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.slide.js')?>"></script>
+	<script type="text/javascript" src="<?=x_resource('js/ui/jquery.effects.transfer.js')?>"></script>
+
+        <script type="text/javascript" src="<?=x_resource('js/tinymce/tiny_mce.js')?>"></script>
+
+        <script type="text/javascript" src="<?=x_resource('js/jquery.dataTables.js')?>"</script>
+        <script type="text/javascript" src="<?=x_resource('js/FixedHeader.js')?>"</script>
+        <script type="text/javascript" src="<?=x_resource('js/KeyTable.js')?>"</script>
+        
+        <script type="text/javascript">            
+            tinyMCE.init({
+                mode: "textareas",
+                theme: "advanced"
+            });            
+
+            $(document).ready(function() {
+                $("#data_form").validate();                                
+
+                $('.submit').click(function() {
+                    $('#data_form').submit();
+                });
+
+                $('#example').dataTable();            
+                $('#example2').dataTable();
+                $('#example3').dataTable();
+                $('#example4').dataTable();
+                $('#example5').dataTable();
+                $('#example6').dataTable();
+
+         
+                $('#simple1').dataTable({
+                    "bLengthChange": false,
+                    "bFilter": false,
+                    "bSort": false,
+                    "bInfo": false,
+                    "bAutoWidth": false });
+            });
+        </script>
+
+        <link type="text/css" href="<?=x_resource('styles/sunny/jquery.ui.all.css')?>" rel="stylesheet">
+        <link type="text/css" href="<?=x_resource('styles/old.css');?>" rel="stylesheet">
+        <style type="text/css">
+            .dataTables_wrapper {
+                    position: relative;                    
+                    clear: both;
+                    zoom: 1; /* Feeling sorry for IE */
+            }            
+
+            .dataTables_length {
+                    width: 40%;
+                    float: left;
+            }
+
+            .dataTables_filter {
+                    width: 50%;
+                    float: right;
+                    text-align: right;
+            }
+
+            .dataTables_info {
+                    width: 60%;
+                    float: left;
+            }
+
+            .dataTables_paginate {
+                    width: 44px;
+                    width: 50px;
+                    float: right;
+                    text-align: right;
+            }
+
+            /* Pagination nested */
+            .paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
+                    height: 19px;
+                    width: 19px;
+                    margin-left: 3px;
+                    float: left;
+            }
+
+            .paginate_disabled_previous {
+                    background-image: url('../images/back_disabled.jpg');
+            }
+
+            .paginate_enabled_previous {
+                    background-image: url('../images/back_enabled.jpg');
+            }
+
+            .paginate_disabled_next {
+                    background-image: url('../images/forward_disabled.jpg');
+            }
+
+            .paginate_enabled_next {
+                    background-image: url('../images/forward_enabled.jpg');
+            }
+
+            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+             * DataTables display
+             */
+            table.display {
+                    margin: 0 auto;
+                    width: 100%;
+                    clear: both;
+            }
+
+            table.display thead th {
+                    padding: 3px 18px 3px 10px;
+                    border-bottom: 1px solid black;
+                    font-weight: bold;
+                    cursor: pointer;
+                    cursor: hand;
+            }
+
+            table.display tfoot th {
+                    padding: 3px 10px;
+                    border-top: 1px solid black;
+                    font-weight: bold;
+            }
+
+            table.display tr.heading2 td {
+                    border-bottom: 1px solid #aaa;
+            }
+
+            table.display td {
+                    padding: 3px 10px;
+            }
+
+            table.display td.center {
+                    text-align: center;
+            }
+
+            .sorting_asc {
+                    background: url('../images/sort_asc.png') no-repeat center right;
+            }
+
+            .sorting_desc {
+                    background: url('../images/sort_desc.png') no-repeat center right;
+            }
+
+            .sorting {
+                    background: url('../images/sort_both.png') no-repeat center right;
+            }
+
+            .sorting_asc_disabled {
+                    background: url('../images/sort_asc_disabled.png') no-repeat center right;
+            }
+
+            .sorting_desc_disabled {
+                    background: url('../images/sort_desc_disabled.png') no-repeat center right;
+            }
+
+            tr.odd {
+                    background-color: #E2E4FF;
+            }
+
+            tr.even {
+                    background-color: white;
+            }                                     
+
+            table.display tr.even.row_selected td {
+                    background-color: #B0BED9;
+            }
+
+            table.display tr.odd.row_selected td {
+                    background-color: #9FAFD1;
+            }
+            
+            tr.odd td.sorting_1 {
+                    background-color: #D3D6FF;
+            }
+
+            tr.odd td.sorting_2 {
+                    background-color: #DADCFF;
+            }
+
+            tr.odd td.sorting_3 {
+                    background-color: #E0E2FF;
+            }
+
+            tr.even td.sorting_1 {
+                    background-color: #EAEBFF;
+            }
+
+            tr.even td.sorting_2 {
+                    background-color: #F2F3FF;
+            }
+
+            tr.even td.sorting_3 {
+                    background-color: #F9F9FF;
+            }        
+        </style>        
+    </head>
+    <body>
+        <div id="container">
+          <img alt="title" height="100px" src="<?=x_resource('images/title.png')?>" />
+	  <div id="content">
+	    <div id="navigation">                
+                <?php
+                    $user_type = "";
+                    if ($LOGGED_USER) {
+                        $user_type = $LOGGED_USER->type;
+                    }                    
+                ?>
+                <ul>                    
+                <?php if ($user_type == 'Student'): ?>
+                    <li><?=lnk('PROFILE', site_url('ViewProfile'));?></li>
+                    <li><?=lnk('QUIZZES', site_url('ViewStudentQuiz'));?></li>
+                    <li><?=lnk('SECTIONS', site_url('ViewStudentSection'));?></li>
+                    <li><?=lnk('INBOX', site_url('ViewInbox'));?></li>
+                    <li><?=lnk('LOGOUT', site_url('ViewMain/logout'));?></li>
+                <?php elseif ($user_type == 'Teacher'): ?>
+                    <li><?=lnk('PROFILE', site_url('ViewProfile'));?></li>
+                    <li><?=lnk('QUIZZES', site_url('ViewTeacherQuiz'));?></li>
+                    <li><?=lnk('SECTIONS', site_url('ViewTeacherSection'));?></li>
+                    <li><?=lnk('INBOX', site_url('ViewInbox'));?></li>
+                    <li><?=lnk('LOGOUT', site_url('ViewMain/logout'));?></li>
+                <?php elseif ($user_type == 'Administrator'): ?>
+                    <li><?=lnk('QUIZZES', site_url('ViewAdminQuiz'));?></li>
+                    <li><?=lnk('TEACHERS', site_url('ViewAdminTeacher'));?></li>
+                    <li><?=lnk('STUDENTS', site_url('ViewAdminStudent'));?></li>
+                    <li><?=lnk('SUBJECTS', site_url('ViewAdminSubject'));?></li>
+                    <li><?=lnk('SECTIONS', site_url('ViewAdminSection'));?></li>
+                    <li><?=lnk('LOGOUT', site_url('ViewMain/logout'));?></li>
+                <?php else: ?>
+                    <li><?=lnk('LOGIN', site_url('ViewMain'));?></li>
+                <?php endif; ?>
+                </ul>
+            </div>
+              <?php if ($SUBNAV): ?>
+                  <div id="subnav">
+                      <ul>
+                      <?php foreach ($SUBNAV as $v): ?>
+                          <li> | <?=$v;?> </li>
+                      <?php endforeach; ?>
+                      </ul>
+                  </div>
+              <?php endif; ?>              
+            
+            <?php if (param('ERROR_MSG')): ?>
+                <div class="ui-widget">                
+                    <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                            <p>
+                                <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                                <strong>ALERT: </strong><?=param('ERROR_MSG')?>
+                            </p>
+                    </div>                
+                </div>
+                <br />
+            <?php endif; ?>               
+               
+            <?php if (param('MSG')): ?>
+                <div class="ui-widget">                
+                    <div class="ui-state-highlight ui-corner-all" style="padding: 0 .7em;">
+                            <p>
+                                <span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+                                <strong>STATUS: </strong><?=param('MSG');?>
+                            </p>
+                    </div>                
+                </div>
+                <br />
+            <?php endif; ?>             
+        

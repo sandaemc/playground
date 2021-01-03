@@ -1,0 +1,24 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of Section
+ *
+ * @author Sandae
+ */
+class Section extends DataMapper {
+    var $has_many = array('subject', 'user');
+    
+    function __construct() {
+        parent::DataMapper();
+    }
+
+    public static function getAll() {
+        $section = new Section();
+        return $section->get()->all;
+    }
+}
+?>

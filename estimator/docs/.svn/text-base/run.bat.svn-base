@@ -1,0 +1,2 @@
+mysql -uroot < quizdb.sql
+pause

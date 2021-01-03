@@ -1,0 +1,33 @@
+<div class="column" id="col1">    
+    <table id="example" class="display" width="100%">
+        <thead>
+            <tr>                
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>            
+            <? foreach (User::getTeachers() as $teacher): ?>
+            <tr>                
+                <td>
+                    <a href="<?=site_url("ViewAdminTeacher/edit/{$teacher->id}")?>">
+                        <?=$teacher->getName();?>
+                    </a>
+                </td>
+                <td>
+                    <a href="<?=site_url("ViewAdminTeacher/delete/{$teacher->id}")?>">
+                        DELETE
+                    </a>
+                </td>
+            </tr>
+            <? endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>                
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+    <br />
+</div>

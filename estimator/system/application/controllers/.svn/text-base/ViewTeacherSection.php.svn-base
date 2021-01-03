@@ -1,0 +1,35 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewTeacherQuestion
+ *
+ * @author Sandae
+ */
+class ViewTeacherSection extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+    }
+
+    function add() { throw new Exception('Not implemented'); }
+    function edit() { throw new Exception('Not implemented'); }
+    function delete() { throw new Exception("Not implemented"); }
+    function _relationSave() { throw new Exception("Not implemented"); }
+
+    function execute() {
+        if ($this->param('send')) {
+            $students = array();
+            foreach (User::getStudents() as $student) {
+                if ($this->param("checked_{$student->id}"))
+                    $students[] = $student->username;                
+            }
+
+            $this->session->set_userdata('send_to_people', join(', ', $students));
+            return redirect('ViewInbox/create');
+        }
+    }
+}
+?>

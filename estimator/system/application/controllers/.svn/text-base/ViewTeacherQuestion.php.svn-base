@@ -1,0 +1,63 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewTeacherQuestion
+ *
+ * @author Sandae
+ */
+class ViewTeacherQuestion extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+
+        $this->_model = 'Question';
+
+        $this->SUBNAV = array(
+            lnk('ADD', site_url('ViewTeacherQuestion/add'))
+        );
+    }
+
+    function index() {
+        //set the selected quiz
+        if ($this->uri->segment(3)) {
+            $quiz = new Quiz();
+            $quiz->get_by_id($this->uri->segment(3));
+            $this->setLoadedQuiz($quiz);
+        }
+
+        if (!$this->getLoadedQuiz()) {
+            throw new Exception("You're hacking!");
+        }
+
+        $this->setData(array('quiz' => $this->getLoadedQuiz()));
+
+        parent::index();
+    }
+
+    function _relationSave() { throw new Exception('Not implemented'); }
+
+    function save() {
+        $q = new Question();
+        if ($this->param('id'))
+            $q->get_by_id($this->param('id'));
+
+        $q->question = $this->param('question');                
+        $q->question_type = $this->param('question_type');
+        $q->choice_1 = $this->param('choice_1');
+        $q->choice_2 = $this->param('choice_2');
+        $q->choice_3 = $this->param('choice_3');
+        $q->choice_4 = $this->param('choice_4');
+        $q->answer_1 = $this->param('answer_1');
+        $q->answer_2 = $this->param('answer_2');
+        $q->save();
+
+        $q->save($this->getLoadedQuiz());
+
+        $this->setStatus('Data was successfully saved');
+        return $this->index();
+    }
+}
+?>

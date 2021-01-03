@@ -1,0 +1,20 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of Note
+ *
+ * @author Sandae
+ */
+class Note extends DataMapper {
+    var $table = 'notes';
+    var $has_one = array('quiz');
+    
+    function __construct() {
+        parent::DataMapper();
+    }
+}
+?>

@@ -1,0 +1,36 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewAdminSubject
+ *
+ * @author Sandae
+ */
+class ViewAdminSubject extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+
+        $this->_model = 'Subject';
+
+        $this->SUBNAV = array(
+            lnk('ADD', site_url('ViewAdminSubject/add'))
+        );
+    }
+    
+    //POST:
+    function save() {
+        $subject = new Subject();
+        if ($this->param('id'))
+            $subject->get_by_id($this->param('id'));
+
+        $subject->name = $this->param('name');
+        $subject->save();
+
+        $this->setStatus('The data has been successfully saved.');
+        return $this->index();
+    }
+}
+?>

@@ -1,0 +1,69 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewAdminSection
+ *
+ * @author Sandae
+ */
+class ViewAdminSection extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+
+        $this->_model = 'Section';
+
+        $this->SUBNAV = array(
+            lnk('ADD', site_url('ViewAdminSection/add'))
+        );
+    }
+
+    // GET:
+    function teachers() {        
+        $this->display('teachers.php')->render();
+    }
+
+    // POST:
+    function teachers_save() {
+        $this->_relationSave(User::getTeachers());
+        return redirect("ViewAdminSection/teachers/{$this->param('id')}");
+    }    
+
+    //GET:
+    function students() {
+        $this->display('students.php')->render();
+    }
+
+    //POST:
+    function students_save() {
+        $this->_relationSave(User::getStudents());        
+        return redirect("ViewAdminSection/students/{$this->param('id')}");
+    }
+
+    //GET:
+    function subjects() {
+        $this->display('subjects.php')->render();
+    }
+
+    //POST:
+    function subjects_save() {
+        $this->_relationSave(Subject::getAll());
+        return redirect("ViewAdminSection/subjects/{$this->param('id')}");
+    }
+
+    //POST:
+    function save() {
+        $section = new Section();
+        if ($this->param('id'))
+            $section->get_by_id($this->param('id'));
+
+        $section->name = $this->param('name');
+        $section->save();
+
+        $this->setStatus('The data has been successfully saved.');
+        return $this->index();
+    }
+}
+?>

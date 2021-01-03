@@ -1,0 +1,41 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewTeacherQuiz
+ *
+ * @author Sandae
+ */
+class ViewTeacherQuiz extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+
+        $this->_model = 'Quiz';
+
+        $this->SUBNAV = array(
+            lnk('ADD', site_url('ViewTeacherQuiz/add'))
+        );
+    }    
+        
+    function _relationSave() { throw new Exception('Not implemented.'); }    
+
+    function save() {
+        $quiz = new Quiz();
+        if ($this->param('id'))
+            $quiz->get_by_id($this->param('id'));
+
+        $quiz->name = $this->param('name');
+        $quiz->minutes_per_question = $this->param('minutes_per_question');
+        $quiz->allowed_attempts = $this->param('allowed_attempts');
+        $quiz->user_id = $this->getLoggedUser()->id;
+        $quiz->subject_id = $this->param('subject_id');
+        $quiz->save();
+
+        $this->setStatus('The data has been successfully saved');
+        return $this->index();
+    }
+}
+?>

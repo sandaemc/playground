@@ -1,0 +1,49 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewTeacherNote
+ *
+ * @author Sandae
+ */
+class ViewTeacherNote extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+    }
+
+    function index() {
+        //set the selected quiz
+        if ($this->uri->segment(3)) {
+            $quiz = new Quiz();
+            $quiz->get_by_id($this->uri->segment(3));
+            $this->setLoadedQuiz($quiz);
+        }
+
+        if (!$this->getLoadedQuiz()) {
+            throw new Exception("You're hacking!");
+        }
+
+        $this->setData(array('quiz' => $this->getLoadedQuiz()));
+
+        parent::index();
+    }    
+
+    function save() {
+        $note = new Note();
+        $existing_note = $this->getLoadedQuiz()->note->limit(1)->get();
+        if ($existing_note->exists()) {
+            $note = $existing_note;
+        }
+
+        $note->content = $this->param('content');
+        $note->save();
+        $note->save($this->getLoadedQuiz());
+
+        $this->setStatus('Data was successfully saved');
+        return $this->index();
+    }
+}
+?>

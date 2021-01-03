@@ -1,0 +1,35 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewStudentSection
+ *
+ * @author Sandae
+ */
+class ViewStudentSection extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+    }
+
+    function add() { throw new Exception('Not implemented'); }
+    function edit() { throw new Exception('Not implemented'); }
+    function delete() { throw new Exception("Not implemented"); }
+    function _relationSave() { throw new Exception("Not implemented"); }
+
+    function execute() {
+        if ($this->param('send')) {
+            $teachers = array();
+            foreach (User::getTeachers() as $teacher) {
+                if ($this->param("checked_{$teacher->id}"))
+                    $teachers[] = $teacher->username;
+            }
+
+            $this->session->set_userdata('send_to_people', join(', ', $teachers));
+            return redirect('ViewInbox/create');
+        }
+    }
+}
+?>

@@ -1,0 +1,22 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ViewStudentQuiz
+ *
+ * @author Sandae
+ */
+class ViewStudentQuiz extends MY_Controller {
+    function __construct() {
+        parent::MY_Controller();
+    }
+
+    function add() { throw new Exception('Not implemented'); }
+    function edit() { throw new Exception('Not implemented'); }
+    function delete() { throw new Exception("Not implemented"); }
+    function _relationSave() { throw new Exception("Not implemented"); }
+}
+?>

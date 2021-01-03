@@ -1,0 +1,32 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of Subject
+ *
+ * @author Sandae
+ */
+class Subject extends DataMapper {
+    var $has_many = array('section');
+    
+    function __construct() {
+        parent::DataMapper();
+    }
+
+    function getQuizzesByUser($user_id) {
+        $quiz = new Quiz();
+        $quiz->where('subject_id', $this->{'id'});
+        $quiz->where('user_id', $user_id);
+        
+        return $quiz->get()->all;
+    }
+
+    public static function getAll() {
+        $subject = new Subject();
+        return $subject->get()->all;
+    }
+}
+?>

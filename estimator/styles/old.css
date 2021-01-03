@@ -1,0 +1,129 @@
+body {
+        background-color: #e8f7fd;
+        font-family: verdana;
+        font-size: 10px;
+}
+#top{
+        margin: -8px -8px 15px -8px;
+        background-image:url("../images/top_background.png");
+        background-repeat:repeat-x;
+        color: #EDF3F7;
+}
+
+#logo {
+        margin-left:170px;
+}
+
+#top_right {
+        float: right;
+        margin-top: -30px;
+        margin-right: 150px;
+}
+
+ul {
+	display: inline;
+}
+
+li{
+        display: inline;
+        vertical-align: middle;
+}
+
+#top_right a {
+	text-decoration: none;
+        color: #D2E0E6;
+}
+
+#top_right a:hover {
+	text-decoration: none;
+        color: #4E6CA3;
+}
+
+#container {
+	margin: 0px auto;
+	text-align: left;
+	width: 80%;
+        background-color: white;
+        border: 1.5px solid #BACBD6;
+}
+
+#main_body {
+        margin: 10px;
+        background-color: #EDF3F7;
+        border: 1px solid #BACBD6;
+        padding: 10px 10px 10px 10px;
+}
+
+#content {
+
+
+}
+
+#navigation {
+        vertical-align: middle;
+        background-color: #BACBD6;
+        text-align: right;
+        height: 30px;
+        padding-top: 3px;
+        margin-top: 15px;
+}
+
+#navigation a {
+	text-decoration: none;
+        color: #3d8ca6;
+        font-weight: bold;
+}
+
+#navigation a:hover {
+	text-decoration: none;
+        color: white;
+}
+
+#navigation ul {
+	display: block;        
+        height: 20px;
+        margin-top: 7px;
+}
+
+#navigation li {
+	display: inline;
+        font-weight: bold;
+        vertical-align: middle;
+        padding: 13px;
+        border-left: 1px solid white;
+}
+
+#subnav {        
+        text-align: left;        
+}
+
+#subnav ul {
+	display: block;
+        height: 15px;
+}
+
+#subnav li {
+	display: inline;
+        font-weight: bold;
+        vertical-align: middle;
+        padding: 4px 8px;
+        border: 1px solid #D2E0E6;
+}
+
+#subnav a {
+        text-decoration: none;
+        color: #3d8ca6;
+}
+
+#subnav a:hover {
+        color: #4E6CA3;
+}
+
+#login_list ul li{
+        padding-right: 135px;
+        margin-left: -35px;
+}
+
+#login {
+        margin-top: -25px;
+}

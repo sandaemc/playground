@@ -1,0 +1,41 @@
+<?php
+/**
+ * Description of AdminUser
+ *
+ * @author Sandae
+ */
+class ViewAdminTeacher extends MY_Controller {
+    const TITLE = 'Teacher';    
+    
+    function ViewAdminTeacher() {
+        parent::MY_Controller();
+        
+        $this->_model = 'User';
+
+        $this->SUBNAV = array(
+            lnk('ADD', site_url('ViewAdminTeacher/add'))
+        );
+    }
+
+    function save() {
+        $user = new User();
+        if ($this->param('id'))
+            $user->get_by_id($this->param('id'));
+        
+        if (!$this->param('id') && User::userExists($this->param('username'))) {
+            $this->setError('User already exists!');
+            return $this->add();
+        }
+            
+        foreach (User::$EXPOSED_COLS as $col) {
+            $user->$col = $this->param($col);
+        }
+
+        $user->type = 'Teacher';
+        $user->save();                
+
+        $this->setStatus('The data has been successfully saved.');
+        return $this->index();
+    }
+}
+?>

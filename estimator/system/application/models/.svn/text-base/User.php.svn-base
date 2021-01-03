@@ -1,0 +1,63 @@
+<?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of User
+ *
+ * @author Sandae
+ */
+class User extends DataMapper {
+    var $has_many = array('section', 'message');
+
+    public static $EXPOSED_COLS = array(
+        'last_name',
+        'first_name',
+        'username',
+        'password'
+    );
+    
+    function __construct() {
+        parent::DataMapper();
+    }
+
+    function getName() {
+        return $this->{'last_name'}.', '.$this->{'first_name'};
+    }
+
+    function isStudent() {
+        return ($this->{'type'} == 'Student');
+    }
+
+    function isAdministrator() {
+        return ($this->{'type'} == 'Administrator');
+    }
+
+    function isTeacher() {
+        return ($this->{'type'} == 'Teacher');
+    }
+
+    function getQuizzes() {
+        $quiz = new Quiz();
+        return $quiz->where('user_id', $this->{'id'})->get()->all;
+    }
+
+    public static function getStudents() {
+        $user = new User();
+        return $user->where('type', 'Student')->get()->all;
+    }
+
+    public static function getTeachers() {
+        $user = new User();
+        return $user->where('type', 'Teacher')->get()->all;
+    }    
+
+    public static function userExists($username) {
+        $user = new User();
+        $user->get_by_username($username);
+        return ($user->exists());
+    }
+}
+?>

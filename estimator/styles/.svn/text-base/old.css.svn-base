@@ -1,0 +1,53 @@
+body {
+	margin: 10px 10px;
+        background-color: whitesmoke;
+        font-family: monospace;
+}
+#container {
+	margin: 0px auto;
+	text-align: left;
+	width: 90%;
+	border-top: 2px solid gray;
+	border-left: 2px solid gray;
+	border-right: 2px solid gray;
+	border-bottom: 2px solid gray;
+        background-color: white;
+}
+
+#content {
+	width:98%;
+	padding: 10px 10px 10px 10px;
+}
+
+#navigation {
+        vertical-align: middle;
+        background-color: pink;
+        text-align: right;
+        padding: 0px 10px 0px 10px;
+}
+
+#navigation ul {
+	display: block;        
+        height: 20px;
+}
+
+#navigation li {
+	display: inline;
+        font-weight: bold;
+        vertical-align: middle;
+}
+
+#subnav {        
+        text-align: left;        
+}
+
+#subnav ul {
+	display: block;
+        height: 15px;
+}
+
+#subnav li {
+	display: inline;
+        font-weight: bold;
+        vertical-align: middle;
+}

@@ -1,0 +1,159 @@
+DROP DATABASE IF EXISTS quizdb;
+CREATE DATABASE quizdb;
+USE quizdb;
+
+CREATE TABLE users (
+    id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    last_name VARCHAR(200) NOT NULL,
+    first_name VARCHAR(200) NOT NULL,
+    username VARCHAR(200) NOT NULL,
+    password VARCHAR(200) NOT NULL,
+    `type` ENUM ('Teacher', 'Student', 'Administrator') NOT NULL,
+    UNIQUE INDEX (username)
+) ENGINE=InnoDB;
+	
+INSERT INTO users (last_name, first_name, username, password, `type`)
+	VALUES ('Macalalag', 'Sandae', 'sandaemc', 'lordofwar', 'Student');
+	
+INSERT INTO users (last_name, first_name, username, password, `type`)
+	VALUES ('Macalalag', 'Cristina', 'tinay', 'angel', 'Teacher');			
+	
+INSERT INTO users (last_name, first_name, username, password, `type`)
+	VALUES ('LastName', 'FirstName', 'admin', 'admin', 'Administrator');
+
+CREATE TABLE subjects (
+    id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    UNIQUE INDEX (name)
+) ENGINE=InnoDB;
+
+INSERT INTO subjects (name) VALUES 
+	('Aperture Science'),
+	('Black Mesa'),
+	('Boreales');
+
+CREATE TABLE sections (
+    id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    UNIQUE INDEX (name)
+) ENGINE=InnoDB;
+
+INSERT INTO sections (name) VALUES
+	('Section A'),
+	('Section B'),
+	('Section C');
+
+CREATE TABLE sections_users (
+    id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT UNSIGNED NOT NULL,
+    section_id BIGINT UNSIGNED NOT NULL,
+    UNIQUE INDEX (user_id, section_id),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (section_id) REFERENCES sections (id) ON DELETE CASCADE
+);
+
+CREATE TABLE sections_subjects (
+    id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    section_id BIGINT UNSIGNED NOT NULL,
+    subject_id BIGINT UNSIGNED NOT NULL,
+    UNIQUE INDEX (section_id, subject_id),
+    FOREIGN KEY (section_id) REFERENCES sections (id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES subjects (id) ON DELETE CASCADE
+);
+
+CREATE TABLE messages (
+	id			BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	sender		VARCHAR(200) NOT NULL,
+	subject		VARCHAR(200) NOT NULL,
+	content		TEXT NULL,
+	status		ENUM("Read", "Unread") NOT NULL DEFAULT 'Unread'
+) ENGINE=InnoDB;
+
+CREATE TABLE messages_users (
+	id			BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	user_id		BIGINT UNSIGNED NOT NULL,	
+	message_id	BIGINT UNSIGNED NOT NULL,	
+	FOREIGN KEY (message_id) REFERENCES messages (id) ON DELETE CASCADE,
+	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,	
+	UNIQUE INDEX (message_id, user_id)	
+) ENGINE=InnoDB;
+
+CREATE TABLE quizzes (
+	id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(200) NOT NULL,
+	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	minutes_per_question INTEGER NOT NULL,
+	allowed_attempts INTEGER NOT NULL,
+	user_id	BIGINT UNSIGNED NOT NULL,
+	subject_id BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,	
+	FOREIGN KEY (subject_id) REFERENCES subjects (id) ON DELETE CASCADE,
+	UNIQUE INDEX (name)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS questions CASCADE;
+CREATE TABLE questions (
+	id				BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	question		TEXT NOT NULL,	
+	question_type	ENUM('Multiple Choice', 'Fill-In the Blank') NOT NULL,
+	choice_1		TEXT NOT NULL,
+	choice_2		TEXT NOT NULL,
+	choice_3		TEXT NOT NULL,
+	choice_4 		TEXT NOT NULL,
+	answer_1		TEXT NOT NULL,
+	answer_2		TEXT NOT NULL
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS questions_quizzes CASCADE;
+CREATE TABLE questions_quizzes (
+	id			BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	quiz_id		BIGINT UNSIGNED NOT NULL,
+	question_id	BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY (quiz_id) REFERENCES quizzes (id) ON DELETE CASCADE,
+	FOREIGN KEY (question_id) REFERENCES questions (id) ON DELETE CASCADE,
+	UNIQUE INDEX (quiz_id, question_id)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS notes;
+CREATE TABLE notes (
+	id				BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	content			TEXT NOT NULL
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS notes_quizzes;
+CREATE TABLE notes_quizzes (
+	id				BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	quiz_id			BIGINT UNSIGNED NOT NULL,
+	note_id			BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY (quiz_id) REFERENCES quizzes (id) ON DELETE CASCADE,
+	FOREIGN KEY (note_id) REFERENCES notes (id) ON DELETE CASCADE,	
+	UNIQUE INDEX (quiz_id, note_id)
+) ENGINE=InnoDB;
+
+/*
+CREATE TABLE quizzes_subjects (
+	id			BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,	
+	quiz_id		BIGINT UNSIGNED NOT NULL,
+	subject_id	BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY (subject_id) REFERENCES subjects (id) ON DELETE CASCADE,
+	FOREIGN KEY (quiz_id) REFERENCES quizzes (id) ON DELETE CASCADE,
+	UNIQUE INDEX (subject_id, quiz_id),
+	UNIQUE INDEX (quiz_id)
+) ENGINE=InnoDB;
+
+
+
+CREATE TABLE files (
+	id			BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	filename	VARCHAR(200) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE files_questions (
+	id			BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	question_id	BIGINT UNSIGNED NOT NULL,
+	`file_id`	BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY (question_id) REFERENCES questions (id) ON DELETE CASCADE,
+	FOREIGN KEY (`file_id`) REFERENCES files (id) ON DELETE CASCADE,
+	UNIQUE INDEX (question_id, `file_id`)
+) ENGINE=InnoDB;
+*/
