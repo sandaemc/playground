@@ -1,0 +1,32 @@
+{
+  "name": "distracted-ext-chrome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode=development",
+    "build:watch": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandaemc/distracted-ext-chrome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandaemc/distracted-ext-chrome/issues"
+  },
+  "homepage": "https://github.com/sandaemc/distracted-ext-chrome#readme",
+  "devDependencies": {
+    "@types/chrome": "0.0.91",
+    "awesome-typescript-loader": "^5.2.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^1.7.0",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  }
+}

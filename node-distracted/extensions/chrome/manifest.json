@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "name": "Distracted Chrome Extension",
+  "description": "Chrome extension for Distracted App",
+  "version": "0.1",
+  "permissions": [
+    "identity"
+  ]
+}
