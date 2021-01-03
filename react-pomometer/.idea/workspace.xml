@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b7dc5d3f-1aec-43aa-938e-4d81db58f62a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/project.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/add-project/add-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add-project/add-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/add-project/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add-project/index.tsx" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="pomometer" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1Q7PtzKZrXoGxw1sIUaXflXTZhy" />
+  <component name="PropertiesComponent">
+    <property name="NewWatcherDialog.advanced.open" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../todoist-tasks" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="/usr/lib/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/view-project" />
+      <recent name="$PROJECT_DIR$/src/pages/add-project" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/list-projects" />
+      <recent name="D:\code\pomometer\src\components" />
+      <recent name="D:\code\pomometer\src\pages\view-project" />
+      <recent name="D:\code\pomometer\src\pages\list-projects" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b7dc5d3f-1aec-43aa-938e-4d81db58f62a" name="Default Changelist" comment="" />
+      <created>1567118879936</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1567118879936</updated>
+      <workItem from="1567118881219" duration="4735000" />
+      <workItem from="1567132286394" duration="9840000" />
+      <workItem from="1567165839196" duration="1845000" />
+      <workItem from="1567402897806" duration="1143000" />
+      <workItem from="1567521147218" duration="20458000" />
+      <workItem from="1567585050324" duration="3231000" />
+      <workItem from="1567650587300" duration="10601000" />
+      <workItem from="1567687947963" duration="6666000" />
+      <workItem from="1567732433498" duration="3825000" />
+      <workItem from="1567738098031" duration="1106000" />
+      <workItem from="1567761846800" duration="5060000" />
+      <workItem from="1568063422610" duration="2583000" />
+      <workItem from="1568104232587" duration="3932000" />
+      <workItem from="1568148396890" duration="4415000" />
+      <workItem from="1568186836613" duration="6883000" />
+      <workItem from="1568204937034" duration="687000" />
+      <workItem from="1568233980712" duration="217000" />
+      <workItem from="1568240409923" duration="36000" />
+      <workItem from="1568273125609" duration="1634000" />
+      <workItem from="1568324031474" duration="26000" />
+      <workItem from="1568326983109" duration="19022000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,63 @@
+{
+  "name": "pomometer",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@types/date-fns": "^2.6.0",
+    "@types/howler": "^2.1.1",
+    "@types/lodash": "^4.14.141",
+    "@types/lowdb": "^1.0.9",
+    "@types/material-ui": "^0.21.7",
+    "@types/node": "12.7.1",
+    "@types/react": "16.9.1",
+    "@types/react-dom": "16.8.5",
+    "@types/react-router-dom": "^4.3.5",
+    "@types/recharts": "^1.1.21",
+    "@types/uuid": "^3.4.5",
+    "typescript": "3.6.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.2.1",
+    "axios": "^0.19.0",
+    "date-fns": "^2.2.1",
+    "firebase": "^7.2.3",
+    "firebaseui": "^4.2.0",
+    "howler": "^2.1.2",
+    "lodash": "^4.17.15",
+    "lowdb": "^1.0.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-firebaseui": "^4.0.0",
+    "react-hook-form": "^3.26.4",
+    "react-router-dom": "^5.1.1",
+    "react-scripts": "3.2.0",
+    "react-use": "^12.1.0",
+    "recharts": "^1.7.1",
+    "typeface-roboto": "0.0.75",
+    "uuid": "^3.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id E1IJXCK3WB5N6J --invalidation-batch file://invalidation.json",
+    "deploy": "npm run build && aws s3 sync build/ s3://pomometer"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
